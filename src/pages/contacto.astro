@@ -1,0 +1,1012 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout 
+  title="Contacto | Cien Mares"
+  description="Contacte con Cien Mares. Estamos en Conil de la Frontera, Cádiz. Teléfono: +34 605 18 37 85. Email: info@cienmares.es"
+>
+  <main class="contacto-page">
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         HERO — LIGHT — Airy & Elegant
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="hero-contacto">
+      <div class="container">
+        <div class="hero-content">
+          <span class="label reveal">Contacto</span>
+          
+          <h1 class="hero-title reveal" data-delay="1">
+            Hablemos
+          </h1>
+          
+          <p class="hero-desc reveal" data-delay="2">
+            Estamos aquí para convertir su próxima aventura náutica en realidad. 
+            Respuesta garantizada en menos de 24 horas.
+          </p>
+          
+          <div class="hero-contact reveal" data-delay="3">
+            <a href="tel:+34605183785" class="contact-link">
+              <span class="contact-label">Teléfono</span>
+              <span class="contact-value">+34 605 18 37 85</span>
+            </a>
+            <div class="contact-divider"></div>
+            <a href="mailto:info@cienmares.es" class="contact-link">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">info@cienmares.es</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-accent">
+        <div class="accent-line-vertical"></div>
+      </div>
+    </section>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         FORM SECTION — LIGHT — 5 Service Tabs
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="form-section" id="formulario">
+      <div class="container">
+        <div class="form-header">
+          <span class="label reveal">Solicitud</span>
+          <h2 class="form-title reveal" data-delay="1">
+            Seleccione su servicio
+          </h2>
+        </div>
+        
+        <!-- Service Tabs -->
+        <div class="service-tabs reveal" data-delay="2">
+          <button class="service-tab active" data-tab="alquiler">
+            <span class="tab-num">01</span>
+            <span class="tab-name">Alquiler</span>
+          </button>
+          <button class="service-tab" data-tab="academia">
+            <span class="tab-num">02</span>
+            <span class="tab-name">Academia</span>
+          </button>
+          <button class="service-tab" data-tab="gestoria">
+            <span class="tab-num">03</span>
+            <span class="tab-name">Gestoría</span>
+          </button>
+          <button class="service-tab" data-tab="traslados">
+            <span class="tab-num">04</span>
+            <span class="tab-name">Traslados</span>
+          </button>
+          <button class="service-tab" data-tab="otros">
+            <span class="tab-num">05</span>
+            <span class="tab-name">Otros</span>
+          </button>
+        </div>
+        
+        <!-- Form Panels -->
+        <div class="form-panels">
+          <!-- Alquiler Form -->
+          <form class="form-panel active" data-panel="alquiler" action="#" method="POST">
+            <input type="hidden" name="servicio" value="Alquiler de barcos" />
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="alq-nombre">Nombre completo *</label>
+                <input type="text" id="alq-nombre" name="nombre" class="form-input" placeholder="Su nombre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="alq-email">Email *</label>
+                <input type="email" id="alq-email" name="email" class="form-input" placeholder="su@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="alq-telefono">Teléfono *</label>
+                <input type="tel" id="alq-telefono" name="telefono" class="form-input" placeholder="+34 600 000 000" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="alq-fecha">Fecha deseada</label>
+                <input type="date" id="alq-fecha" name="fecha" class="form-input" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="alq-embarcacion">Tipo de embarcación</label>
+                <select id="alq-embarcacion" name="tipo_embarcacion" class="form-select">
+                  <option value="">Seleccione...</option>
+                  <option value="velero">Velero</option>
+                  <option value="lancha">Lancha</option>
+                  <option value="yate">Yate</option>
+                  <option value="indiferente">Me asesoran</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="alq-personas">Nº de personas</label>
+                <input type="number" id="alq-personas" name="personas" class="form-input" min="1" max="12" placeholder="4" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="alq-mensaje">Mensaje</label>
+              <textarea id="alq-mensaje" name="mensaje" class="form-textarea" rows="3" placeholder="¿Necesita patrón? ¿Alguna preferencia especial?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              <span>Enviar solicitud</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+          
+          <!-- Academia Form -->
+          <form class="form-panel" data-panel="academia" action="#" method="POST">
+            <input type="hidden" name="servicio" value="Academia Náutica" />
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="aca-nombre">Nombre completo *</label>
+                <input type="text" id="aca-nombre" name="nombre" class="form-input" placeholder="Su nombre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="aca-email">Email *</label>
+                <input type="email" id="aca-email" name="email" class="form-input" placeholder="su@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="aca-telefono">Teléfono *</label>
+                <input type="tel" id="aca-telefono" name="telefono" class="form-input" placeholder="+34 600 000 000" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="aca-curso">Curso de interés *</label>
+                <select id="aca-curso" name="curso" class="form-select" required>
+                  <option value="">Seleccione...</option>
+                  <option value="licencia">Licencia de Navegación</option>
+                  <option value="pnb">Patrón de Navegación Básica</option>
+                  <option value="per">PER</option>
+                  <option value="per-ampliado">PER Ampliado</option>
+                  <option value="patron-yate">Patrón de Yate</option>
+                  <option value="capitan-yate">Capitán de Yate</option>
+                  <option value="vela">Habilitación a Vela</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="aca-mensaje">Mensaje</label>
+              <textarea id="aca-mensaje" name="mensaje" class="form-textarea" rows="3" placeholder="¿Tiene alguna titulación previa? ¿Cuándo le gustaría empezar?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              <span>Solicitar información</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+          
+          <!-- Gestoría Form -->
+          <form class="form-panel" data-panel="gestoria" action="#" method="POST">
+            <input type="hidden" name="servicio" value="Gestoría Náutica" />
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ges-nombre">Nombre completo *</label>
+                <input type="text" id="ges-nombre" name="nombre" class="form-input" placeholder="Su nombre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ges-email">Email *</label>
+                <input type="email" id="ges-email" name="email" class="form-input" placeholder="su@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ges-telefono">Teléfono *</label>
+                <input type="tel" id="ges-telefono" name="telefono" class="form-input" placeholder="+34 600 000 000" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ges-tramite">Tipo de trámite *</label>
+                <select id="ges-tramite" name="tramite" class="form-select" required>
+                  <option value="">Seleccione...</option>
+                  <option value="inscripcion">Inscripción de embarcación</option>
+                  <option value="cambio-titularidad">Cambio de titularidad</option>
+                  <option value="certificado">Certificado de navegabilidad</option>
+                  <option value="licencia-radio">Licencia de estación</option>
+                  <option value="baja">Baja de registro</option>
+                  <option value="abanderamiento">Abanderamiento Polonia</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ges-mensaje">Detalles del trámite *</label>
+              <textarea id="ges-mensaje" name="mensaje" class="form-textarea" rows="3" placeholder="Describa su situación y qué necesita gestionar" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              <span>Solicitar presupuesto</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+          
+          <!-- Traslados Form -->
+          <form class="form-panel" data-panel="traslados" action="#" method="POST">
+            <input type="hidden" name="servicio" value="Traslados" />
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="tra-nombre">Nombre completo *</label>
+                <input type="text" id="tra-nombre" name="nombre" class="form-input" placeholder="Su nombre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tra-email">Email *</label>
+                <input type="email" id="tra-email" name="email" class="form-input" placeholder="su@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="tra-telefono">Teléfono *</label>
+                <input type="tel" id="tra-telefono" name="telefono" class="form-input" placeholder="+34 600 000 000" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tra-embarcacion">Embarcación *</label>
+                <input type="text" id="tra-embarcacion" name="embarcacion" class="form-input" placeholder="Tipo, modelo y eslora" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="tra-origen">Puerto de origen *</label>
+                <input type="text" id="tra-origen" name="origen" class="form-input" placeholder="Puerto de salida" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tra-destino">Puerto de destino *</label>
+                <input type="text" id="tra-destino" name="destino" class="form-input" placeholder="Puerto de llegada" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="tra-mensaje">Detalles adicionales</label>
+              <textarea id="tra-mensaje" name="mensaje" class="form-textarea" rows="3" placeholder="Fecha deseada, flexibilidad, requisitos especiales..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              <span>Solicitar presupuesto</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+          
+          <!-- Otros Form -->
+          <form class="form-panel" data-panel="otros" action="#" method="POST">
+            <input type="hidden" name="servicio" value="Otras consultas" />
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="otro-nombre">Nombre completo *</label>
+                <input type="text" id="otro-nombre" name="nombre" class="form-input" placeholder="Su nombre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="otro-email">Email *</label>
+                <input type="email" id="otro-email" name="email" class="form-input" placeholder="su@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="otro-telefono">Teléfono</label>
+                <input type="tel" id="otro-telefono" name="telefono" class="form-input" placeholder="+34 600 000 000" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="otro-asunto">Asunto *</label>
+                <input type="text" id="otro-asunto" name="asunto" class="form-input" placeholder="¿Sobre qué nos quiere consultar?" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="otro-mensaje">Mensaje *</label>
+              <textarea id="otro-mensaje" name="mensaje" class="form-textarea" rows="4" placeholder="¿En qué podemos ayudarle?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              <span>Enviar mensaje</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         MAP SECTION — DARK — Embedded Google Maps (contrast)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="map-section">
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102350.52768322843!2d-6.149393134745284!3d36.27789343838421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c46129e9c5555%3A0xdb0381d996bbc1b0!2sConil%20de%20la%20Frontera%2C%20C%C3%A1diz!5e0!3m2!1ses!2ses!4v1709318400000!5m2!1ses!2ses"
+          width="100%" 
+          height="100%" 
+          style="border:0; filter: grayscale(1) contrast(1.1);" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de Cien Mares en Conil de la Frontera"
+        ></iframe>
+        <div class="map-overlay"></div>
+      </div>
+      
+      <div class="map-content">
+        <div class="map-card reveal">
+          <span class="label">Ubicación</span>
+          <h3 class="map-title">Conil de la Frontera</h3>
+          <p class="map-address">
+            Puerto de Conil<br/>
+            11140 Cádiz, España
+          </p>
+          <div class="map-hours">
+            <span class="hours-label">Horario</span>
+            <span class="hours-value">Lun - Vie: 9:00 - 19:00</span>
+            <span class="hours-value">Sáb: 10:00 - 14:00</span>
+          </div>
+          <a href="https://maps.google.com/?q=Conil+de+la+Frontera+Cádiz" target="_blank" rel="noopener" class="map-link">
+            <span>Cómo llegar</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         FAQ SECTION — LIGHT — Elegant Grid
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="faq-header">
+          <span class="label reveal">FAQ</span>
+          <h2 class="faq-title reveal" data-delay="1">
+            Preguntas frecuentes
+          </h2>
+        </div>
+        
+        <div class="faq-grid">
+          <div class="faq-item reveal" data-delay="1">
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h4 class="faq-question">¿Cuál es el horario de apertura?</h4>
+            <p class="faq-answer">Nuestro horario es de lunes a viernes de 9:00 a 19:00 y sábados de 10:00 a 14:00. Durante la temporada alta (julio-agosto) también abrimos algunas tardes de domingo.</p>
+          </div>
+          
+          <div class="faq-item reveal" data-delay="2">
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h4 class="faq-question">¿Puedo alquilar sin licencia?</h4>
+            <p class="faq-answer">Sí, ofrecemos alquiler con patrón profesional incluido. Usted solo tiene que preocuparse de disfrutar de la experiencia en el mar.</p>
+          </div>
+          
+          <div class="faq-item reveal" data-delay="3">
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+              </svg>
+            </div>
+            <h4 class="faq-question">¿Cuánto dura un curso de PER?</h4>
+            <p class="faq-answer">El curso de PER tiene una duración aproximada de 3 meses, combinando clases teóricas y prácticas. Las prácticas se realizan en fines de semana.</p>
+          </div>
+          
+          <div class="faq-item reveal" data-delay="1">
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <h4 class="faq-question">¿Cuánto tarda un trámite de gestoría?</h4>
+            <p class="faq-answer">Depende del trámite. Los más sencillos se resuelven en 7-15 días. Los cambios de titularidad o inscripciones pueden tardar 3-4 semanas.</p>
+          </div>
+          
+          <div class="faq-item reveal" data-delay="2">
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <h4 class="faq-question">¿Hacen traslados a Canarias?</h4>
+            <p class="faq-answer">Sí, realizamos traslados a cualquier destino, incluido el archipiélago canario. Son travesías de varios días con escalas en puertos intermedios.</p>
+          </div>
+          
+          <div class="faq-item reveal" data-delay="3">
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+              </svg>
+            </div>
+            <h4 class="faq-question">¿Aceptan mascotas a bordo?</h4>
+            <p class="faq-answer">Sí, la mayoría de nuestras embarcaciones admiten mascotas. Consulte las condiciones específicas al hacer la reserva para confirmar disponibilidad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+</Layout>
+
+<script>
+  // Form tabs functionality
+  const formTabs = document.querySelectorAll('.service-tab');
+  const formPanels = document.querySelectorAll('.form-panel');
+  
+  formTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetPanel = tab.dataset.tab;
+      
+      // Update active tab
+      formTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show corresponding panel
+      formPanels.forEach(panel => {
+        if (panel.dataset.panel === targetPanel) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════════════════════
+     CONTACTO PAGE — v3.5 Design System
+     Light-First · Airy · Sophisticated
+     ═══════════════════════════════════════════════════════════════════════════════ */
+  
+  /* ─── HERO SECTION — LIGHT ───────────────────────────────────────────────────── */
+  .hero-contacto {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--space-lg) + 80px) 0 var(--space-xl);
+    background: var(--ivory);
+    overflow: hidden;
+  }
+  
+  .hero-contacto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+  
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--void);
+    margin: 1rem 0 1.5rem;
+  }
+  
+  .hero-desc {
+    max-width: 450px;
+    font-size: 1.0625rem;
+    color: var(--stone);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  
+  .hero-contact {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    text-decoration: none;
+    transition: all 0.4s var(--ease-out);
+  }
+  
+  .contact-link:hover {
+    transform: translateY(-2px);
+  }
+  
+  .contact-link:hover .contact-value {
+    color: var(--gold);
+  }
+  
+  .contact-label {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+  
+  .contact-value {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 400;
+    color: var(--void);
+    transition: color 0.4s var(--ease-out);
+    letter-spacing: -0.01em;
+  }
+  
+  .contact-divider {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+  
+  .hero-accent {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+  }
+  
+  .accent-line-vertical {
+    width: 1px;
+    height: 160px;
+    background: var(--gold);
+  }
+  
+  /* ─── FORM SECTION — LIGHT ───────────────────────────────────────────────────── */
+  .form-section {
+    padding: var(--space-xxl) 0;
+    background: var(--pearl);
+  }
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .form-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--void);
+    letter-spacing: -0.02em;
+    margin-top: 1rem;
+  }
+  
+  /* Service Tabs */
+  .service-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .service-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--mist);
+    cursor: pointer;
+    transition: all 0.4s var(--ease-out);
+    min-width: 90px;
+  }
+  
+  .service-tab:hover {
+    border-color: var(--gold);
+    background: var(--ivory);
+  }
+  
+  .service-tab.active {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+  
+  .tab-num {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--gold);
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+  }
+  
+  .service-tab.active .tab-num {
+    color: var(--white);
+    opacity: 0.9;
+  }
+  
+  .tab-name {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--void);
+    transition: color 0.3s ease;
+  }
+  
+  .service-tab.active .tab-name {
+    color: var(--white);
+  }
+  
+  /* Form Panels */
+  .form-panels {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .form-panel {
+    display: none;
+    animation: fadeIn 0.5s var(--ease-out);
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid var(--mist);
+  }
+  
+  .form-panel.active {
+    display: block;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    margin-bottom: 0.625rem;
+  }
+  
+  .form-input,
+  .form-textarea,
+  .form-select {
+    width: 100%;
+    padding: 0.875rem 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--mist);
+    color: var(--void);
+    transition: border-color 0.4s var(--ease-out);
+  }
+  
+  .form-input:focus,
+  .form-textarea:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--stone);
+    opacity: 0.5;
+  }
+  
+  .form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a45c' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+  }
+  
+  .form-select option {
+    background: var(--ivory);
+    color: var(--void);
+    padding: 0.5rem;
+  }
+  
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .form-submit {
+    margin-top: 0.5rem;
+  }
+  
+  /* ─── MAP SECTION — DARK ─────────────────────────────────────────────────────── */
+  .map-section {
+    position: relative;
+    min-height: 550px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .map-container {
+    position: relative;
+    min-height: 550px;
+  }
+  
+  .map-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(10, 10, 11, 0.3) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+  
+  .map-content {
+    background: var(--void);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+  }
+  
+  .map-card {
+    max-width: 320px;
+  }
+  
+  .map-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400;
+    color: var(--ivory);
+    margin: 1rem 0 1.25rem;
+    letter-spacing: -0.01em;
+  }
+  
+  .map-address {
+    font-size: 1rem;
+    color: var(--stone);
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+  }
+  
+  .map-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1.75rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .hours-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  
+  .hours-value {
+    font-size: 0.9375rem;
+    color: var(--stone);
+  }
+  
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-decoration: none;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--gold);
+    transition: all 0.3s var(--ease-out);
+  }
+  
+  .map-link:hover {
+    gap: 1rem;
+    color: var(--white);
+    border-color: var(--white);
+  }
+  
+  .map-link svg {
+    transition: transform 0.3s var(--ease-out);
+  }
+  
+  .map-link:hover svg {
+    transform: translateX(4px);
+  }
+  
+  /* ─── FAQ SECTION — LIGHT ────────────────────────────────────────────────────── */
+  .faq-section {
+    padding: var(--space-xxl) 0;
+    background: var(--ivory);
+  }
+  
+  .faq-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  
+  .faq-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--void);
+    letter-spacing: -0.02em;
+    margin-top: 1rem;
+  }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .faq-item {
+    padding: 1.75rem;
+    background: var(--white);
+    border: 1px solid var(--mist);
+    transition: all 0.4s var(--ease-out);
+  }
+  
+  .faq-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  }
+  
+  .faq-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gold);
+    margin-bottom: 1.25rem;
+    transition: all 0.4s var(--ease-out);
+  }
+  
+  .faq-icon svg {
+    width: 18px;
+    height: 18px;
+    color: var(--gold);
+  }
+  
+  .faq-item:hover .faq-icon {
+    background: var(--gold);
+  }
+  
+  .faq-item:hover .faq-icon svg {
+    color: var(--white);
+  }
+  
+  .faq-question {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--void);
+    margin-bottom: 0.875rem;
+    line-height: 1.4;
+  }
+  
+  .faq-answer {
+    font-size: 0.9375rem;
+    color: var(--stone);
+    line-height: 1.7;
+  }
+  
+  /* ─── RESPONSIVE ─────────────────────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .map-section {
+      grid-template-columns: 1fr;
+    }
+    
+    .map-container {
+      min-height: 400px;
+      order: 2;
+    }
+    
+    .map-content {
+      order: 1;
+      padding: var(--space-md);
+    }
+    
+    .map-overlay {
+      display: none;
+    }
+    
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-contacto {
+      min-height: auto;
+      padding: calc(var(--space-xl) + 3rem) 0 var(--space-lg);
+    }
+    
+    .hero-contact {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    
+    .contact-divider {
+      display: none;
+    }
+    
+    .hero-accent {
+      display: none;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    
+    .service-tabs {
+      gap: 0.375rem;
+    }
+    
+    .service-tab {
+      min-width: 70px;
+      padding: 0.875rem 0.625rem;
+    }
+    
+    .tab-name {
+      font-size: 0.6875rem;
+    }
+    
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-panel {
+      padding: 1.75rem;
+    }
+  }
+</style>
