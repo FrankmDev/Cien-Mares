@@ -4,190 +4,124 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer
-  class="relative bg-[#050505] text-[#FAFAFA] pt-32 pb-6 overflow-hidden rounded-t-[2rem] -mt-8 z-50 border-t border-white/5"
+  class="relative bg-[#02060a] text-white pt-24 lg:pt-32 pb-8 overflow-hidden"
   id="site-footer"
 >
-  <!-- Noise -->
-  <div
-    class="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none z-0"
-    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')"
-  >
+  <!-- Background -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#CFA35A]/5 blur-[200px] rounded-full pointer-events-none"></div>
   </div>
 
-  <div
-    class="container mx-auto px-6 lg:px-12 relative z-10 w-full max-w-[1400px]"
-  >
-    <!-- Top Grid Layout -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10"
-    >
-      <!-- Column 1: Brand & Tagline (Span 4) -->
-      <div class="lg:col-span-4 flex flex-col justify-between">
-        <div>
-          <a href="/" class="flex items-center gap-3 mb-6 group">
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              class="w-10 h-10 text-[#CFA35A] group-hover:rotate-90 transition-transform duration-700"
-            >
-              <circle cx="20" cy="20" r="18"></circle>
-              <path d="M20 8v24M8 20h24"></path>
-              <circle
-                cx="20"
-                cy="20"
-                r="6"
-                fill="currentColor"
-                fill-opacity="0.2"></circle>
+  <!-- Top Border -->
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    
+    <!-- Main Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
+      
+      <!-- Brand Column -->
+      <div class="lg:col-span-1">
+        <a href="/" class="inline-flex items-center gap-3 mb-6 group">
+          <div class="w-11 h-11 relative">
+            <svg viewBox="0 0 48 48" fill="none" class="w-full h-full">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" class="text-[#CFA35A]"/>
+              <path d="M24 8v32M8 24h32" stroke="currentColor" stroke-width="1.5" class="text-[#CFA35A]"/>
+              <circle cx="24" cy="24" r="8" fill="currentColor" class="text-[#CFA35A]"/>
             </svg>
-            <h3
-              class="font-display font-black text-2xl uppercase tracking-tighter"
-            >
-              Cien Mares
-            </h3>
+          </div>
+          <span class="font-display font-black text-xl tracking-tight">CIEN MARES</span>
+        </a>
+        <p class="font-body text-white/50 leading-relaxed mb-6 text-sm">
+          Experiencias náuticas de élite en la costa de Cádiz. Excelencia y pasión por el mar desde 2010.
+        </p>
+        
+        <!-- Contact Info -->
+        <div class="space-y-3">
+          <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} class="flex items-center gap-3 group">
+            <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#CFA35A]">Tlf</span>
+            <span class="font-body text-sm text-white/70 group-hover:text-white transition-colors">{contactInfo.phone}</span>
           </a>
-          <p class="font-body text-[#888] text-base leading-relaxed">
-            Arquitectura naval, formación de élite y gestión chárter premium
-            desde las costas del sur hasta el Atlántico profundo.
-          </p>
-        </div>
-        <div class="mt-8">
-          <span
-            class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-3"
-            >Sedes</span
-          >
-          <p
-            class="font-mono text-[0.7rem] uppercase tracking-widest text-[#AAA] leading-relaxed"
-          >
-            {contactInfo.address[0]}<br />
-            {contactInfo.address[1]}<br />
-            {contactInfo.address[2]}
-          </p>
+          <a href={`mailto:${contactInfo.email}`} class="flex items-center gap-3 group">
+            <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#CFA35A]">Email</span>
+            <span class="font-body text-sm text-white/70 group-hover:text-white transition-colors">{contactInfo.email}</span>
+          </a>
         </div>
       </div>
 
-      <!-- Column 2: Navigation (Span 2) -->
-      <div class="lg:col-start-6 lg:col-span-2 flex flex-col gap-4">
-        <span
-          class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-2"
-          >Explorar</span
-        >
-        {
-          footerLinks.services.map((link) => (
-            <a
-              href={link.href}
-              class="font-display text-base uppercase tracking-wider text-[#AAA] hover:text-white transition-colors duration-300 w-fit link-underline relative pb-1"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </div>
-
-      <!-- Column 3: Empresa (Span 2) -->
-      <div class="lg:col-span-2 flex flex-col gap-4">
-        <span
-          class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-2"
-          >Empresa</span
-        >
-        {
-          footerLinks.company.map((link) => (
-            <a
-              href={link.href}
-              class="font-display text-base uppercase tracking-wider text-[#AAA] hover:text-white transition-colors duration-300 w-fit link-underline relative pb-1"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </div>
-
-      <!-- Column 4: Contact (Span 3) -->
-      <div class="lg:col-span-3 flex flex-col gap-6 lg:items-end lg:text-right">
-        <div>
-          <span
-            class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-3"
-            >Mesa de Operaciones</span
-          >
-          <a
-            href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-            class="font-display font-black text-2xl lg:text-3xl text-white hover:text-[#CFA35A] transition-colors duration-300 block mb-1"
-          >
-            {contactInfo.phone}
-          </a>
-          <a
-            href={`mailto:${contactInfo.email}`}
-            class="font-mono text-[0.75rem] uppercase tracking-widest text-[#888] hover:text-white transition-colors duration-300"
-          >
-            {contactInfo.email}
-          </a>
-        </div>
-
-        <!-- Social Buttons -->
-        <div class="flex items-center gap-3 mt-auto">
-          {
-            socialLinks.map((link) => (
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group relative w-11 h-11 rounded-full border border-white/20 flex items-center justify-center overflow-hidden transition-all duration-300 hover:border-[#CFA35A] hover:bg-[#CFA35A]"
-              >
-                <span class="font-mono text-[0.65rem] font-bold tracking-wider text-white/70 group-hover:text-[#050505] transition-colors duration-300 z-10">
-                  {link.label}
-                </span>
+      <!-- Services -->
+      <div>
+        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-6">Servicios</h4>
+        <ul class="space-y-3">
+          {footerLinks.services.map((link) => (
+            <li>
+              <a href={link.href} class="font-body text-sm text-white/50 hover:text-white transition-colors">
+                {link.label}
               </a>
-            ))
-          }
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-6">Empresa</h4>
+        <ul class="space-y-3">
+          {footerLinks.company.map((link) => (
+            <li>
+              <a href={link.href} class="font-body text-sm text-white/50 hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Social & Location -->
+      <div>
+        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-6">Síguenos</h4>
+        <div class="flex gap-3 mb-6">
+          {socialLinks.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#CFA35A] hover:border-[#CFA35A] group transition-all duration-300"
+            >
+              <span class="font-mono text-xs font-bold text-white/50 group-hover:text-[#02060a] transition-colors">
+                {link.label.substring(0, 2)}
+              </span>
+            </a>
+          ))}
         </div>
+
+        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-3">Ubicación</h4>
+        <p class="font-body text-sm text-white/50 leading-relaxed">
+          {contactInfo.address.join(", ")}
+        </p>
       </div>
     </div>
 
-    <!-- Massive Text Treatment Bottom (Raised up, less cut off) -->
-    <div class="pt-6 flex justify-center w-full overflow-hidden select-none">
-      <h2
-        class="font-display font-black text-display-massive text-white/[0.06] translate-y-[15%] hover:text-white/[0.12] transition-colors duration-1000 whitespace-nowrap"
-      >
+    <!-- Large Brand Text -->
+    <div class="py-12 border-t border-b border-white/5 overflow-hidden">
+      <h2 class="font-display font-black text-[clamp(5rem,18vw,14rem)] leading-none text-white/[0.06] text-center select-none whitespace-nowrap tracking-tighter">
         CIEN MARES
       </h2>
     </div>
 
     <!-- Bottom Bar -->
-    <div
-      class="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/10 pt-6 mt-4"
-    >
-      <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#666]">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
+      <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/30">
         © {currentYear} Cien Mares S.L. Todos los derechos reservados.
       </p>
       <div class="flex gap-6">
-        <a
-          href="/privacidad"
-          class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#666] hover:text-white transition-colors"
-          >Política de Privacidad</a
-        >
-        <a
-          href="/legal"
-          class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#666] hover:text-white transition-colors"
-          >Aviso Legal</a
-        >
+        <a href="/privacidad" class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/30 hover:text-[#CFA35A] transition-colors">
+          Privacidad
+        </a>
+        <a href="/legal" class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/30 hover:text-[#CFA35A] transition-colors">
+          Legal
+        </a>
       </div>
     </div>
   </div>
 </footer>
-
-<style>
-  .link-underline::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    background-color: #cfa35a;
-    transition: width 0.4s ease;
-  }
-  .link-underline:hover::after {
-    width: 100%;
-  }
-</style>

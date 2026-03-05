@@ -1,113 +1,138 @@
 ---
 /**
- * HeroSection — Editorial Masterpiece
- * Self-contained: animations inlined, no external .ts dependencies
+ * HeroSection — Cinematic Oceanic Experience
+ * Full-screen immersive hero with dynamic effects
  */
 ---
 
 <section
-  class="relative h-[250vh] w-full selection:bg-[#F2F2F2] selection:text-[#050505]"
+  class="relative h-screen w-full overflow-hidden bg-[#02060a]"
   id="hero-section"
   data-theme="dark"
 >
-  <!-- Fixed Background Container (Pins during scroll) -->
-  <div
-    class="fixed inset-0 w-full h-full z-0 flex items-center justify-center overflow-hidden bg-[#050505]"
-    id="hero-fixed-bg"
-  >
-    <!-- Ambient Noise Texture -->
-    <div
-      class="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none z-[1]"
-      style={`background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`}
+  <!-- Video Background -->
+  <div class="absolute inset-0 z-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="w-full h-full object-cover scale-105 hero-video"
+      poster="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80"
     >
-    </div>
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#02060a]/60 via-[#02060a]/30 to-[#02060a]"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 0%, #02060a 85%);"></div>
+  </div>
 
-    <!-- Ambient Glow -->
-    <div
-      class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-white/5 blur-[120px] rounded-full translate-x-1/4 -translate-y-1/4 pointer-events-none"
-    >
-    </div>
+  <!-- Animated Waves SVG -->
+  <div class="absolute bottom-0 left-0 right-0 z-[3] pointer-events-none">
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+      <defs>
+        <path id="wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"/>
+      </defs>
+      <g class="wave-parallax">
+        <use href="#wave" x="48" y="0" fill="rgba(207, 163, 90, 0.05)"/>
+        <use href="#wave" x="48" y="3" fill="rgba(207, 163, 90, 0.08)"/>
+        <use href="#wave" x="48" y="5" fill="rgba(207, 163, 90, 0.1)"/>
+      </g>
+    </svg>
+  </div>
 
-    <!-- Expanding Image Mask Container -->
-    <div
-      class="relative w-[85vw] md:w-[60vw] lg:w-[45vw] h-[55vh] md:h-[65vh] z-10 overflow-hidden will-change-transform shadow-[0_30px_100px_rgba(0,0,0,0.6)] opacity-0"
-      style="border-radius: 200px; transform: scale(0.85);"
-      id="hero-image-mask"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=2800&q=90"
-        alt="Yate Cien Mares en el océano"
-        class="absolute inset-0 w-full h-full object-cover scale-[1.5] will-change-transform"
-        id="hero-image-inner"
-        fetchpriority="high"
-      />
-      <!-- Gradient overlays to ensure text contrast -->
-      <div class="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent z-10 pointer-events-none"
-      >
-      </div>
-
-      <div
-        class="absolute inset-x-0 bottom-16 md:bottom-24 z-20 flex flex-col items-center justify-center text-center opacity-0 scale-[0.95] will-change-transform"
-        id="hero-inner-content"
-      >
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-[1px] bg-white/40"></div>
-          <span
-            class="font-mono text-[0.65rem] uppercase tracking-[0.4em] font-bold text-white/80 drop-shadow-md"
-          >
-            Conil de la Frontera
+  <!-- Content -->
+  <div class="relative z-10 h-full flex flex-col justify-center items-center px-6">
+    <div class="text-center max-w-5xl mx-auto">
+      
+      <!-- Badge -->
+      <div class="hero-badge opacity-0 translate-y-4 mb-8">
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CFA35A] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#CFA35A]"></span>
           </span>
-          <div class="w-12 h-[1px] bg-white/40"></div>
-        </div>
-
-        <h2
-          class="font-display font-black text-display-hero leading-[0.85] text-white uppercase tracking-tighter drop-shadow-[0_20px_40px_rgba(0,0,0,1)] whitespace-nowrap"
-        >
-          <span class="block mb-2 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
-            >EL ARTE DEL</span
-          >
-          <span
-            class="block text-transparent drop-shadow-none"
-            style="-webkit-text-stroke: 2px rgba(255,255,255,0.9);"
-            >OCÉANO.</span
-          >
-        </h2>
-      </div>
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div
-      class="absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20 opacity-0"
-      id="hero-scroll"
-    >
-      <span
-        class="font-mono text-[0.55rem] uppercase tracking-[0.3em] font-bold text-white/50"
-      >
-        Descubrir
-      </span>
-      <div class="w-[1px] h-12 bg-white/10 relative overflow-hidden">
-        <div
-          class="w-full h-full bg-white absolute top-[-100%] animate-scroll-line"
-        >
+          <span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-white/70 font-bold">Est. 2010 — Cádiz</span>
         </div>
       </div>
+
+      <!-- Title -->
+      <div class="hero-title opacity-0 translate-y-8 mb-6">
+        <h1 class="font-display font-black text-[clamp(3.5rem,12vw,10rem)] leading-[0.85] tracking-tighter uppercase">
+          <span class="block text-white">CIEN</span>
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] to-[#CFA35A]">MARES</span>
+        </h1>
+      </div>
+
+      <!-- Divider -->
+      <div class="hero-divider opacity-0 scale-x-0 flex items-center justify-center gap-4 mb-8">
+        <div class="w-16 h-[1px] bg-gradient-to-r from-transparent to-[#CFA35A]/60"></div>
+        <div class="w-2 h-2 rounded-full bg-[#CFA35A]"></div>
+        <div class="w-16 h-[1px] bg-gradient-to-l from-transparent to-[#CFA35A]/60"></div>
+      </div>
+
+      <!-- Tagline -->
+      <p class="hero-tagline opacity-0 translate-y-4 font-body text-lg md:text-xl text-white/60 max-w-xl mx-auto mb-10">
+        Experiencias náuticas de élite en la costa de Cádiz
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta opacity-0 translate-y-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#services-wrapper" 
+          class="group px-8 py-4 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-white transition-all duration-300 flex items-center gap-3">
+          <span>Explorar</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="/contacto" 
+          class="px-8 py-4 border border-white/20 text-white rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-white/5 hover:border-[#CFA35A]/40 transition-all duration-300">
+          Contactar
+        </a>
+      </div>
     </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="hero-scroll opacity-0 absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
+    <span class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-white/40">Scroll</span>
+    <div class="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center p-2">
+      <div class="w-1 h-2 bg-[#CFA35A] rounded-full animate-bounce"></div>
+    </div>
+  </div>
+
+  <!-- Bottom Wave Transition -->
+  <div class="absolute bottom-0 left-0 right-0 z-[5]">
+    <svg class="w-full h-16 lg:h-20" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path fill="#FAFAFA" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/>
+    </svg>
   </div>
 </section>
 
 <style>
-  @keyframes scrollLine {
-    0% {
-      top: -100%;
-    }
-    100% {
-      top: 100%;
-    }
+  .waves {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
   }
-  .animate-scroll-line {
-    animation: scrollLine 2s ease-in-out infinite;
+  .wave-parallax use {
+    animation: wave-move 20s cubic-bezier(.55,.5,.45,.5) infinite;
+  }
+  .wave-parallax use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+  .wave-parallax use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+  .wave-parallax use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
+  
+  @keyframes wave-move {
+    0% { transform: translate3d(-90px, 0, 0); }
+    100% { transform: translate3d(85px, 0, 0); }
+  }
+  
+  .hero-video {
+    animation: hero-zoom 25s ease-in-out infinite alternate;
+  }
+  @keyframes hero-zoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.15); }
   }
 </style>
 
@@ -117,55 +142,31 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // La secuencia de Hero ahora escucha al preloader externo
-  document.addEventListener("preloader:complete", () => {
-    const initTl = gsap.timeline({
-      defaults: { ease: "expo.out" },
-      delay: 0.1,
-    });
-    initTl
-      .fromTo(
-        "#hero-image-mask",
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 2.5 },
-      )
-      .to("#hero-scroll", { opacity: 1, duration: 2 }, 1.5);
-  });
-
   document.addEventListener("astro:page-load", () => {
-    // 4) Animacion Original de Scroll
-    const scrollTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#hero-section",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
+    const tl = gsap.timeline({ delay: 0.3 });
+    
+    tl.to(".hero-badge", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
+      .to(".hero-title", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=0.4")
+      .to(".hero-divider", { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" }, "-=0.6")
+      .to(".hero-tagline", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
+      .to(".hero-cta", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
+      .to(".hero-scroll", { opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.2");
+
+    // Fade out on scroll - reversible
+    ScrollTrigger.create({
+      trigger: "#hero-section",
+      start: "center top",
+      end: "bottom top",
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        gsap.to(".hero-title, .hero-tagline, .hero-cta", {
+          opacity: 1 - progress,
+          y: -30 * progress,
+          duration: 0.1,
+          overwrite: true
+        });
+      }
     });
-
-    scrollTl
-      .to(
-        "#hero-image-mask",
-        {
-          width: "100vw",
-          height: "100vh",
-          borderRadius: "0px",
-          ease: "power2.inOut",
-        },
-        0,
-      )
-      .to("#hero-image-inner", { scale: 1, ease: "power2.inOut" }, 0)
-      .to(
-        "#hero-inner-content",
-        { opacity: 1, scale: 1, y: -30, ease: "power2.out" },
-        0.3,
-      )
-      .to("#hero-scroll", { opacity: 0, y: -20, ease: "power1.in" }, 0);
-  });
-
-  document.addEventListener("astro:before-swap", () => {
-    ScrollTrigger.getAll()
-      .filter((st) => (st.vars as any).trigger === "#hero-section")
-      .forEach((st) => st.kill());
   });
 </script>

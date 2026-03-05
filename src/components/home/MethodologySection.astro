@@ -1,204 +1,149 @@
 ---
 /**
- * Methodology V19 — "Modern Clear Grid"
- *
- * - Light theme, highly modern and airy.
- * - 3-column dynamic layout on desktop with staggered vertical alignment.
- * - Extremely clear, readable, and premium without being "dark/heavy".
+ * MethodologySection — Hexagon Process Cards
+ * Modern geometric design with 3D hover effects
  */
+
+const phases = [
+  {
+    number: '01',
+    title: 'Consulta',
+    subtitle: 'Personalizada',
+    description: 'Analizamos tus necesidades para diseñar una aventura náutica a medida.',
+    features: ['Evaluación de requerimientos', 'Selección de embarcación', 'Planificación de ruta'],
+    color: '#CFA35A'
+  },
+  {
+    number: '02',
+    title: 'Planificación',
+    subtitle: 'Integral',
+    description: 'Gestionamos logística, documentación y tripulación para tu tranquilidad.',
+    features: ['Gestión documental', 'Asignación de tripulación', 'Abastecimiento premium'],
+    color: '#0A0A0A'
+  },
+  {
+    number: '03',
+    title: 'Experiencia',
+    subtitle: 'Inolvidable',
+    description: 'Disfruta del mar mientras nuestro equipo cuida cada detalle.',
+    features: ['Navegación experta', 'Servicio de lujo', 'Atención 24/7'],
+    color: '#CFA35A'
+  }
+];
 ---
 
 <section
-  class="relative bg-[#FAFAFA] text-[#0A0A0A] py-32 lg:py-56 overflow-hidden border-t border-[#0A0A0A]/5"
-  id="methodology-v19"
+  class="relative bg-white text-[#0A0A0A] py-28 lg:py-36 overflow-hidden"
+  id="methodology-section"
   data-theme="light"
 >
-  <div
-    class="container mx-auto px-6 lg:px-12 relative z-10 w-full max-w-[1400px]"
-  >
-    <!-- Header: Clear and Modern -->
-    <div
-      class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 lg:mb-32 gap-8"
-    >
-      <div class="max-w-3xl">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-[1px] bg-[#0A0A0A]"></div>
-          <span
-            class="font-mono text-[0.65rem] uppercase tracking-[0.4em] font-bold text-[#0A0A0A]"
-            >Metodología</span
-          >
-        </div>
-        <h2
-          class="font-display font-black text-display-section uppercase tracking-tighter leading-[0.85] text-[#0A0A0A]"
-        >
-          <span class="block mb-2">NAVEGACIÓN</span>
-          <span
-            class="block text-transparent"
-            style="-webkit-text-stroke: 2px #0A0A0A;">SIN FRICCIONES.</span
-          >
-        </h2>
+  <!-- Background -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#CFA35A]/3 rounded-full blur-[150px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    
+    <!-- Header -->
+    <div class="meth-header text-center max-w-2xl mx-auto mb-20">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#0A0A0A] text-white rounded-full mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#CFA35A] animate-pulse"></span>
+        <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold">Proceso</span>
       </div>
-      <p
-        class="font-body text-body-premium text-[#0A0A0A]/60 max-w-sm lg:text-right"
-      >
-        Un proceso estructurado para garantizar absoluta excelencia desde la
-        planificación hasta el amarre final.
+      <h2 class="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-[0.9] mb-6">
+        Cómo <span class="text-[#CFA35A]">trabajamos</span>
+      </h2>
+      <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60">
+        Tres pasos hacia tu aventura náutica perfecta.
       </p>
     </div>
 
-    <!-- 3-Column Staggered Editorial Grid -->
-    <div class="flex flex-col gap-24 lg:gap-32 relative z-10 w-full">
-      <!-- Phase 1 -->
-      <article
-        class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 meth-card opacity-0 translate-y-12"
-      >
-        <div class="w-full lg:w-1/2 relative">
-          <!-- Massive Background Number -->
-          <div
-            class="absolute -top-12 -left-8 font-display font-black text-[12rem] leading-none text-[#0A0A0A]/5 select-none z-0 pointer-events-none"
-          >
-            01
-          </div>
-          <div
-            class="w-full aspect-[4/3] lg:aspect-[4/5] rounded-[2rem] overflow-hidden relative bg-[#EAEAEA] animate-float-subtle shadow-[0_30px_60px_rgba(0,0,0,0.08)] z-10"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=85&w=1200"
-              alt="Auditoría"
-              class="w-full h-full object-cover scale-[1.02] hover:scale-110 transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)]"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div class="w-full lg:w-1/2 lg:pl-12">
-          <h3
-            class="font-display font-black text-display-section leading-none text-[#0A0A0A] uppercase mb-6 tracking-tighter"
-          >
-            Consultoría<br /><span
-              class="text-transparent"
-              style="-webkit-text-stroke: 1.5px #0A0A0A;">Exacta</span>
-          </h3>
-          <p
-            class="font-body text-lg text-[#0A0A0A]/70 max-w-md leading-relaxed"
-          >
-            Analizamos la eslora requerida, preferencias gastronómicas y
-            protocolos de privacidad. Diseñamos la travesía basándonos en tus
-            exigencias absolutas, sin dejar margen a la improvisación.
-          </p>
-        </div>
-      </article>
+    <!-- Process Cards - New Design -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {phases.map((phase, i) => (
+        <div class="meth-card group relative" style={`--delay: ${i * 0.15}s`}>
+          <!-- Connector line (hidden on mobile) -->
+          {i < phases.length - 1 && (
+            <div class="hidden md:block absolute top-20 left-full w-12 h-[2px] z-0">
+              <div class="w-full h-full bg-gradient-to-r from-[#CFA35A]/50 to-transparent"></div>
+            </div>
+          )}
+          
+          <div class="relative p-8 rounded-3xl bg-[#FAFAFA] border-2 border-transparent hover:border-[#CFA35A]/30 transition-all duration-500 h-full group-hover:bg-white group-hover:shadow-2xl group-hover:shadow-[#CFA35A]/10">
+            
+            <!-- Top accent bar -->
+            <div class="absolute top-0 left-8 right-8 h-1 bg-[#CFA35A] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
 
-      <!-- Phase 2 (Reversed) -->
-      <article
-        class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20 meth-card opacity-0 translate-y-12"
-      >
-        <div class="w-full lg:w-1/2 relative flex justify-end">
-          <div
-            class="absolute -top-12 -right-8 font-display font-black text-[12rem] leading-none text-[#0A0A0A]/5 select-none z-0 pointer-events-none"
-          >
-            02
-          </div>
-          <div
-            class="w-[90%] lg:w-[85%] aspect-[4/3] lg:aspect-[3/4] rounded-[2rem] overflow-hidden relative bg-[#EAEAEA] animate-float-subtle shadow-[0_30px_60px_rgba(0,0,0,0.08)] z-10"
-            style="animation-delay: -2s;"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&q=85&w=1200"
-              alt="Logística"
-              class="w-full h-full object-cover scale-[1.02] hover:scale-110 transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)]"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div
-          class="w-full lg:w-1/2 lg:pr-12 lg:text-right flex flex-col items-start lg:items-end"
-        >
-          <h3
-            class="font-display font-black text-display-section leading-none text-[#0A0A0A] uppercase mb-6 tracking-tighter"
-          >
-            Logística<br /><span
-              class="text-transparent"
-              style="-webkit-text-stroke: 1.5px #0A0A0A;">Invisible</span>
-          </h3>
-          <p
-            class="font-body text-lg text-[#0A0A0A]/70 max-w-md leading-relaxed"
-          >
-            Permisos rápidos, repostaje coordinado y abastecimiento premium. El
-            barco te espera en el amarre impecable, como si siempre hubiera sido
-            tuyo.
-          </p>
-        </div>
-      </article>
+            <!-- Number with hexagon background -->
+            <div class="relative mb-8">
+              <div class="absolute -top-2 -left-2 w-20 h-20">
+                <svg class="w-full h-full text-[#CFA35A]/10 group-hover:text-[#CFA35A]/20 transition-colors" viewBox="0 0 100 100" fill="currentColor">
+                  <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"/>
+                </svg>
+              </div>
+              <div class="relative w-16 h-16 rounded-2xl bg-[#0A0A0A] flex items-center justify-center group-hover:bg-[#CFA35A] transition-colors duration-300 shadow-lg">
+                <span class="font-display font-black text-2xl text-white">{phase.number}</span>
+              </div>
+            </div>
 
-      <!-- Phase 3 -->
-      <article
-        class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 meth-card opacity-0 translate-y-12"
-      >
-        <div class="w-full lg:w-1/2 relative">
-          <div
-            class="absolute -top-12 -left-8 font-display font-black text-[12rem] leading-none text-[#CFA35A]/10 select-none z-0 pointer-events-none"
-          >
-            03
-          </div>
-          <div
-            class="w-full aspect-[4/3] lg:aspect-[4/5] rounded-[2rem] overflow-hidden relative bg-[#EAEAEA] animate-float-subtle shadow-[0_40px_80px_rgba(207,163,90,0.15)] z-10"
-            style="animation-delay: -4s;"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1566847464366-50e50937a72d?auto=format&fit=crop&q=85&w=1200"
-              alt="Excelencia"
-              class="w-full h-full object-cover scale-[1.02] hover:scale-110 transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)]"
-              loading="lazy"
-            />
+            <!-- Content -->
+            <div class="mb-2">
+              <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[#CFA35A] font-bold">{phase.subtitle}</span>
+            </div>
+            <h3 class="font-display font-black text-2xl lg:text-3xl mb-4 group-hover:text-[#CFA35A] transition-colors">
+              {phase.title}
+            </h3>
+            <p class="font-body text-[#0A0A0A]/60 leading-relaxed mb-6 text-sm">
+              {phase.description}
+            </p>
+
+            <!-- Features as tags -->
+            <div class="flex flex-wrap gap-2">
+              {phase.features.map((feature) => (
+                <span class="px-3 py-1.5 rounded-full bg-[#0A0A0A]/5 text-[#0A0A0A]/70 text-xs font-mono uppercase tracking-wider group-hover:bg-[#CFA35A]/10 group-hover:text-[#CFA35A] transition-colors">
+                  {feature}
+                </span>
+              ))}
+            </div>
+
+            <!-- Hover indicator -->
+            <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-[#0A0A0A]/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+              <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
           </div>
         </div>
-        <div class="w-full lg:w-1/2 lg:pl-12">
-          <h3
-            class="font-display font-black text-display-section leading-none text-[#0A0A0A] uppercase mb-6 tracking-tighter"
-          >
-            Dominio en<br /><span
-              class="text-transparent"
-              style="-webkit-text-stroke: 1.5px #CFA35A;">Altamar</span>
-          </h3>
-          <p
-            class="font-body text-lg text-[#0A0A0A]/70 max-w-md leading-relaxed"
-          >
-            Disfruta de la máxima tranquilidad y del rigor discreto de una
-            tripulación excepcional. Navegación en estado puro, de principio a
-            fin, bajo tus propias reglas.
-          </p>
-        </div>
-      </article>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="meth-footer text-center mt-16">
+      <a href="/contacto" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#0A0A0A] text-white rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-[#CFA35A] transition-all duration-300 hover:shadow-lg hover:shadow-[#CFA35A]/30">
+        <span>Iniciar proyecto</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
   </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("astro:page-load", () => {
+      gsap.fromTo(".meth-header", 
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: "#methodology-section", start: "top 80%" }}
+      );
+      
+      gsap.fromTo(".meth-card", 
+        { y: 80, opacity: 0, rotateY: -10 },
+        { y: 0, opacity: 1, rotateY: 0, duration: 1, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".meth-card", start: "top 85%" }}
+      );
+    });
+  </script>
 </section>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener("astro:page-load", () => {
-    const cards = gsap.utils.toArray(".meth-card");
-    if (cards.length > 0) {
-      gsap.to(cards, {
-        y: 0,
-        opacity: 1,
-        duration: 1.6,
-        stagger: 0.3,
-        ease: "sine.out",
-        scrollTrigger: {
-          trigger: "#methodology-v19",
-          start: "top 70%",
-        },
-      });
-    }
-  });
-
-  document.addEventListener("astro:before-swap", () => {
-    ScrollTrigger.getAll()
-      .filter((st) => (st.vars as any).trigger === "#methodology-v19")
-      .forEach((st) => st.kill());
-  });
-</script>

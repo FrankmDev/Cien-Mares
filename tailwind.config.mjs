@@ -25,8 +25,8 @@ export default {
         "cm-glow": "rgba(207, 163, 90, 0.15)",
       },
       fontFamily: {
-        display: ["Cormorant Garamond", "serif"],
-        accent: ["Cormorant Garamond", "serif"],
+        display: ["Space Grotesk", "system-ui", "sans-serif"],
+        accent: ["Space Grotesk", "system-ui", "sans-serif"],
         body: ["Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },

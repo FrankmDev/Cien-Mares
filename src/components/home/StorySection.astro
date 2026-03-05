@@ -1,234 +1,194 @@
 ---
 /**
- * StorySection — Ultra-Premium Editorial
- * Self-contained: animations inlined, no external .ts dependencies
+ * StorySection — Editorial Magazine Layout
+ * Asymmetric composition with overlapping images
  */
 ---
 
 <section
-  class="relative bg-[#FAFAFA] text-[#0A0A0A] border-b border-[#0A0A0A]/10 py-32 lg:py-56 overflow-hidden"
+  class="relative bg-[#FAFAFA] text-[#0A0A0A] py-28 lg:py-36 overflow-hidden"
   id="story-section"
   data-theme="light"
 >
-  <!-- Noise Texture -->
-  <div
-    class="absolute inset-0 opacity-[0.04] mix-blend-multiply pointer-events-none z-[1]"
-    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')"
-  >
+  <!-- Background -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-[#CFA35A]/[0.04] to-transparent"></div>
   </div>
 
-  <!-- Background Decor Letters -->
-  <div
-    class="absolute top-0 right-0 pointer-events-none overflow-hidden select-none opacity-[0.03] w-full h-full flex justify-end items-center z-0"
-  >
-    <span
-      class="font-display font-black text-[25vw] leading-none tracking-tighter text-[#0A0A0A] translate-x-[25%]"
-    >
-      CM.
-    </span>
-  </div>
-
-  <div
-    class="container mx-auto px-6 lg:px-12 xl:px-20 relative z-10 max-w-[1400px]"
-  >
-    <div class="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
-      <!-- Left Text Content -->
-      <div class="w-full lg:w-1/2 flex flex-col justify-center relative">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="w-12 h-[1px] bg-[#CFA35A]"></div>
-          <span
-            class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A]"
-            >Quiénes Somos</span
-          >
-        </div>
-
-        <h2
-          class="font-display font-black text-display-section lg:text-display-hero uppercase tracking-tighter leading-[0.85] mb-8 text-[#0A0A0A] whitespace-nowrap flex flex-col"
-        >
-          <span class="block mb-2">EL ARTE DE LA</span>
-          <span
-            class="block text-transparent"
-            style="-webkit-text-stroke: 2px #0A0A0A;">NAVEGACIÓN.</span
-          >
-        </h2>
-
-        <div class="flex flex-col gap-5 relative z-10">
-          <p class="font-body text-[#0A0A0A]/80 text-lg leading-relaxed">
-            Fundada en 2010 en Conil de la Frontera, Cien Mares nació de una
-            dedicación absoluta al océano. No somos una agencia tradicional;
-            somos una firma de servicios náuticos que entiende el mar como el
-            entorno definitivo para la libertad y la privacidad.
-          </p>
-          <p
-            class="font-body text-[#0A0A0A]/60 text-base leading-relaxed pl-5 border-l-2 border-[#CFA35A]/30"
-          >
-            Cada yate que gestionamos, cada curso que impartimos y cada travesía
-            que diseñamos se ejecuta con precisión milimétrica. Transformamos la
-            complejidad naval en una experiencia de lujo fluido y sin
-            fricciones.
-          </p>
-        </div>
-
-        <!-- Stats -->
-        <div
-          class="flex flex-wrap items-center gap-12 lg:gap-24 mt-16 pt-10 border-t border-[#0A0A0A]/10 relative"
-        >
-          <!-- Editorial Decor Line -->
-          <div class="absolute -top-3 left-0 w-2 h-2 bg-[#0A0A0A]"></div>
-
-          <div class="flex flex-col">
-            <span
-              class="font-display text-[clamp(3.5rem,5vw,5rem)] leading-none font-black tracking-tighter text-[#0A0A0A]"
-            >
-              15<span
-                class="text-[#CFA35A] font-light text-[clamp(2rem,3vw,3rem)] align-top"
-                >+</span
-              >
-            </span>
-            <span
-              class="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-[#0A0A0A]/50 font-bold mt-1 block"
-              >Años en el mar</span
-            >
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    
+    <!-- Header -->
+    <div class="story-header mb-16 lg:mb-24">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+        <div class="lg:w-[55%]">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#0A0A0A] text-white rounded-full mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#CFA35A] animate-pulse"></span>
+            <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold">Sobre Nosotros</span>
           </div>
-          <div class="hidden lg:block w-[1px] h-16 bg-[#0A0A0A]/10"></div>
-          <div class="flex flex-col">
-            <span
-              class="font-display text-[clamp(3.5rem,5vw,5rem)] leading-none font-black tracking-tighter text-[#0A0A0A]"
-            >
-              2<span
-                class="text-[#CFA35A] font-light text-[clamp(2rem,3vw,3rem)] align-top"
-                >K</span
-              ><span
-                class="text-[#0A0A0A]/30 text-[clamp(2rem,3vw,3rem)] align-top"
-                >+</span
-              >
-            </span>
-            <span
-              class="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-[#0A0A0A]/50 font-bold mt-1 block"
-              >Travesías Premium</span
-            >
+          <h2 class="font-display font-black text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.9]">
+            <span class="block">15 años</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] to-[#8e6f38]">navegando</span>
+          </h2>
+        </div>
+        <div class="lg:w-[40%] lg:pb-4">
+          <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60 leading-relaxed mb-6">
+            Desde 2010 en Conil de la Frontera, creamos momentos únicos en el mar. Cada travesía es una historia que contar.
+          </p>
+          <div class="flex gap-10">
+            <div>
+              <span class="font-display font-black text-4xl text-[#CFA35A] block">50+</span>
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40">Embarcaciones</span>
+            </div>
+            <div>
+              <span class="font-display font-black text-4xl text-[#CFA35A] block">2K+</span>
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40">Clientes</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Right Imagery Grid -->
-      <div
-        class="w-full lg:w-1/2 relative min-h-[450px] lg:min-h-0 mt-8 lg:mt-0"
-      >
-        <!-- Floating Gold Badge -->
-        <div
-          class="absolute -top-4 -right-4 lg:top-[-5%] lg:right-[-5%] z-30 animate-float-subtle"
-        >
-          <div
-            class="w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-[#0A0A0A] text-[#CFA35A] flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
-            style="animation: spin-slow 30s linear infinite;"
-          >
-            <svg viewBox="0 0 100 100" class="w-full h-full p-2">
-              <path id="curve" d="M 50 15 A 35 35 0 1 1 49.9 15" fill="none"
-              ></path>
-              <text
-                class="text-[10px] lg:text-[12px] font-mono uppercase tracking-[0.15em] font-bold fill-current"
-              >
-                <textPath href="#curve">Cien Mares • Est. 2010 •</textPath>
-              </text>
-            </svg>
-            <div
-              class="absolute inset-0 flex items-center justify-center pointer-events-none"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                class="w-5 h-5 lg:w-6 lg:h-6 -rotate-45"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
+    <!-- Image Grid -->
+    <div class="grid grid-cols-12 gap-6 mb-20">
+      <div class="col-span-12 lg:col-span-7 story-image-main">
+        <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl group">
+          <img
+            src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1400&q=85&auto=format&fit=crop"
+            alt="Yate de lujo"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+            <div>
+              <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/60 block mb-1">Flota Premium</span>
+              <span class="font-display font-bold text-xl text-white">Embarcaciones de élite</span>
+            </div>
+            <div class="w-14 h-14 rounded-xl bg-[#CFA35A] flex items-center justify-center">
+              <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Main Large Image -->
-        <div
-          class="w-[92%] lg:w-[88%] aspect-[3/4] ml-auto rounded-[1.5rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.12)] relative z-10 story-image bg-[#E5E5E5]"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=1200&q=85&auto=format&fit=crop"
-            alt="Cubierta de yate CEO"
-            class="w-full h-full object-cover grayscale-[5%] scale-[1.05] story-parallax"
-            loading="lazy"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/5 pointer-events-none"
-          >
-          </div>
-        </div>
-
-        <!-- Overlapping Small Image -->
-        <div
-          class="absolute bottom-[-8%] left-[-3%] w-[50%] lg:w-[45%] aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.25)] z-20 border-4 border-[#FAFAFA] story-image bg-[#E5E5E5]"
-        >
+      <div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
+        <div class="story-image-secondary relative aspect-video rounded-2xl overflow-hidden shadow-xl group flex-1">
           <img
             src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80&auto=format&fit=crop"
-            alt="Detalle de yate luminoso"
-            class="w-full h-full object-cover scale-[1.1] story-parallax"
-            loading="lazy"
-            style="transform-origin: bottom center;"
+            alt="Equipo"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent"></div>
+          <div class="absolute bottom-5 left-5">
+            <span class="font-display font-bold text-lg text-white">Tripulación Experta</span>
+          </div>
+        </div>
+        
+        <div class="story-image-tertiary bg-[#0A0A0A] rounded-2xl p-6 flex items-center justify-between">
+          <div>
+            <span class="font-display font-black text-5xl text-white block">2010</span>
+            <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/50">Fundación</span>
+          </div>
+          <div class="w-16 h-16 rounded-full border-2 border-[#CFA35A] flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<style>
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener("astro:page-load", () => {
-    gsap.fromTo(
-      ".story-image",
-      { y: 80, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.8,
-        stagger: 0.3,
-        ease: "sine.out",
-        scrollTrigger: { trigger: "#story-section", start: "top 75%" },
-      },
-    );
-
-    gsap.utils.toArray<HTMLElement>(".story-parallax").forEach((img) => {
-      gsap.to(img, {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#story-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
+    <!-- Features - New Original Design -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {[
+        { 
+          title: 'Excelencia', 
+          desc: 'Cada detalle cuidadosamente planificado para superar expectativas.',
+          icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+          gradient: 'from-[#CFA35A] to-[#8e6f38]'
         },
-      });
-    });
-  });
+        { 
+          title: 'Tripulación', 
+          desc: 'Profesionales certificados con décadas de experiencia en alta mar.',
+          icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 14v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+          gradient: 'from-[#0A0A0A] to-[#2a2a2a]'
+        },
+        { 
+          title: 'Disponibilidad', 
+          desc: 'Atención permanente 24/7 para garantizar tu tranquilidad.',
+          icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+          gradient: 'from-[#CFA35A] to-[#e8cb8e]'
+        },
+      ].map((item, i) => (
+        <div class={`story-card group relative p-8 rounded-3xl bg-white border border-[#0A0A0A]/5 hover:border-[#CFA35A]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[#CFA35A]/10 hover:-translate-y-2 ${i === 1 ? 'md:translate-y-6' : ''}`}>
+          <!-- Gradient orb background -->
+          <div class={`absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`}></div>
+          
+          <div class="relative">
+            <!-- Icon with animated ring -->
+            <div class="relative w-16 h-16 mb-6">
+              <div class="absolute inset-0 rounded-2xl bg-[#0A0A0A] group-hover:bg-[#CFA35A] transition-colors duration-300"></div>
+              <div class="absolute inset-0 rounded-2xl border-2 border-[#CFA35A] scale-100 group-hover:scale-110 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <svg class="relative w-full h-full p-4 text-[#CFA35A] group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d={item.icon}/>
+              </svg>
+            </div>
+            
+            <h3 class="font-display font-bold text-xl mb-3 group-hover:text-[#CFA35A] transition-colors">{item.title}</h3>
+            <p class="font-body text-[#0A0A0A]/60 text-sm leading-relaxed">{item.desc}</p>
+            
+            <!-- Animated arrow -->
+            <div class="mt-6 flex items-center gap-2 text-[#0A0A0A]/40 group-hover:text-[#CFA35A] transition-colors">
+              <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em]">Ver más</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
 
-  document.addEventListener("astro:before-swap", () => {
-    ScrollTrigger.getAll()
-      .filter((st) => (st.vars as any).trigger === "#story-section")
-      .forEach((st) => st.kill());
-  });
-</script>
+    <!-- CTA -->
+    <div class="mt-16 text-center story-cta">
+      <a href="/historias" class="group inline-flex items-center gap-4">
+        <span class="font-display font-bold text-lg uppercase tracking-[0.1em]">Conoce nuestra historia</span>
+        <div class="w-12 h-12 rounded-full bg-[#0A0A0A] flex items-center justify-center group-hover:bg-[#CFA35A] transition-colors">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("astro:page-load", () => {
+      gsap.fromTo(".story-header", 
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: "#story-section", start: "top 80%" }}
+      );
+      
+      gsap.fromTo(".story-image-main", 
+        { x: -50, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: ".story-image-main", start: "top 85%" }}
+      );
+      
+      gsap.fromTo(".story-image-secondary, .story-image-tertiary", 
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".story-image-secondary", start: "top 90%" }}
+      );
+      
+      gsap.fromTo(".story-card", 
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: ".story-card", start: "top 85%" }}
+      );
+    });
+  </script>
+</section>
