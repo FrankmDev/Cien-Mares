@@ -1,0 +1,153 @@
+---
+/**
+ * ServicesSection — Editorial Horizontal Scroll
+ * Self-contained: data + animations inlined
+ */
+
+const services = [
+	{ id: 'alquiler', number: '01', title: 'Alquiler', description: 'Veleros, lanchas y yates bañados por el sol para tu próxima gran escapada.', image: 'https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=1200&q=85', link: '/navegar' },
+	{ id: 'academia', number: '02', title: 'Academia', description: 'Aprende en aguas cristalinas con las mejores titulaciones homologadas.', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=85', link: '/aprender' },
+	{ id: 'gestoria', number: '03', title: 'Gestoría', description: 'Gestión impecable, transparente y sin fricción de todo el papeleo naval.', image: 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=1200&q=85', link: '/gestionar' },
+	{ id: 'traslados', number: '04', title: 'Traslados', description: 'Logística internacional bajo los cielos más claros y mares en calma.', image: 'https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=1200&q=85', link: '/contacto' },
+];
+---
+
+<section
+	class="bg-[#050505] text-[#F2F2F2] relative z-20"
+	id="services-wrapper"
+	data-theme="dark"
+>
+	<div class="h-screen w-full flex overflow-hidden" id="services-pinned">
+
+		<!-- Custom Drag Cursor Hint -->
+		<div class="absolute inset-0 z-[60] pointer-events-none lg:flex hidden items-center justify-center">
+			<div class="w-24 h-24 rounded-full border border-[#CFA35A]/30 bg-[#CFA35A]/10 backdrop-blur-md flex items-center justify-center opacity-0 scale-50 will-change-transform" id="drag-cursor">
+				<span class="font-mono text-[0.55rem] uppercase tracking-[0.2em] font-bold text-[#CFA35A]">Scroll</span>
+			</div>
+		</div>
+
+		<!-- Horizontal Scrolling Track -->
+		<div class="flex flex-nowrap h-full w-[400vw] will-change-transform" id="services-track">
+			{services.map((service, i) => (
+				<div class="w-[100vw] h-screen shrink-0 relative flex items-center justify-center overflow-hidden service-panel group">
+
+					<!-- Background Image -->
+					<div class="absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%] will-change-transform" data-srv-bg>
+						<img src={service.image} alt={service.title}
+							class="w-full h-full object-cover grayscale-[20%] opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[2s] ease-out animate-drift"
+							loading="lazy" />
+						<div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-[#050505]/40" />
+						<div class="absolute inset-0 bg-[#050505]/30" />
+					</div>
+
+					<!-- Content Overlay -->
+					<div class="relative z-10 w-full px-6 lg:px-16 xl:px-24 py-16 flex flex-col justify-between h-full max-w-[1400px] mx-auto will-change-transform" data-srv-content>
+						<div class="flex flex-col lg:flex-row justify-between items-start mt-20 lg:mt-28 w-full gap-8">
+							<div class="flex items-center gap-6">
+								<div class="w-16 h-[1px] bg-white/40" />
+								<span class="font-mono text-[0.65rem] uppercase tracking-[0.4em] font-bold text-white/80 drop-shadow-lg">Capítulo 0{i + 1}</span>
+							</div>
+							
+							<div class="hidden lg:block max-w-sm text-right">
+								<p class="font-body text-white/60 text-sm leading-relaxed tracking-wide">Servicios marítimos de élite diseñados para quienes exigen perfección técnica y absoluta privacidad en cada detalle.</p>
+							</div>
+						</div>
+
+						<div class="mb-12 lg:mb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end w-full">
+							
+							<!-- Headline -->
+							<div class="lg:col-span-8 flex flex-col justify-start">
+								<h3 class="font-display font-black text-display-hero uppercase whitespace-nowrap text-white drop-shadow-2xl mb-4 lg:mb-0">
+									{service.title}
+								</h3>
+							</div>
+
+							<!-- Refined Information Box (No generic glass, just fine lines) -->
+							<div class="lg:col-span-4 flex flex-col border-t border-white/20 pt-6">
+								<p class="font-body text-white/80 text-body-premium mb-8 leading-relaxed max-w-md">{service.description}</p>
+								
+								<div class="flex items-center gap-6">
+									<a href={service.link} class="inline-flex items-center gap-4 group/btn cursor-pointer relative z-50">
+										<span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] group-hover/btn:text-white transition-colors duration-300">Descubrir</span>
+										<div class="w-12 h-[1px] bg-[#CFA35A]/50 group-hover/btn:w-20 group-hover/btn:bg-white transition-all duration-500 ease-out" />
+									</a>
+									<a href={service.link} class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-transparent group-hover/btn:bg-white transition-colors duration-500 hover:bg-white hover:text-black hover:border-white z-50 cursor-pointer text-white">
+										<svg class="w-4 h-4 -rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+											<path d="M5 12h14M12 5l7 7-7 7" />
+										</svg>
+									</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+
+	<!-- Progress Indicator -->
+	<div class="absolute bottom-6 left-0 w-full h-[2px] bg-white/10 z-30 hidden lg:block">
+		<div class="h-full bg-white w-0" id="services-progress" />
+	</div>
+</section>
+
+<style>
+	@media (min-width: 1024px) {
+		.service-panel { cursor: none; }
+		.service-panel a { cursor: none; }
+	}
+</style>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener('astro:page-load', () => {
+		if (window.innerWidth > 1024) {
+			const track = document.getElementById('services-track')!;
+			const wrapper = document.getElementById('services-wrapper')!;
+
+			const tl = gsap.timeline({
+				scrollTrigger: { trigger: wrapper, start: 'top top', end: '+=400%', pin: '#services-pinned', scrub: 1 },
+			});
+			tl.to(track, { x: () => -(track.scrollWidth - window.innerWidth) + 'px', ease: 'none' });
+
+			gsap.to('#services-progress', {
+				width: '100%', ease: 'none',
+				scrollTrigger: { trigger: wrapper, start: 'top top', end: '+=400%', scrub: 1 },
+			});
+
+			const panels = gsap.utils.toArray<HTMLElement>('.service-panel');
+			panels.forEach((panel) => {
+				const bg = panel.querySelector('[data-srv-bg]');
+				const content = panel.querySelector('[data-srv-content]');
+				if (bg) gsap.fromTo(bg, { xPercent: -5 }, { xPercent: 5, ease: 'none', scrollTrigger: { trigger: wrapper, start: 'top top', end: '+=400%', scrub: 1 } });
+				if (content) gsap.fromTo(content, { xPercent: 5 }, { xPercent: -5, ease: 'none', scrollTrigger: { trigger: wrapper, start: 'top top', end: '+=400%', scrub: 1 } });
+			});
+
+			// Custom cursor
+			const cursor = document.getElementById('drag-cursor');
+			const pinnedArea = document.getElementById('services-pinned');
+			if (cursor && pinnedArea) {
+				pinnedArea.addEventListener('mousemove', (e) => gsap.to(cursor, { x: e.clientX - 64, y: e.clientY - 64, duration: 0.1, ease: 'none' }));
+				pinnedArea.addEventListener('mouseenter', () => gsap.to(cursor, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.5)' }));
+				pinnedArea.addEventListener('mouseleave', () => gsap.to(cursor, { opacity: 0, scale: 0.5, duration: 0.3, ease: 'power2.in' }));
+				pinnedArea.querySelectorAll('a').forEach((link) => {
+					link.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 0, opacity: 0, duration: 0.2 }));
+					link.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.2 }));
+				});
+			}
+		} else {
+			const track = document.getElementById('services-track');
+			if (track) { track.classList.remove('w-[400vw]', 'flex-nowrap'); track.classList.add('w-full', 'flex-col'); }
+			gsap.utils.toArray<HTMLElement>('.service-panel').forEach((panel) => { panel.classList.remove('h-screen'); panel.classList.add('min-h-[85vh]'); });
+		}
+	});
+
+	document.addEventListener('astro:before-swap', () => {
+		ScrollTrigger.getAll().filter(st => (st.vars as any).trigger === '#services-wrapper').forEach(st => st.kill());
+	});
+</script>

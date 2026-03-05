@@ -1,0 +1,181 @@
+---
+/**
+ * Cinematic Original Preloader
+ * Global loading screen with an editorial wave effect and text reveal.
+ */
+---
+
+<div
+  id="global-preloader-v2"
+  class="fixed inset-0 z-[99999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden"
+>
+  <!-- Atmospheric Deep Water Background -->
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,30,40,0.8)_0%,#050505_100%)] opacity-80"
+    >
+    </div>
+
+    <!-- Moving liquid shapes (pure CSS) -->
+    <div class="water-orb orb-1"></div>
+    <div class="water-orb orb-2"></div>
+    <div class="water-orb orb-3"></div>
+
+    <div
+      class="absolute inset-0 opacity-[0.05] mix-blend-screen pointer-events-none z-10"
+      style={`background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`}
+    >
+    </div>
+  </div>
+
+  <!-- The Content Mask -->
+  <div class="relative z-20 flex flex-col items-center w-full max-w-7xl px-4">
+    <div class="overflow-hidden mix-blend-exclusion">
+      <h1
+        class="preloader-title font-display font-black text-[clamp(5rem,20vw,20rem)] leading-[0.8] tracking-tighter uppercase text-[#FAFAFA] flex items-center justify-center whitespace-nowrap will-change-transform"
+      >
+        <span class="inline-block translate-y-[120%] preloader-char">C</span>
+        <span class="inline-block translate-y-[120%] preloader-char">I</span>
+        <span class="inline-block translate-y-[120%] preloader-char">E</span>
+        <span class="inline-block translate-y-[120%] preloader-char">N</span>
+        <span class="w-[5vw]"></span>
+        <span class="inline-block translate-y-[120%] preloader-char">M</span>
+        <span class="inline-block translate-y-[120%] preloader-char">A</span>
+        <span class="inline-block translate-y-[120%] preloader-char">R</span>
+        <span class="inline-block translate-y-[120%] preloader-char">E</span>
+        <span class="inline-block translate-y-[120%] preloader-char">S</span>
+      </h1>
+    </div>
+
+    <!-- Decorative thin line -->
+    <div class="w-0 h-[1px] bg-white/20 mt-8 rounded-full preloader-line"></div>
+  </div>
+</div>
+
+<style>
+  /* Water Orbs for abstract oceanic feel */
+  .water-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    mix-blend-mode: screen;
+    animation: floatOrb 10s ease-in-out infinite alternate;
+    will-change: transform, border-radius;
+  }
+
+  .orb-1 {
+    width: 60vw;
+    height: 60vh;
+    background: #1a365d;
+    top: -20%;
+    left: -10%;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 50vw;
+    height: 50vh;
+    background: #2b6cb0;
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -3s;
+  }
+
+  .orb-3 {
+    width: 40vw;
+    height: 40vw;
+    background: #2c5282;
+    top: 30%;
+    left: 40%;
+    animation-delay: -6s;
+    opacity: 0.2;
+  }
+
+  @keyframes floatOrb {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    100% {
+      transform: translate(-5vw, 10vh) scale(1.1) rotate(15deg);
+      border-radius: 40% 60% 50% 50% / 40% 50% 50% 60%;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const preloader = document.getElementById("global-preloader-v2");
+    if (!preloader) return;
+
+    // Lock scroll immediately
+    document.body.style.overflow = "hidden";
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        document.body.style.overflow = ""; // Unlock
+        // Tell the Hero to start!
+        document.dispatchEvent(new CustomEvent("preloader:complete"));
+      },
+    });
+
+    // 1. Text characters stagger up like a wave
+    tl.to(".preloader-char", {
+      y: "0%",
+      duration: 1.2,
+      stagger: 0.05,
+      ease: "power4.out",
+      delay: 0.1,
+    })
+      // 2. Line expands
+      .to(
+        ".preloader-line",
+        {
+          width: "40vw",
+          duration: 1,
+          ease: "power3.inOut",
+        },
+        "-=0.8",
+      )
+      // 3. Hold for reading
+      .to({}, { duration: 0.8 })
+      // 4. Everything collapses inwards creating a suction effect
+      .to(".preloader-char", {
+        scale: 0.8,
+        opacity: 0,
+        y: "-20%",
+        duration: 0.8,
+        stagger: 0.02,
+        ease: "power2.in",
+      })
+      .to(
+        ".preloader-line",
+        {
+          width: "0vw",
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.inOut",
+        },
+        "<",
+      )
+      // 5. Background fades and scales out wildly
+      .to(
+        preloader,
+        {
+          scale: 1.1,
+          autoAlpha: 0,
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        "-=0.2",
+      )
+      // 6. Hard reset to prevent DOM ghosting
+      .set(preloader, { display: "none" });
+  });
+</script>

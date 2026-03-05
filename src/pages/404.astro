@@ -1,167 +1,47 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 ---
 
-<Layout 
-  title="404 | Página no encontrada"
+<Layout
+  title="Página no encontrada | Cien Mares"
   description="La página que buscas no existe."
 >
-  <main class="error-page section-dark">
-    <div class="error-content">
-      <span class="error-num">404</span>
-      <div class="error-line"></div>
-      <h1 class="error-title">Página no encontrada</h1>
-      <p class="error-desc">
-        La página que buscas no existe o ha sido movida.
+  <section
+    class="min-h-screen flex items-center justify-center bg-[#050505] text-[#F2F2F2]"
+    data-theme="dark"
+  >
+    <div class="text-center px-6">
+      <span
+        class="font-display font-black text-[clamp(6rem,20vw,12rem)] leading-none text-white/[0.06] block mb-4"
+        >404</span
+      >
+      <h1
+        class="font-display font-black text-[clamp(2rem,5vw,4rem)] leading-[0.9] tracking-tighter uppercase mb-4"
+      >
+        Página <span class="text-[#CFA35A]">no encontrada</span>
+      </h1>
+      <p class="font-body text-[#F2F2F2]/60 text-lg max-w-md mx-auto mb-8">
+        Parece que te has perdido en alta mar. Te ayudamos a volver a puerto.
       </p>
-      <div class="error-actions">
-        <a href="/" class="btn btn-primary">Volver al inicio</a>
-        <a href="/contacto" class="btn btn-outline">Contactar</a>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-[#CFA35A] text-[#050505] font-display font-bold rounded-full hover:bg-[#E8CB8E] transition-colors"
+        >
+          Volver al inicio
+        </a>
+        <a
+          href="/contacto"
+          class="inline-flex items-center gap-3 px-8 py-4 border border-white/20 text-white font-display font-medium rounded-full hover:border-[#CFA35A] hover:text-[#CFA35A] transition-colors"
+        >
+          Contactar
+        </a>
       </div>
+      <p
+        class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-white/30 mt-16 pt-8 border-t border-white/10"
+      >
+        36°31'N · 6°17'W · ERROR 404
+      </p>
     </div>
-    
-    <div class="error-visual">
-      <div class="compass">
-        <div class="compass-rose">
-          <span class="compass-n">N</span>
-        </div>
-        <div class="compass-circle"></div>
-        <div class="compass-circle-2"></div>
-      </div>
-    </div>
-  </main>
+  </section>
 </Layout>
-
-<style>
-  .error-page {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: calc(var(--space-lg) + 80px) 0;
-  }
-  
-  .error-content {
-    padding: 0 0 0 clamp(1.5rem, 5vw, 3rem);
-  }
-  
-  .error-num {
-    display: block;
-    font-family: var(--font-display);
-    font-size: clamp(6rem, 15vw, 12rem);
-    font-weight: 700;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--gold);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-  
-  .error-line {
-    width: 80px;
-    height: 4px;
-    background: var(--gold);
-    margin-bottom: 2rem;
-  }
-  
-  .error-title {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-  
-  .error-desc {
-    max-width: 320px;
-    margin-bottom: 2.5rem;
-    opacity: 0.8;
-  }
-  
-  .error-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  
-  .error-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .compass {
-    position: relative;
-    width: 300px;
-    height: 300px;
-  }
-  
-  .compass-circle {
-    position: absolute;
-    inset: 0;
-    border: 2px solid rgba(212, 168, 83, 0.3);
-    border-radius: 50%;
-    animation: pulse 3s ease-in-out infinite;
-  }
-  
-  .compass-circle-2 {
-    position: absolute;
-    inset: 40px;
-    border: 1px solid rgba(212, 168, 83, 0.15);
-    border-radius: 50%;
-  }
-  
-  .compass-rose {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: spin 20s linear infinite;
-  }
-  
-  .compass-n {
-    font-family: var(--font-display);
-    font-size: 4rem;
-    font-weight: 700;
-    color: var(--gold);
-  }
-  
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
-  }
-  
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  
-  @media (max-width: 768px) {
-    .error-page {
-      grid-template-columns: 1fr;
-      text-align: center;
-      padding-top: calc(var(--space-lg) + 100px);
-    }
-    
-    .error-content {
-      padding: 0 clamp(1.5rem, 5vw, 3rem);
-    }
-    
-    .error-line {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .error-actions {
-      justify-content: center;
-    }
-    
-    .error-visual {
-      order: -1;
-      margin-bottom: 2rem;
-    }
-    
-    .compass {
-      width: 200px;
-      height: 200px;
-    }
-  }
-</style>

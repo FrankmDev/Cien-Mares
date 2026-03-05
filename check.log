@@ -1,0 +1,145 @@
+[2m20:30:41[22m [34m[content][39m Syncing content
+[2m20:30:41[22m [34m[content][39m Synced content
+[2m20:30:41[22m [34m[types][39m Generated [2m33ms[22m
+[2m20:30:41[22m [34m[check][39m Getting diagnostics for Astro files in C:\Users\pacom\PROJECTS\Cien-Mares...
+[96msrc/components/global/WhatsAppFlotante.astro[0m:[93m52[0m:[93m5[0m - [91merror[0m[90m ts(2304): [0mCannot find name 'lastScrollY'.
+
+[7m52[0m     lastScrollY = currentScrollY;
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+[96msrc/components/sections/GallerySection.astro[0m:[93m88[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m88[0m             card.style.opacity = '1';
+[7m  [0m [91m                 ~~~~~[0m
+[96msrc/components/sections/GallerySection.astro[0m:[93m87[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m87[0m             card.style.transform = 'translateY(0)';
+[7m  [0m [91m                 ~~~~~[0m
+[96msrc/components/sections/GallerySection.astro[0m:[93m86[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m86[0m             card.style.transition = `transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) ${0.3 + (index * 0.2)}s, opacity 1s ease ${0.3 + (index * 0.2)}s`;
+[7m  [0m [91m                 ~~~~~[0m
+
+[96msrc/components/sections/HeroSection.astro[0m:[93m135[0m:[93m12[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m135[0m         el.style.opacity = "1";
+[7m   [0m [91m           ~~~~~[0m
+[96msrc/components/sections/HeroSection.astro[0m:[93m134[0m:[93m12[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m134[0m         el.style.transform = "translateY(0)";
+[7m   [0m [91m           ~~~~~[0m
+[96msrc/components/sections/HeroSection.astro[0m:[93m133[0m:[93m12[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m133[0m         el.style.transition = `transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`;
+[7m   [0m [91m           ~~~~~[0m
+
+[96msrc/components/sections/QuoteSection.astro[0m:[93m30[0m:[93m7[0m - [91merror[0m[90m ts(2322): [0mType '{ "0": boolean; "200": boolean; "200\"": boolean; class: string; style: string; xmlns: string; id: string; type: string; baseFrequency: string; stitchTiles: string; width: string; height: string; filter: string; }' is not assignable to type 'HTMLAttributes'.
+  Property 'xmlns' does not exist on type 'HTMLAttributes'.
+
+[7m30[0m       xmlns='\"http://www.w3.org/2000/svg\"%3E%3Cfilter'
+[7m  [0m [91m      ~~~~~[0m
+
+[96msrc/components/sections/SeccionServicios.astro[0m:[93m75[0m:[93m33[0m - [91merror[0m[90m ts(6133): [0m'index' is declared but its value is never read.
+
+[7m75[0m       {servicios.map((servicio, index) => (
+[7m  [0m [91m                                ~~~~~[0m
+
+[96msrc/components/sections/ServicesSection.astro[0m:[93m117[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m117[0m             card.style.opacity = '1';
+[7m   [0m [91m                 ~~~~~[0m
+[96msrc/components/sections/ServicesSection.astro[0m:[93m116[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m116[0m             card.style.transform = 'translateY(0)';
+[7m   [0m [91m                 ~~~~~[0m
+[96msrc/components/sections/ServicesSection.astro[0m:[93m115[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m115[0m             card.style.transition = `transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + delay}s, opacity 1s ease ${0.4 + delay}s`;
+[7m   [0m [91m                 ~~~~~[0m
+[96msrc/components/sections/ServicesSection.astro[0m:[93m108[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m108[0m             el.style.opacity = '1';
+[7m   [0m [91m               ~~~~~[0m
+[96msrc/components/sections/ServicesSection.astro[0m:[93m107[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m107[0m             el.style.transform = 'translateY(0)';
+[7m   [0m [91m               ~~~~~[0m
+[96msrc/components/sections/ServicesSection.astro[0m:[93m106[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m106[0m             el.style.transition = `transform 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s, opacity 1s ease ${index * 0.15}s`;
+[7m   [0m [91m               ~~~~~[0m
+
+[96msrc/components/sections/StorySection.astro[0m:[93m201[0m:[93m23[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m201[0m             htmlBadge.style.opacity = "1";
+[7m   [0m [91m                      ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m200[0m:[93m23[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m200[0m             htmlBadge.style.transform = "translateY(0)";
+[7m   [0m [91m                      ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m198[0m:[93m23[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m198[0m             htmlBadge.style.transition =
+[7m   [0m [91m                      ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m191[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m191[0m             htmlEl.style.transitionDelay = delay;
+[7m   [0m [91m                   ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m182[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m182[0m             htmlEl.style.opacity = "1";
+[7m   [0m [91m                   ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m181[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m181[0m             htmlEl.style.transform = "translateY(0)";
+[7m   [0m [91m                   ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m180[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m180[0m             htmlEl.style.transition = `transform 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.6 + i * 0.2}s, opacity 1s ease ${0.6 + i * 0.2}s`;
+[7m   [0m [91m                   ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m174[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m174[0m             htmlLine.style.opacity = "1";
+[7m   [0m [91m                     ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m173[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m173[0m             htmlLine.style.transform = "translateX(0)";
+[7m   [0m [91m                     ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m171[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m171[0m             htmlLine.style.transition =
+[7m   [0m [91m                     ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m165[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m165[0m             htmlEl.style.opacity = "1";
+[7m   [0m [91m                   ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m164[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m164[0m             htmlEl.style.transform = "translateY(0)";
+[7m   [0m [91m                   ~~~~~[0m
+[96msrc/components/sections/StorySection.astro[0m:[93m163[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'style' does not exist on type 'Element'.
+
+[7m163[0m             htmlEl.style.transition = `transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.15}s, opacity 1s ease ${i * 0.15}s`;
+[7m   [0m [91m                   ~~~~~[0m
+
+[96msrc/components/ui/AccordionNautico.astro[0m:[93m17[0m:[93m21[0m - [91merror[0m[90m ts(6133): [0m'index' is declared but its value is never read.
+
+[7m17[0m   {items.map((item, index) => (
+[7m  [0m [91m                    ~~~~~[0m
+
+[96msrc/components/ui/RevealContainer.astro[0m:[93m2[0m:[93m11[0m - [91merror[0m[90m ts(6196): [0m'Props' is declared but never used.
+
+[7m2[0m interface Props {
+[7m [0m [91m          ~~~~~[0m
+
+[96msrc/pages/historias.astro[0m:[93m22[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '{ titulo: string; tituloLight: string; subtitulo: string; }' is not assignable to type 'IntrinsicAttributes & Props'.
+  Property 'tituloLight' does not exist on type 'IntrinsicAttributes & Props'.
+
+[7m22[0m     tituloLight="El mar"
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+Result (72 files): 
+- 31 errors
+- 0 warnings
+- 0 hints
+

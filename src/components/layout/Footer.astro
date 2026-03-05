@@ -1,0 +1,193 @@
+---
+import { footerLinks, socialLinks, contactInfo } from "../../data/navigation";
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class="relative bg-[#050505] text-[#FAFAFA] pt-32 pb-6 overflow-hidden rounded-t-[2rem] -mt-8 z-50 border-t border-white/5"
+  id="site-footer"
+>
+  <!-- Noise -->
+  <div
+    class="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none z-0"
+    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')"
+  >
+  </div>
+
+  <div
+    class="container mx-auto px-6 lg:px-12 relative z-10 w-full max-w-[1400px]"
+  >
+    <!-- Top Grid Layout -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10"
+    >
+      <!-- Column 1: Brand & Tagline (Span 4) -->
+      <div class="lg:col-span-4 flex flex-col justify-between">
+        <div>
+          <a href="/" class="flex items-center gap-3 mb-6 group">
+            <svg
+              viewBox="0 0 40 40"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              class="w-10 h-10 text-[#CFA35A] group-hover:rotate-90 transition-transform duration-700"
+            >
+              <circle cx="20" cy="20" r="18"></circle>
+              <path d="M20 8v24M8 20h24"></path>
+              <circle
+                cx="20"
+                cy="20"
+                r="6"
+                fill="currentColor"
+                fill-opacity="0.2"></circle>
+            </svg>
+            <h3
+              class="font-display font-black text-2xl uppercase tracking-tighter"
+            >
+              Cien Mares
+            </h3>
+          </a>
+          <p class="font-body text-[#888] text-base leading-relaxed">
+            Arquitectura naval, formación de élite y gestión chárter premium
+            desde las costas del sur hasta el Atlántico profundo.
+          </p>
+        </div>
+        <div class="mt-8">
+          <span
+            class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-3"
+            >Sedes</span
+          >
+          <p
+            class="font-mono text-[0.7rem] uppercase tracking-widest text-[#AAA] leading-relaxed"
+          >
+            {contactInfo.address[0]}<br />
+            {contactInfo.address[1]}<br />
+            {contactInfo.address[2]}
+          </p>
+        </div>
+      </div>
+
+      <!-- Column 2: Navigation (Span 2) -->
+      <div class="lg:col-start-6 lg:col-span-2 flex flex-col gap-4">
+        <span
+          class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-2"
+          >Explorar</span
+        >
+        {
+          footerLinks.services.map((link) => (
+            <a
+              href={link.href}
+              class="font-display text-base uppercase tracking-wider text-[#AAA] hover:text-white transition-colors duration-300 w-fit link-underline relative pb-1"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Column 3: Empresa (Span 2) -->
+      <div class="lg:col-span-2 flex flex-col gap-4">
+        <span
+          class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-2"
+          >Empresa</span
+        >
+        {
+          footerLinks.company.map((link) => (
+            <a
+              href={link.href}
+              class="font-display text-base uppercase tracking-wider text-[#AAA] hover:text-white transition-colors duration-300 w-fit link-underline relative pb-1"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Column 4: Contact (Span 3) -->
+      <div class="lg:col-span-3 flex flex-col gap-6 lg:items-end lg:text-right">
+        <div>
+          <span
+            class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-3"
+            >Mesa de Operaciones</span
+          >
+          <a
+            href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+            class="font-display font-black text-2xl lg:text-3xl text-white hover:text-[#CFA35A] transition-colors duration-300 block mb-1"
+          >
+            {contactInfo.phone}
+          </a>
+          <a
+            href={`mailto:${contactInfo.email}`}
+            class="font-mono text-[0.75rem] uppercase tracking-widest text-[#888] hover:text-white transition-colors duration-300"
+          >
+            {contactInfo.email}
+          </a>
+        </div>
+
+        <!-- Social Buttons -->
+        <div class="flex items-center gap-3 mt-auto">
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative w-11 h-11 rounded-full border border-white/20 flex items-center justify-center overflow-hidden transition-all duration-300 hover:border-[#CFA35A] hover:bg-[#CFA35A]"
+              >
+                <span class="font-mono text-[0.65rem] font-bold tracking-wider text-white/70 group-hover:text-[#050505] transition-colors duration-300 z-10">
+                  {link.label}
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Massive Text Treatment Bottom (Raised up, less cut off) -->
+    <div class="pt-6 flex justify-center w-full overflow-hidden select-none">
+      <h2
+        class="font-display font-black text-display-massive text-white/[0.06] translate-y-[15%] hover:text-white/[0.12] transition-colors duration-1000 whitespace-nowrap"
+      >
+        CIEN MARES
+      </h2>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div
+      class="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/10 pt-6 mt-4"
+    >
+      <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#666]">
+        © {currentYear} Cien Mares S.L. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-6">
+        <a
+          href="/privacidad"
+          class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#666] hover:text-white transition-colors"
+          >Política de Privacidad</a
+        >
+        <a
+          href="/legal"
+          class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#666] hover:text-white transition-colors"
+          >Aviso Legal</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #cfa35a;
+    transition: width 0.4s ease;
+  }
+  .link-underline:hover::after {
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+/**
+ * HeroSection — Editorial Masterpiece
+ * Self-contained: animations inlined, no external .ts dependencies
+ */
+---
+
+<section
+  class="relative h-[250vh] w-full selection:bg-[#F2F2F2] selection:text-[#050505]"
+  id="hero-section"
+  data-theme="dark"
+>
+  <!-- Fixed Background Container (Pins during scroll) -->
+  <div
+    class="fixed inset-0 w-full h-full z-0 flex items-center justify-center overflow-hidden bg-[#050505]"
+    id="hero-fixed-bg"
+  >
+    <!-- Ambient Noise Texture -->
+    <div
+      class="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none z-[1]"
+      style={`background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`}
+    >
+    </div>
+
+    <!-- Ambient Glow -->
+    <div
+      class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-white/5 blur-[120px] rounded-full translate-x-1/4 -translate-y-1/4 pointer-events-none"
+    >
+    </div>
+
+    <!-- Expanding Image Mask Container -->
+    <div
+      class="relative w-[85vw] md:w-[60vw] lg:w-[45vw] h-[55vh] md:h-[65vh] z-10 overflow-hidden will-change-transform shadow-[0_30px_100px_rgba(0,0,0,0.6)] opacity-0"
+      style="border-radius: 200px; transform: scale(0.85);"
+      id="hero-image-mask"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=2800&q=90"
+        alt="Yate Cien Mares en el océano"
+        class="absolute inset-0 w-full h-full object-cover scale-[1.5] will-change-transform"
+        id="hero-image-inner"
+        fetchpriority="high"
+      />
+      <!-- Gradient overlays to ensure text contrast -->
+      <div class="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent z-10 pointer-events-none"
+      >
+      </div>
+
+      <div
+        class="absolute inset-x-0 bottom-16 md:bottom-24 z-20 flex flex-col items-center justify-center text-center opacity-0 scale-[0.95] will-change-transform"
+        id="hero-inner-content"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-[1px] bg-white/40"></div>
+          <span
+            class="font-mono text-[0.65rem] uppercase tracking-[0.4em] font-bold text-white/80 drop-shadow-md"
+          >
+            Conil de la Frontera
+          </span>
+          <div class="w-12 h-[1px] bg-white/40"></div>
+        </div>
+
+        <h2
+          class="font-display font-black text-display-hero leading-[0.85] text-white uppercase tracking-tighter drop-shadow-[0_20px_40px_rgba(0,0,0,1)] whitespace-nowrap"
+        >
+          <span class="block mb-2 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
+            >EL ARTE DEL</span
+          >
+          <span
+            class="block text-transparent drop-shadow-none"
+            style="-webkit-text-stroke: 2px rgba(255,255,255,0.9);"
+            >OCÉANO.</span
+          >
+        </h2>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div
+      class="absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20 opacity-0"
+      id="hero-scroll"
+    >
+      <span
+        class="font-mono text-[0.55rem] uppercase tracking-[0.3em] font-bold text-white/50"
+      >
+        Descubrir
+      </span>
+      <div class="w-[1px] h-12 bg-white/10 relative overflow-hidden">
+        <div
+          class="w-full h-full bg-white absolute top-[-100%] animate-scroll-line"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scrollLine {
+    0% {
+      top: -100%;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  .animate-scroll-line {
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // La secuencia de Hero ahora escucha al preloader externo
+  document.addEventListener("preloader:complete", () => {
+    const initTl = gsap.timeline({
+      defaults: { ease: "expo.out" },
+      delay: 0.1,
+    });
+    initTl
+      .fromTo(
+        "#hero-image-mask",
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 2.5 },
+      )
+      .to("#hero-scroll", { opacity: 1, duration: 2 }, 1.5);
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    // 4) Animacion Original de Scroll
+    const scrollTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#hero-section",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+
+    scrollTl
+      .to(
+        "#hero-image-mask",
+        {
+          width: "100vw",
+          height: "100vh",
+          borderRadius: "0px",
+          ease: "power2.inOut",
+        },
+        0,
+      )
+      .to("#hero-image-inner", { scale: 1, ease: "power2.inOut" }, 0)
+      .to(
+        "#hero-inner-content",
+        { opacity: 1, scale: 1, y: -30, ease: "power2.out" },
+        0.3,
+      )
+      .to("#hero-scroll", { opacity: 0, y: -20, ease: "power1.in" }, 0);
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    ScrollTrigger.getAll()
+      .filter((st) => (st.vars as any).trigger === "#hero-section")
+      .forEach((st) => st.kill());
+  });
+</script>

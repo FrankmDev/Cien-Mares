@@ -1,0 +1,346 @@
+---
+import { navLinks } from "../../data/navigation";
+
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+/**
+ * Header V13 — Color Observer & GSAP Mobile Menu
+ *
+ * - IntersectionObserver detects [data-theme="light"] on sections
+ *   and applies .theme-light to the header, smoothly inverting text to black.
+ * - Mobile menu is a full-screen #050505 takeover with GSAP stagger reveals.
+ */
+---
+
+<header
+  id="site-header"
+  class:list={[
+    "fixed top-0 left-0 right-0 z-[1000] w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] py-6 lg:py-8",
+    { "bg-transparent": transparent },
+  ]}
+>
+  <div
+    class="container mx-auto px-6 lg:px-12 flex items-center justify-between max-w-[1400px]"
+  >
+    <!-- Header Logo -->
+    <a
+      href="/"
+      class="header-logo group flex items-center gap-3 relative z-[1001]"
+    >
+      <div
+        class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center transition-transform duration-500 group-hover:rotate-90"
+      >
+        <svg
+          viewBox="0 0 40 40"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          class="w-full h-full text-white transition-colors duration-500 header-icon"
+        >
+          <circle cx="20" cy="20" r="18"></circle>
+          <path d="M20 8v24M8 20h24"></path>
+          <circle cx="20" cy="20" r="6" fill="currentColor" fill-opacity="0.2"
+          ></circle>
+        </svg>
+      </div>
+      <span
+        class="font-display font-black text-xl lg:text-2xl tracking-tighter uppercase text-white transition-colors duration-500 header-text"
+        >Cien Mares</span
+      >
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center gap-10">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="header-link group relative overflow-hidden"
+          >
+            <span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-white transition-colors duration-500 block relative translate-y-0 group-hover:-translate-y-full will-change-transform header-text">
+              {link.label}
+            </span>
+            <span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] absolute top-full left-0 transition-all duration-500 block group-hover:-translate-y-full will-change-transform">
+              {link.label}
+            </span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a
+      href="/contacto"
+      class="hidden lg:flex items-center gap-4 group/btn relative z-[1001]"
+    >
+      <span
+        class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold text-white transition-colors duration-500 header-text"
+        >Contacto</span
+      >
+      <div
+        class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-sm group-hover/btn:bg-white transition-colors duration-500 header-btn"
+      >
+        <svg
+          class="w-4 h-4 -rotate-45 group-hover/btn:rotate-0 transition-transform duration-500 text-white group-hover/btn:text-[#030303] header-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+        >
+      </div>
+    </a>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      class="lg:hidden flex flex-col gap-[6px] relative z-[1001] p-2"
+      id="mobile-toggle"
+      aria-label="Menu"
+    >
+      <span
+        class="w-8 h-[2px] bg-white transition-all duration-500 origin-right header-bg-stroke"
+      ></span>
+      <span
+        class="w-8 h-[2px] bg-white transition-all duration-500 header-bg-stroke"
+      ></span>
+      <span
+        class="w-8 h-[2px] bg-white transition-all duration-500 origin-right header-bg-stroke"
+      ></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay (GSAP animated) -->
+  <div
+    class="fixed inset-0 w-full h-[100dvh] bg-[#050505] z-[1000] flex flex-col justify-center px-8 lg:hidden clip-path-menu will-change-transform"
+    id="mobile-menu"
+    style="clip-path: circle(0% at 90% 10%); visibility: hidden;"
+  >
+    <!-- Noise -->
+    <div
+      class="absolute inset-0 opacity-[0.03] mix-blend-screen pointer-events-none z-0"
+      style={`background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");`}
+    >
+    </div>
+
+    <nav class="flex flex-col gap-6 relative z-10 w-full">
+      {
+        navLinks.map((link) => (
+          <div class="overflow-hidden">
+            <a
+              href={link.href}
+              class="font-display font-black text-display-section uppercase tracking-tighter text-[#FAFAFA] block mobile-nav-link translate-y-full opacity-0 will-change-transform"
+            >
+              {link.label}
+            </a>
+          </div>
+        ))
+      }
+      <div class="overflow-hidden mt-8 pt-8 border-t border-white/10">
+        <a
+          href="/contacto"
+          class="font-display font-black text-display-section uppercase tracking-tighter text-[#CFA35A] block mobile-nav-link translate-y-full opacity-0 will-change-transform"
+        >
+          Contacto
+        </a>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Footer -->
+    <div
+      class="absolute bottom-12 left-8 right-8 flex justify-between items-end overflow-hidden"
+    >
+      <div class="mobile-nav-link translate-y-full opacity-0">
+        <span
+          class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-white/40 block mb-2"
+          >Social</span
+        >
+        <div class="flex gap-4">
+          <a
+            href="#"
+            class="font-mono text-[0.65rem] uppercase tracking-widest text-white"
+            >IG</a
+          >
+          <a
+            href="#"
+            class="font-mono text-[0.65rem] uppercase tracking-widest text-white"
+            >IN</a
+          >
+        </div>
+      </div>
+      <div class="mobile-nav-link translate-y-full opacity-0 text-right">
+        <span
+          class="font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold text-white/40 block mb-2"
+          >Telf</span
+        >
+        <span
+          class="font-mono text-[0.65rem] uppercase tracking-widest text-white"
+          >+34 956 123 456</span
+        >
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Header Light Theme Overrides */
+  .header-light .header-text {
+    color: #0a0a0a !important;
+  }
+  .header-light .header-icon {
+    color: #0a0a0a !important;
+  }
+  .header-light .header-btn {
+    border-color: rgba(10, 10, 10, 0.2) !important;
+    background-color: rgba(10, 10, 10, 0.05) !important;
+  }
+  .header-light .header-btn svg {
+    color: #0a0a0a !important;
+  }
+  .header-light .header-bg-stroke {
+    background-color: #0a0a0a !important;
+  }
+
+  /* Scrolled background added by JS for blur */
+  .header-scrolled {
+    background: rgba(3, 3, 3, 0.85); /* Dark blur */
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  /* If scrolled AND light theme */
+  .header-light.header-scrolled {
+    background: rgba(250, 250, 250, 0.9); /* Light blur */
+    border-bottom: 1px solid rgba(10, 10, 10, 0.05);
+  }
+
+  /* Keep mobile hamburger white if menu is open, regardless of background */
+  .menu-open #mobile-toggle span {
+    background-color: #fafafa !important;
+  }
+  .menu-open #site-header .header-text {
+    color: #fafafa !important;
+  }
+  .menu-open #site-header .header-icon {
+    color: #fafafa !important;
+  }
+
+  /* Toggle Animation */
+  .menu-open #mobile-toggle span:nth-child(1) {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+  .menu-open #mobile-toggle span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  .menu-open #mobile-toggle span:nth-child(3) {
+    transform: rotate(45deg) translateY(8px);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    // --- 1. THE OBSERVER (Theme Detection) ---
+    const header = document.getElementById("site-header");
+    const sections = document.querySelectorAll("section[data-theme]");
+
+    if (header && sections.length > 0) {
+      const observerOptions = {
+        root: null,
+        rootMargin: "-10% 0px -90% 0px", // Detects what is currently at the top 10% of the screen under the header
+        threshold: 0,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const theme = entry.target.getAttribute("data-theme");
+            if (theme === "light") {
+              header.classList.add("header-light");
+            } else {
+              header.classList.remove("header-light");
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((sec) => observer.observe(sec));
+    }
+
+    // --- 2. SCROLL BLUR BACKGROUND ---
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 50) {
+          header?.classList.add("header-scrolled");
+        } else {
+          header?.classList.remove("header-scrolled");
+        }
+      },
+      { passive: true },
+    );
+
+    // --- 3. MOBILE MENU (GSAP) ---
+    const toggle = document.getElementById("mobile-toggle");
+    const menu = document.getElementById("mobile-menu");
+    let isMenuOpen = false;
+
+    if (toggle && menu) {
+      toggle.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+        document.body.classList.toggle("menu-open", isMenuOpen);
+        document.body.style.overflow = isMenuOpen ? "hidden" : "";
+
+        if (isMenuOpen) {
+          // Open animation (clip-path circle expanding)
+          gsap.set(menu, { visibility: "visible" });
+          gsap.to(menu, {
+            clipPath: "circle(150% at 90% 10%)",
+            duration: 0.8,
+            ease: "power3.inOut",
+          });
+
+          // Stagger texts UP
+          gsap.to(".mobile-nav-link", {
+            y: "0%",
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: "expo.out",
+            delay: 0.3,
+          });
+        } else {
+          // Close animation
+          gsap.to(".mobile-nav-link", {
+            y: "100%",
+            opacity: 0,
+            duration: 0.4,
+            stagger: -0.05,
+            ease: "power2.in",
+          });
+          gsap.to(menu, {
+            clipPath: "circle(0% at 90% 10%)",
+            duration: 0.6,
+            ease: "power3.inOut",
+            delay: 0.2,
+            onComplete: () => {
+              gsap.set(menu, { visibility: "hidden" });
+            },
+          });
+        }
+      });
+
+      // Close on link click
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (isMenuOpen) toggle.click();
+        });
+      });
+    }
+  });
+</script>
