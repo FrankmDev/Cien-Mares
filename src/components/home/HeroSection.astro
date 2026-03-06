@@ -1,7 +1,7 @@
 ---
 /**
- * HeroSection — Cinematic Oceanic Experience
- * Full-screen immersive hero with dynamic effects
+ * HeroSection — Cinematic Nautical Experience
+ * Immersive full-screen hero with layered depth effects
  */
 ---
 
@@ -10,129 +10,300 @@
   id="hero-section"
   data-theme="dark"
 >
-  <!-- Video Background -->
+  <!-- Layer 1: Video Background with Enhanced Vignette -->
   <div class="absolute inset-0 z-0">
     <video
       autoplay
       muted
       loop
       playsinline
-      class="w-full h-full object-cover scale-105 hero-video"
+      class="w-full h-full object-cover hero-video-scale"
       poster="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80"
     >
       <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" type="video/mp4" />
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-[#02060a]/60 via-[#02060a]/30 to-[#02060a]"></div>
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 0%, #02060a 85%);"></div>
+    
+    <!-- Multi-layer gradient overlays for depth -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#02060a]/70 via-[#02060a]/20 to-[#02060a]"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#02060a]/50 via-transparent to-[#02060a]/50"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 100% 100% at 50% 30%, transparent 0%, rgba(2,6,10,0.4) 50%, #02060a 100%);"></div>
   </div>
 
-  <!-- Animated Waves SVG -->
-  <div class="absolute bottom-0 left-0 right-0 z-[3] pointer-events-none">
-    <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
-      <defs>
-        <path id="wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"/>
-      </defs>
-      <g class="wave-parallax">
-        <use href="#wave" x="48" y="0" fill="rgba(207, 163, 90, 0.05)"/>
-        <use href="#wave" x="48" y="3" fill="rgba(207, 163, 90, 0.08)"/>
-        <use href="#wave" x="48" y="5" fill="rgba(207, 163, 90, 0.1)"/>
-      </g>
-    </svg>
+  <!-- Layer 2: Animated Ocean Particles -->
+  <div class="absolute inset-0 z-[1] pointer-events-none" id="ocean-particles"></div>
+
+  <!-- Layer 3: Golden Light Rays -->
+  <div class="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
+    <div class="light-ray absolute top-0 left-1/4 w-[2px] h-full bg-gradient-to-b from-[#CFA35A]/20 via-[#CFA35A]/5 to-transparent transform -rotate-12 origin-top"></div>
+    <div class="light-ray absolute top-0 left-1/2 w-[1px] h-full bg-gradient-to-b from-[#CFA35A]/15 via-transparent to-transparent transform rotate-6 origin-top"></div>
+    <div class="light-ray absolute top-0 right-1/3 w-[2px] h-full bg-gradient-to-b from-[#CFA35A]/10 via-[#CFA35A]/3 to-transparent transform -rotate-6 origin-top"></div>
   </div>
 
-  <!-- Content -->
+  <!-- Layer 4: Floating Elements -->
+  <div class="absolute inset-0 z-[3] pointer-events-none">
+    <!-- Compass decoration -->
+    <div class="compass-decoration absolute top-1/4 right-[10%] w-32 h-32 lg:w-48 lg:h-48 opacity-20">
+      <svg viewBox="0 0 100 100" fill="none" class="w-full h-full">
+        <circle cx="50" cy="50" r="48" stroke="#CFA35A" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <circle cx="50" cy="50" r="38" stroke="#CFA35A" stroke-width="0.3"/>
+        <circle cx="50" cy="50" r="28" stroke="#CFA35A" stroke-width="0.2"/>
+        <!-- Compass points -->
+        <path d="M50 5 L52 15 L50 18 L48 15 Z" fill="#CFA35A"/>
+        <path d="M50 95 L52 85 L50 82 L48 85 Z" fill="#CFA35A" opacity="0.5"/>
+        <path d="M95 50 L85 52 L82 50 L85 48 Z" fill="#CFA35A" opacity="0.5"/>
+        <path d="M5 50 L15 52 L18 50 L15 48 Z" fill="#CFA35A" opacity="0.5"/>
+        <!-- Center star -->
+        <path d="M50 35 L53 47 L65 50 L53 53 L50 65 L47 53 L35 50 L47 47 Z" fill="#CFA35A" opacity="0.8"/>
+      </svg>
+    </div>
+
+    <!-- Decorative lines -->
+    <div class="absolute bottom-1/3 left-8 w-[1px] h-32 bg-gradient-to-b from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute bottom-1/3 right-8 w-[1px] h-32 bg-gradient-to-b from-transparent via-[#CFA35A]/30 to-transparent"></div>
+  </div>
+
+  <!-- Main Content -->
   <div class="relative z-10 h-full flex flex-col justify-center items-center px-6">
-    <div class="text-center max-w-5xl mx-auto">
+    <div class="text-center max-w-6xl mx-auto">
       
-      <!-- Badge -->
-      <div class="hero-badge opacity-0 translate-y-4 mb-8">
-        <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+      <!-- Badge with enhanced animation -->
+      <div class="hero-badge opacity-0 mb-6 lg:mb-8">
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#CFA35A]/30 transition-all duration-500 group">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CFA35A] opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-[#CFA35A]"></span>
           </span>
           <span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-white/70 font-bold">Est. 2010 — Cádiz</span>
+          <span class="hidden sm:inline-block w-[1px] h-3 bg-white/20"></span>
+          <span class="hidden sm:inline-block font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#CFA35A]">Premium Yachting</span>
         </div>
       </div>
 
-      <!-- Title -->
-      <div class="hero-title opacity-0 translate-y-8 mb-6">
-        <h1 class="font-display font-black text-[clamp(3.5rem,12vw,10rem)] leading-[0.85] tracking-tighter uppercase">
-          <span class="block text-white">CIEN</span>
-          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] to-[#CFA35A]">MARES</span>
+      <!-- Main Title with 3D layered effect -->
+      <div class="hero-title-container relative mb-8 lg:mb-10">
+        <!-- Shadow layer for depth -->
+        <div class="hero-title-shadow absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-0">
+          <span class="font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text" 
+                style="-webkit-text-stroke: 2px rgba(207,163,90,0.15); transform: translateY(8px);">
+            CIEN
+          </span>
+          <span class="font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text"
+                style="-webkit-text-stroke: 2px rgba(207,163,90,0.15); transform: translateY(8px);">
+            MARES
+          </span>
+        </div>
+        
+        <!-- Main title -->
+        <h1 class="hero-title-main opacity-0 relative">
+          <span class="block font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase text-white drop-shadow-2xl">
+            CIEN
+          </span>
+          <span class="block font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] via-[#f5e6c8] via-[#e8cb8e] to-[#CFA35A] animate-gradient-shift">
+              MARES
+            </span>
+          </span>
         </h1>
+
+        <!-- Decorative underline -->
+        <div class="hero-underline opacity-0 mt-4 flex justify-center">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-[2px] bg-gradient-to-r from-transparent to-[#CFA35A]"></div>
+            <div class="w-2 h-2 rounded-full bg-[#CFA35A] shadow-[0_0_10px_rgba(207,163,90,0.8)]"></div>
+            <div class="w-24 h-[2px] bg-[#CFA35A]"></div>
+            <div class="w-2 h-2 rounded-full bg-[#CFA35A] shadow-[0_0_10px_rgba(207,163,90,0.8)]"></div>
+            <div class="w-12 h-[2px] bg-gradient-to-l from-transparent to-[#CFA35A]"></div>
+          </div>
+        </div>
       </div>
 
-      <!-- Divider -->
-      <div class="hero-divider opacity-0 scale-x-0 flex items-center justify-center gap-4 mb-8">
-        <div class="w-16 h-[1px] bg-gradient-to-r from-transparent to-[#CFA35A]/60"></div>
-        <div class="w-2 h-2 rounded-full bg-[#CFA35A]"></div>
-        <div class="w-16 h-[1px] bg-gradient-to-l from-transparent to-[#CFA35A]/60"></div>
-      </div>
-
-      <!-- Tagline -->
-      <p class="hero-tagline opacity-0 translate-y-4 font-body text-lg md:text-xl text-white/60 max-w-xl mx-auto mb-10">
+      <!-- Tagline with typewriter-like reveal -->
+      <p class="hero-tagline opacity-0 font-display font-medium text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto mb-10 lg:mb-12 tracking-wide">
         Experiencias náuticas de élite en la costa de Cádiz
       </p>
 
-      <!-- CTA Buttons -->
-      <div class="hero-cta opacity-0 translate-y-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <!-- CTA Buttons with enhanced styling -->
+      <div class="hero-cta opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a href="#services-wrapper" 
-          class="group px-8 py-4 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-white transition-all duration-300 flex items-center gap-3">
-          <span>Explorar</span>
-          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+           class="group relative px-8 py-4 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] overflow-hidden transition-all duration-500 hover:shadow-[0_0_60px_rgba(207,163,90,0.5)] hover:scale-105">
+          <span class="relative z-10 flex items-center gap-3">
+            <span>Explorar</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+          <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
         </a>
+        
         <a href="/contacto" 
-          class="px-8 py-4 border border-white/20 text-white rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-white/5 hover:border-[#CFA35A]/40 transition-all duration-300">
-          Contactar
+           class="group px-8 py-4 border border-white/30 text-white rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-white/10 hover:border-[#CFA35A]/50 hover:shadow-[0_0_40px_rgba(207,163,90,0.2)] transition-all duration-500 backdrop-blur-sm flex items-center gap-3">
+          <svg class="w-4 h-4 text-[#CFA35A] group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          <span>Contactar</span>
         </a>
+      </div>
+
+      <!-- Quick Stats Row -->
+      <div class="hero-stats opacity-0 mt-12 lg:mt-16 flex flex-wrap justify-center gap-8 lg:gap-16">
+        <div class="text-center group">
+          <span class="block font-display font-black text-2xl lg:text-3xl text-[#CFA35A] group-hover:scale-110 transition-transform">15+</span>
+          <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/50">Años</span>
+        </div>
+        <div class="w-[1px] h-10 bg-white/10 hidden sm:block"></div>
+        <div class="text-center group">
+          <span class="block font-display font-black text-2xl lg:text-3xl text-[#CFA35A] group-hover:scale-110 transition-transform">50+</span>
+          <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/50">Embarcaciones</span>
+        </div>
+        <div class="w-[1px] h-10 bg-white/10 hidden sm:block"></div>
+        <div class="text-center group">
+          <span class="block font-display font-black text-2xl lg:text-3xl text-[#CFA35A] group-hover:scale-110 transition-transform">4.9</span>
+          <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/50">Valoración</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Scroll Indicator -->
+  <!-- Scroll Indicator with enhanced animation -->
   <div class="hero-scroll opacity-0 absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
-    <span class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-white/40">Scroll</span>
-    <div class="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center p-2">
-      <div class="w-1 h-2 bg-[#CFA35A] rounded-full animate-bounce"></div>
+    <span class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-white/40">Descubre</span>
+    <div class="w-6 h-10 rounded-full border border-white/30 flex items-start justify-center p-2 hover:border-[#CFA35A]/50 transition-colors cursor-pointer group">
+      <div class="w-1 h-2 bg-[#CFA35A] rounded-full animate-scroll-bounce group-hover:bg-white transition-colors"></div>
     </div>
   </div>
 
-  <!-- Bottom Wave Transition -->
+  <!-- Animated Waves at Bottom -->
   <div class="absolute bottom-0 left-0 right-0 z-[5]">
-    <svg class="w-full h-16 lg:h-20" viewBox="0 0 1440 60" preserveAspectRatio="none">
-      <path fill="#FAFAFA" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/>
+    <svg class="waves w-full h-16 lg:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#FAFAFA;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#FAFAFA;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path class="wave-path-1" fill="url(#waveGradient)" fill-opacity="0.3" d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z"/>
+      <path class="wave-path-2" fill="url(#waveGradient)" fill-opacity="0.5" d="M0,70 C360,30 720,90 1080,50 C1260,30 1350,60 1440,70 L1440,120 L0,120 Z"/>
+      <path class="wave-path-3" fill="url(#waveGradient)" d="M0,80 C480,50 960,100 1440,70 L1440,120 L0,120 Z"/>
     </svg>
+  </div>
+
+  <!-- Corner Decorations -->
+  <div class="absolute top-8 left-8 z-20 hidden lg:block">
+    <div class="flex items-center gap-3 opacity-50">
+      <div class="w-8 h-[1px] bg-[#CFA35A]"></div>
+      <span class="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-white/60">36.28°N</span>
+    </div>
+    <div class="flex items-center gap-3 mt-2 opacity-50">
+      <div class="w-8 h-[1px] bg-[#CFA35A]"></div>
+      <span class="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-white/60">6.08°W</span>
+    </div>
+  </div>
+
+  <div class="absolute top-8 right-8 z-20 hidden lg:block text-right">
+    <span class="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-white/50 block">Conil de la Frontera</span>
+    <span class="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-[#CFA35A]/70 block mt-1">Costa de la Luz</span>
   </div>
 </section>
 
 <style>
-  .waves {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 120px;
-  }
-  .wave-parallax use {
-    animation: wave-move 20s cubic-bezier(.55,.5,.45,.5) infinite;
-  }
-  .wave-parallax use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
-  .wave-parallax use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
-  .wave-parallax use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
-  
-  @keyframes wave-move {
-    0% { transform: translate3d(-90px, 0, 0); }
-    100% { transform: translate3d(85px, 0, 0); }
+  /* Video zoom animation */
+  .hero-video-scale {
+    animation: hero-zoom 30s ease-in-out infinite alternate;
   }
   
-  .hero-video {
-    animation: hero-zoom 25s ease-in-out infinite alternate;
-  }
   @keyframes hero-zoom {
     from { transform: scale(1.05); }
-    to { transform: scale(1.15); }
+    to { transform: scale(1.2); }
+  }
+
+  /* Gradient shift animation for title */
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  /* Light rays animation */
+  .light-ray {
+    animation: ray-pulse 6s ease-in-out infinite;
+  }
+  
+  .light-ray:nth-child(2) { animation-delay: -2s; }
+  .light-ray:nth-child(3) { animation-delay: -4s; }
+  
+  @keyframes ray-pulse {
+    0%, 100% { opacity: 0.3; transform: rotate(var(--rotation, 0deg)) scaleY(1); }
+    50% { opacity: 0.6; transform: rotate(var(--rotation, 0deg)) scaleY(1.1); }
+  }
+
+  /* Compass rotation */
+  .compass-decoration {
+    animation: compass-rotate 60s linear infinite;
+  }
+  
+  @keyframes compass-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Scroll indicator bounce */
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(8px); opacity: 0.5; }
+  }
+  
+  .animate-scroll-bounce {
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  /* Wave animations */
+  .wave-path-1 {
+    animation: wave-drift-1 8s ease-in-out infinite alternate;
+  }
+  .wave-path-2 {
+    animation: wave-drift-2 10s ease-in-out infinite alternate;
+  }
+  .wave-path-3 {
+    animation: wave-drift-3 6s ease-in-out infinite alternate;
+  }
+  
+  @keyframes wave-drift-1 {
+    from { transform: translateX(-20px); }
+    to { transform: translateX(20px); }
+  }
+  @keyframes wave-drift-2 {
+    from { transform: translateX(15px); }
+    to { transform: translateX(-15px); }
+  }
+  @keyframes wave-drift-3 {
+    from { transform: translateX(-10px); }
+    to { transform: translateX(10px); }
+  }
+
+  /* Ocean particles */
+  .ocean-particle {
+    position: absolute;
+    background: rgba(207, 163, 90, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float-particle linear infinite;
+  }
+  
+  @keyframes float-particle {
+    0% {
+      transform: translateY(100vh) translateX(0) scale(0);
+      opacity: 0;
+    }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% {
+      transform: translateY(-20vh) translateX(30px) scale(1);
+      opacity: 0;
+    }
   }
 </style>
 
@@ -142,31 +313,88 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // Generate ocean particles
+  const particleContainer = document.getElementById('ocean-particles');
+  if (particleContainer) {
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'ocean-particle';
+      const size = Math.random() * 3 + 1;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      particle.style.animationDelay = Math.random() * 15 + 's';
+      particle.style.opacity = (Math.random() * 0.4 + 0.2).toString();
+      particleContainer.appendChild(particle);
+    }
+  }
+
   document.addEventListener("astro:page-load", () => {
-    const tl = gsap.timeline({ delay: 0.3 });
+    // Main entrance timeline
+    const tl = gsap.timeline({ delay: 0.2 });
     
     tl.to(".hero-badge", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
-      .to(".hero-title", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "-=0.4")
-      .to(".hero-divider", { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" }, "-=0.6")
+      .to(".hero-title-main", { opacity: 1, duration: 1.4, ease: "power4.out" }, "-=0.3")
+      .to(".hero-title-shadow", { opacity: 1, duration: 1.4, ease: "power4.out" }, "<")
+      .to(".hero-underline", { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" }, "-=0.8")
       .to(".hero-tagline", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
       .to(".hero-cta", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
-      .to(".hero-scroll", { opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.2");
+      .to(".hero-stats", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.3")
+      .to(".hero-scroll", { opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.2");
 
-    // Fade out on scroll - reversible
+    // Parallax on scroll
     ScrollTrigger.create({
       trigger: "#hero-section",
-      start: "center top",
+      start: "top top",
       end: "bottom top",
       scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
-        gsap.to(".hero-title, .hero-tagline, .hero-cta", {
-          opacity: 1 - progress,
-          y: -30 * progress,
-          duration: 0.1,
-          overwrite: true
+        gsap.set(".hero-title-main, .hero-title-shadow", {
+          y: -60 * progress,
+          opacity: 1 - progress * 1.5
+        });
+        gsap.set(".hero-tagline, .hero-cta, .hero-stats", {
+          y: -40 * progress,
+          opacity: 1 - progress * 2
+        });
+        gsap.set(".hero-video-scale", {
+          scale: 1.05 + (progress * 0.15)
         });
       }
+    });
+
+    // Mouse parallax for title
+    const heroSection = document.getElementById('hero-section');
+    if (heroSection && window.innerWidth > 1024) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        const xPercent = (clientX / innerWidth - 0.5) * 2;
+        const yPercent = (clientY / innerHeight - 0.5) * 2;
+        
+        gsap.to(".hero-title-main", {
+          x: xPercent * 10,
+          y: yPercent * 5,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+        
+        gsap.to(".compass-decoration", {
+          x: xPercent * -20,
+          y: yPercent * -20,
+          duration: 1,
+          ease: "power2.out"
+        });
+      });
+    }
+  });
+
+  // Cleanup
+  document.addEventListener('astro:before-swap', () => {
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger === '#hero-section') st.kill();
     });
   });
 </script>

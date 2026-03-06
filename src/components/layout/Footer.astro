@@ -1,127 +1,253 @@
 ---
-import { footerLinks, socialLinks, contactInfo } from "../../data/navigation";
+import { socialLinks, contactInfo } from "../../data/navigation";
 const currentYear = new Date().getFullYear();
+
+const socialIcons: Record<string, string> = {
+  "Instagram": "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z",
+  "Facebook": "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z",
+  "LinkedIn": "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
+  "YouTube": "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
+  "X": "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+};
 ---
 
-<footer
-  class="relative bg-[#02060a] text-white pt-24 lg:pt-32 pb-8 overflow-hidden"
-  id="site-footer"
->
-  <!-- Background -->
-  <div class="absolute inset-0 z-0">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#CFA35A]/5 blur-[200px] rounded-full pointer-events-none"></div>
+<footer class="relative bg-[#02060a] text-white overflow-hidden" id="site-footer">
+  
+  <!-- Animated Wave Top -->
+  <div class="relative h-24 lg:h-32 -mb-1 overflow-hidden">
+    <svg class="absolute bottom-0 w-[200%] h-full" viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#CFA35A" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#CFA35A" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#CFA35A" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path class="wave-anim" fill="none" stroke="url(#waveGrad)" stroke-width="2" d="M0,50 C360,10 720,90 1080,50 S1440,50 1440,50"/>
+      <path fill="#02060a" d="M0,70 C480,30 960,90 1440,60 L1440,100 L0,100 Z"/>
+    </svg>
   </div>
 
-  <!-- Top Border -->
-  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+  <!-- Dynamic Background -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-[#CFA35A]/[0.03] rounded-full blur-[120px] animate-pulse-slow"></div>
+    <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#CFA35A]/[0.02] rounded-full blur-[100px] animate-pulse-slow" style="animation-delay: -3s;"></div>
+  </div>
 
-  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+  <!-- Content -->
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px] pt-12 pb-8">
     
-    <!-- Main Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
+    <!-- Main Row: Logo + Contact Icons + Social -->
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-8 mb-16">
       
-      <!-- Brand Column -->
-      <div class="lg:col-span-1">
-        <a href="/" class="inline-flex items-center gap-3 mb-6 group">
-          <div class="w-11 h-11 relative">
-            <svg viewBox="0 0 48 48" fill="none" class="w-full h-full">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" class="text-[#CFA35A]"/>
-              <path d="M24 8v32M8 24h32" stroke="currentColor" stroke-width="1.5" class="text-[#CFA35A]"/>
-              <circle cx="24" cy="24" r="8" fill="currentColor" class="text-[#CFA35A]"/>
+      <!-- Logo -->
+      <a href="/" class="group flex items-center gap-3">
+        <div class="relative w-12 h-12">
+          <div class="absolute inset-0 rounded-full border border-[#CFA35A]/30 group-hover:border-[#CFA35A] group-hover:scale-110 transition-all duration-500"></div>
+          <div class="absolute inset-2 rounded-full bg-[#CFA35A]/10 group-hover:bg-[#CFA35A]/20 transition-colors"></div>
+          <svg viewBox="0 0 48 48" fill="none" class="absolute inset-0 w-full h-full p-2.5">
+            <circle cx="24" cy="24" r="20" stroke="#CFA35A" stroke-width="1.5"/>
+            <path d="M24 12v24M12 24h24" stroke="#CFA35A" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="5" fill="#CFA35A" class="group-hover:animate-pulse"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-black text-xl tracking-tight block">CIEN MARES</span>
+          <span class="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-[#CFA35A]/70">Est. 2010</span>
+        </div>
+      </a>
+
+      <!-- Quick Contact -->
+      <div class="flex items-center gap-4">
+        <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} 
+           class="contact-icon group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden hover:border-[#CFA35A] transition-colors duration-300"
+           aria-label="Teléfono">
+          <div class="absolute inset-0 bg-[#CFA35A] scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full"></div>
+          <svg class="relative w-5 h-5 text-white/60 group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </a>
+        <a href={`mailto:${contactInfo.email}`} 
+           class="contact-icon group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden hover:border-[#CFA35A] transition-colors duration-300"
+           aria-label="Email">
+          <div class="absolute inset-0 bg-[#CFA35A] scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full"></div>
+          <svg class="relative w-5 h-5 text-white/60 group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 6l10 6 10-6"/>
+          </svg>
+        </a>
+        <a href="https://maps.google.com/?q=Conil+de+la+Frontera+Cádiz" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="contact-icon group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden hover:border-[#CFA35A] transition-colors duration-300"
+           aria-label="Ubicación">
+          <div class="absolute inset-0 bg-[#CFA35A] scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full"></div>
+          <svg class="relative w-5 h-5 text-white/60 group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Social -->
+      <div class="flex items-center gap-3">
+        {socialLinks.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer"
+             class="social-icon group relative w-10 h-10 rounded-full border border-white/10 flex items-center justify-center overflow-hidden hover:border-[#CFA35A] transition-all duration-300"
+             aria-label={link.label}>
+            <div class="absolute inset-0 bg-[#CFA35A] scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full"></div>
+            <svg class="relative w-4 h-4 text-white/50 group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="currentColor">
+              <path d={socialIcons[link.label] || ""}/>
             </svg>
-          </div>
-          <span class="font-display font-black text-xl tracking-tight">CIEN MARES</span>
-        </a>
-        <p class="font-body text-white/50 leading-relaxed mb-6 text-sm">
-          Experiencias náuticas de élite en la costa de Cádiz. Excelencia y pasión por el mar desde 2010.
-        </p>
-        
-        <!-- Contact Info -->
-        <div class="space-y-3">
-          <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} class="flex items-center gap-3 group">
-            <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#CFA35A]">Tlf</span>
-            <span class="font-body text-sm text-white/70 group-hover:text-white transition-colors">{contactInfo.phone}</span>
           </a>
-          <a href={`mailto:${contactInfo.email}`} class="flex items-center gap-3 group">
-            <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#CFA35A]">Email</span>
-            <span class="font-body text-sm text-white/70 group-hover:text-white transition-colors">{contactInfo.email}</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Services -->
-      <div>
-        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-6">Servicios</h4>
-        <ul class="space-y-3">
-          {footerLinks.services.map((link) => (
-            <li>
-              <a href={link.href} class="font-body text-sm text-white/50 hover:text-white transition-colors">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Company -->
-      <div>
-        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-6">Empresa</h4>
-        <ul class="space-y-3">
-          {footerLinks.company.map((link) => (
-            <li>
-              <a href={link.href} class="font-body text-sm text-white/50 hover:text-white transition-colors">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Social & Location -->
-      <div>
-        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-6">Síguenos</h4>
-        <div class="flex gap-3 mb-6">
-          {socialLinks.map((link) => (
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#CFA35A] hover:border-[#CFA35A] group transition-all duration-300"
-            >
-              <span class="font-mono text-xs font-bold text-white/50 group-hover:text-[#02060a] transition-colors">
-                {link.label.substring(0, 2)}
-              </span>
-            </a>
-          ))}
-        </div>
-
-        <h4 class="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#CFA35A] font-bold mb-3">Ubicación</h4>
-        <p class="font-body text-sm text-white/50 leading-relaxed">
-          {contactInfo.address.join(", ")}
-        </p>
+        ))}
       </div>
     </div>
 
-    <!-- Large Brand Text -->
-    <div class="py-12 border-t border-b border-white/5 overflow-hidden">
-      <h2 class="font-display font-black text-[clamp(5rem,18vw,14rem)] leading-none text-white/[0.06] text-center select-none whitespace-nowrap tracking-tighter">
-        CIEN MARES
-      </h2>
+    <!-- Giant Typography -->
+    <div class="relative py-12 lg:py-16 border-t border-white/5">
+      <div class="overflow-hidden">
+        <h2 class="footer-brand font-display font-black text-[clamp(3.5rem,16vw,14rem)] leading-[0.8] text-center tracking-tighter select-none"
+            style="-webkit-text-stroke: 2px rgba(207,163,90,0.25); color: transparent;">
+          CIEN MARES
+        </h2>
+      </div>
+      
+      <!-- Animated underline -->
+      <div class="flex justify-center mt-8">
+        <div class="footer-line flex items-center gap-3 opacity-0">
+          <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-[#CFA35A]"></div>
+          <div class="w-2 h-2 rounded-full bg-[#CFA35A] animate-pulse"></div>
+          <div class="w-32 h-[2px] bg-[#CFA35A]/40"></div>
+          <div class="w-2 h-2 rounded-full bg-[#CFA35A] animate-pulse" style="animation-delay: 0.5s;"></div>
+          <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-[#CFA35A]"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
-      <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/30">
-        © {currentYear} Cien Mares S.L. Todos los derechos reservados.
+    <!-- Bottom -->
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-white/5">
+      <p class="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-white/25">
+        © {currentYear} Cien Mares S.L.
       </p>
-      <div class="flex gap-6">
-        <a href="/privacidad" class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/30 hover:text-[#CFA35A] transition-colors">
-          Privacidad
-        </a>
-        <a href="/legal" class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/30 hover:text-[#CFA35A] transition-colors">
-          Legal
-        </a>
-      </div>
+      
+      <a href="https://frnq.studio" target="_blank" rel="noopener noreferrer"
+         class="group flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/25 hover:text-[#CFA35A] transition-colors">
+        <span>Desarrollado por</span>
+        <span class="relative font-bold">
+          FRN.Q
+          <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#CFA35A] group-hover:w-full transition-all duration-300"></span>
+        </span>
+        <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Corner Coordinates -->
+  <div class="absolute bottom-6 left-6 hidden lg:block">
+    <div class="font-mono text-[0.5rem] uppercase tracking-[0.3em] text-white/15 flex flex-col gap-1">
+      <span class="hover:text-[#CFA35A]/50 transition-colors cursor-default">36°16'N</span>
+      <span class="hover:text-[#CFA35A]/50 transition-colors cursor-default">6°05'W</span>
     </div>
   </div>
 </footer>
+
+<style>
+  /* Wave animation */
+  .wave-anim {
+    animation: wave-flow 6s ease-in-out infinite;
+  }
+  
+  @keyframes wave-flow {
+    0%, 100% { transform: translateX(0) translateY(0); d: path("M0,50 C360,10 720,90 1080,50 S1440,50 1440,50"); }
+    50% { transform: translateX(-25px) translateY(5px); d: path("M0,50 C360,90 720,10 1080,50 S1440,50 1440,50"); }
+  }
+
+  /* Pulse animation */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 6s ease-in-out infinite;
+  }
+
+  /* Brand text shimmer */
+  .footer-brand {
+    background: linear-gradient(90deg, rgba(207,163,90,0) 0%, rgba(207,163,90,0.15) 50%, rgba(207,163,90,0) 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer 6s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0%, 100% { background-position: -200% center; }
+    50% { background-position: 200% center; }
+  }
+
+  /* Contact icon bounce on hover */
+  .contact-icon:hover,
+  .social-icon:hover {
+    animation: icon-bounce 0.5s ease;
+  }
+  
+  @keyframes icon-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    // Brand reveal
+    gsap.fromTo(".footer-brand", 
+      { y: 80, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1, 
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".footer-brand", start: "top 90%" }
+      }
+    );
+    
+    // Line reveal
+    gsap.to(".footer-line", {
+      opacity: 1,
+      scaleX: 1,
+      duration: 0.8,
+      delay: 0.3,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".footer-line", start: "top 90%" }
+    });
+
+    // Icons stagger
+    gsap.fromTo(".contact-icon, .social-icon",
+      { y: 20, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.5, 
+        stagger: 0.08,
+        ease: "back.out(1.5)",
+        scrollTrigger: { trigger: "#site-footer", start: "top 85%" }
+      }
+    );
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.trigger === '.footer-brand' || st.vars.trigger === '.footer-line' || st.vars.trigger === '#site-footer') {
+        st.kill();
+      }
+    });
+  });
+</script>

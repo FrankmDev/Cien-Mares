@@ -227,7 +227,7 @@
     let progress = 0;
     
     const progressInterval = setInterval(() => {
-      progress += Math.random() * 12;
+      progress += Math.random() * 18;
       if (progress >= 100) {
         progress = 100;
         clearInterval(progressInterval);
@@ -236,7 +236,7 @@
       if (progressBar) {
         (progressBar as HTMLElement).style.width = progress + "%";
       }
-    }, 120);
+    }, 80);
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -245,22 +245,23 @@
       },
     });
 
-    tl.to(".preloader-mark", { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }, 0.2)
-      .to(".preloader-char", { y: "0%", duration: 1.2, stagger: { each: 0.05, from: "center" }, ease: "power4.out" }, 0.3)
-      .to(".preloader-subtitle", { y: "0%", duration: 0.8, ease: "power3.out" }, 0.6)
-      .to(".preloader-line", { width: "50vw", duration: 1, ease: "power3.inOut" }, 0.8)
-      .to(".preloader-progress", { opacity: 1, duration: 0.5, ease: "power2.out" }, 1)
-      .to({}, { duration: 0.8 })
-      .to(".progress-bar", { width: "100%", duration: 0.3, ease: "power2.out", onStart: () => { if (progressText) progressText.textContent = "100%"; }})
-      .to(".preloader-char", { y: "-30%", opacity: 0, filter: "blur(8px)", duration: 0.6, stagger: { each: 0.02, from: "edges" }, ease: "power2.in" }, "+=0.2")
-      .to([".preloader-subtitle", ".preloader-line", ".preloader-progress", ".preloader-mark"], { opacity: 0, y: -15, duration: 0.4, ease: "power2.in" }, "<+=0.1")
-      .to(".wave-layer-1", { height: "120vh", duration: 0.9, ease: "power3.inOut" }, "-=0.2")
-      .to(".wave-layer-2", { height: "120vh", duration: 0.8, ease: "power3.inOut" }, "-=0.75")
-      .to(".wave-layer-3", { height: "120vh", duration: 0.7, ease: "power3.inOut" }, "-=0.65")
-      .to("#wave-video", { scale: 1.25, opacity: 0, duration: 0.8, ease: "power2.inOut" }, "-=0.8")
-      .to(preloader, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "-=0.3")
+    // 33% shorter - all durations and delays multiplied by 0.67
+    tl.to(".preloader-mark", { opacity: 1, scale: 1, duration: 0.54, ease: "power2.out" }, 0.13)
+      .to(".preloader-char", { y: "0%", duration: 0.8, stagger: { each: 0.033, from: "center" }, ease: "power4.out" }, 0.2)
+      .to(".preloader-subtitle", { y: "0%", duration: 0.54, ease: "power3.out" }, 0.4)
+      .to(".preloader-line", { width: "50vw", duration: 0.67, ease: "power3.inOut" }, 0.54)
+      .to(".preloader-progress", { opacity: 1, duration: 0.33, ease: "power2.out" }, 0.67)
+      .to({}, { duration: 0.54 })
+      .to(".progress-bar", { width: "100%", duration: 0.2, ease: "power2.out", onStart: () => { if (progressText) progressText.textContent = "100%"; }})
+      .to(".preloader-char", { y: "-30%", opacity: 0, filter: "blur(8px)", duration: 0.4, stagger: { each: 0.013, from: "edges" }, ease: "power2.in" }, "+=0.13")
+      .to([".preloader-subtitle", ".preloader-line", ".preloader-progress", ".preloader-mark"], { opacity: 0, y: -15, duration: 0.27, ease: "power2.in" }, "<+=0.07")
+      .to(".wave-layer-1", { height: "120vh", duration: 0.6, ease: "power3.inOut" }, "-=0.13")
+      .to(".wave-layer-2", { height: "120vh", duration: 0.54, ease: "power3.inOut" }, "-=0.5")
+      .to(".wave-layer-3", { height: "120vh", duration: 0.47, ease: "power3.inOut" }, "-=0.43")
+      .to("#wave-video", { scale: 1.25, opacity: 0, duration: 0.54, ease: "power2.inOut" }, "-=0.54")
+      .to(preloader, { opacity: 0, duration: 0.27, ease: "power2.inOut" }, "-=0.2")
       .set(preloader, { display: "none" });
 
-    setTimeout(() => { if (video) video.pause(); }, 5000);
+    setTimeout(() => { if (video) video.pause(); }, 3350);
   });
 </script>

@@ -61,7 +61,7 @@ const stats = [
           <span class="w-1.5 h-1.5 rounded-full bg-[#CFA35A] animate-pulse"></span>
           <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold">Testimonios</span>
         </div>
-        <h2 class="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-[0.9]">
+        <h2 class="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-[0.85]">
           Lo que dicen<br/><span class="text-[#CFA35A]">nuestros clientes</span>
         </h2>
       </div>
@@ -174,7 +174,7 @@ const stats = [
 
     document.addEventListener("astro:page-load", () => {
       // Header animation
-      gsap.fromTo(".test-header", 
+      const headerTrigger = gsap.fromTo(".test-header", 
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: "#testimonials-section", start: "top 80%" }}
       );
@@ -187,12 +187,15 @@ const stats = [
       const nextBtn = document.querySelector('.slider-next');
       
       let currentIndex = 0;
+      let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
       
       function updateSlider(index: number) {
         if (!slider) return;
-        const card = cards[index];
-        if (card) {
-          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        const card = cards[index] as HTMLElement;
+        if (card && slider) {
+          // Usar scrollLeft en lugar de scrollIntoView para no interferir con el scroll vertical
+          const scrollLeft = card.offsetLeft - (slider.offsetWidth / 2) + (card.offsetWidth / 2);
+          slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
         }
         dots.forEach((dot, i) => {
           dot.classList.toggle('active', i === index);
@@ -217,7 +220,7 @@ const stats = [
       });
       
       // Auto-play
-      setInterval(() => {
+      autoPlayInterval = setInterval(() => {
         const newIndex = currentIndex < cards.length - 1 ? currentIndex + 1 : 0;
         updateSlider(newIndex);
       }, 5000);
@@ -226,10 +229,20 @@ const stats = [
       updateSlider(0);
       
       // Scroll animation for cards
-      gsap.fromTo(".test-card", 
+      const cardsTrigger = gsap.fromTo(".test-card", 
         { y: 60, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".test-slider", start: "top 85%" }}
       );
+
+      // Cleanup en navegación
+      document.addEventListener('astro:before-swap', () => {
+        if (autoPlayInterval) clearInterval(autoPlayInterval);
+        ScrollTrigger.getAll().forEach(st => {
+          if (st.vars.trigger === '#testimonials-section' || st.vars.trigger === '.test-slider') {
+            st.kill();
+          }
+        });
+      }, { once: true });
     });
   </script>
 </section>
