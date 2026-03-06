@@ -67,7 +67,7 @@
     <div class="text-center max-w-6xl mx-auto">
       
       <!-- Badge with enhanced animation -->
-      <div class="hero-badge opacity-0 mb-6 lg:mb-8">
+      <div class="hero-badge will-animate opacity-0 translate-y-5 mb-6 lg:mb-8">
         <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#CFA35A]/30 transition-all duration-500 group">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CFA35A] opacity-75"></span>
@@ -82,7 +82,7 @@
       <!-- Main Title with 3D layered effect -->
       <div class="hero-title-container relative mb-8 lg:mb-10">
         <!-- Shadow layer for depth -->
-        <div class="hero-title-shadow absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
+        <div class="hero-title-shadow will-animate absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 translate-y-8">
           <span class="font-display font-black text-[clamp(3.5rem,16vw,14rem)] leading-[0.85] tracking-tighter uppercase text-transparent bg-clip-text whitespace-nowrap" 
                 style="-webkit-text-stroke: 2px rgba(207,163,90,0.15); transform: translateY(8px);">
             CIEN MARES
@@ -90,7 +90,7 @@
         </div>
         
         <!-- Main title -->
-        <h1 class="hero-title-main opacity-0 relative">
+        <h1 class="hero-title-main will-animate opacity-0 translate-y-8 relative">
           <span class="font-display font-black text-[clamp(3.5rem,16vw,14rem)] leading-[0.85] tracking-tighter uppercase whitespace-nowrap">
             <span class="text-white drop-shadow-2xl">CIEN</span>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] via-[#f5e6c8] via-[#e8cb8e] to-[#CFA35A] animate-gradient-shift">
@@ -100,7 +100,7 @@
         </h1>
 
         <!-- Decorative underline -->
-        <div class="hero-underline opacity-0 mt-4 flex justify-center">
+        <div class="hero-underline will-animate opacity-0 scale-x-0 mt-4 flex justify-center origin-center">
           <div class="flex items-center gap-3">
             <div class="w-12 h-[2px] bg-gradient-to-r from-transparent to-[#CFA35A]"></div>
             <div class="w-2 h-2 rounded-full bg-[#CFA35A] shadow-[0_0_10px_rgba(207,163,90,0.8)]"></div>
@@ -112,12 +112,12 @@
       </div>
 
       <!-- Tagline with typewriter-like reveal -->
-      <p class="hero-tagline opacity-0 font-display font-medium text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto mb-10 lg:mb-12 tracking-wide">
+      <p class="hero-tagline will-animate opacity-0 translate-y-5 font-display font-medium text-lg md:text-xl lg:text-2xl text-white/80 max-w-2xl mx-auto mb-10 lg:mb-12 tracking-wide">
         Experiencias náuticas de élite en la costa de Cádiz
       </p>
 
       <!-- CTA Buttons with enhanced styling -->
-      <div class="hero-cta opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <div class="hero-cta will-animate opacity-0 translate-y-5 flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a href="#services-wrapper" 
            class="group relative px-8 py-4 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] overflow-hidden transition-all duration-500 hover:shadow-[0_0_60px_rgba(207,163,90,0.5)] hover:scale-105">
           <span class="relative z-10 flex items-center gap-3">
@@ -139,7 +139,7 @@
       </div>
 
       <!-- Quick Stats Row -->
-      <div class="hero-stats opacity-0 mt-12 lg:mt-16 flex flex-wrap justify-center gap-8 lg:gap-16">
+      <div class="hero-stats will-animate opacity-0 translate-y-5 mt-12 lg:mt-16 flex flex-wrap justify-center gap-8 lg:gap-16">
         <div class="text-center group">
           <span class="block font-display font-black text-2xl lg:text-3xl text-[#CFA35A] group-hover:scale-110 transition-transform">15+</span>
           <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/50">Años</span>
@@ -159,7 +159,7 @@
   </div>
 
   <!-- Scroll Indicator with enhanced animation -->
-  <div class="hero-scroll opacity-0 absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
+  <div class="hero-scroll will-animate opacity-0 translate-y-4 absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
     <span class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-white/40">Descubre</span>
     <div class="w-6 h-10 rounded-full border border-white/30 flex items-start justify-center p-2 hover:border-[#CFA35A]/50 transition-colors cursor-pointer group">
       <div class="w-1 h-2 bg-[#CFA35A] rounded-full animate-scroll-bounce group-hover:bg-white transition-colors"></div>
@@ -200,6 +200,12 @@
 </section>
 
 <style>
+  /* Performance optimization for animated elements */
+  .will-animate {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  
   /* Video zoom animation */
   .hero-video-scale {
     animation: hero-zoom 30s ease-in-out infinite alternate;
@@ -325,39 +331,82 @@
   }
 
   document.addEventListener("astro:page-load", () => {
-    // Main entrance timeline
-    const tl = gsap.timeline({ delay: 0.2 });
+    // Main entrance timeline - optimized for smoothness and speed
+    const tl = gsap.timeline({ delay: 0.15 });
     
-    tl.to(".hero-badge", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
-      .to(".hero-title-main", { opacity: 1, duration: 1.4, ease: "power4.out" }, "-=0.3")
-      .to(".hero-title-shadow", { opacity: 1, duration: 1.4, ease: "power4.out" }, "<")
-      .to(".hero-underline", { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" }, "-=0.8")
-      .to(".hero-tagline", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
-      .to(".hero-cta", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
-      .to(".hero-stats", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.3")
-      .to(".hero-scroll", { opacity: 1, duration: 0.6, ease: "power3.out" }, "-=0.2");
+    // Set initial states explicitly with fromTo for consistency
+    tl.fromTo(".hero-badge", 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+    )
+    .fromTo(".hero-title-main, .hero-title-shadow", 
+      { opacity: 0, y: 40, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out", stagger: 0.05 },
+      "-=0.3"
+    )
+    .fromTo(".hero-underline", 
+      { opacity: 0, scaleX: 0 },
+      { opacity: 1, scaleX: 1, duration: 0.5, ease: "power2.out" },
+      "-=0.5"
+    )
+    .fromTo(".hero-tagline", 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      "-=0.3"
+    )
+    .fromTo(".hero-cta", 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      "-=0.35"
+    )
+    .fromTo(".hero-stats", 
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      "-=0.3"
+    )
+    .fromTo(".hero-scroll", 
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      "-=0.2"
+    );
 
-    // Parallax on scroll
-    ScrollTrigger.create({
-      trigger: "#hero-section",
-      start: "top top",
-      end: "bottom top",
-      scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        gsap.set(".hero-title-main, .hero-title-shadow", {
-          y: -60 * progress,
-          opacity: 1 - progress * 1.5
-        });
-        gsap.set(".hero-tagline, .hero-cta, .hero-stats", {
-          y: -40 * progress,
-          opacity: 1 - progress * 2
-        });
-        gsap.set(".hero-video-scale", {
-          scale: 1.05 + (progress * 0.15)
-        });
-      }
-    });
+    // Subtle parallax on scroll - only on desktop (no mobile to avoid jump issues)
+    const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+    
+    if (!isMobile) {
+      gsap.to(".hero-title-main, .hero-title-shadow", {
+        y: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1
+        }
+      });
+      
+      gsap.to(".hero-tagline, .hero-cta, .hero-stats", {
+        y: -25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1
+        }
+      });
+      
+      gsap.to(".hero-video-scale", {
+        scale: 1.12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1
+        }
+      });
+    }
 
     // Mouse parallax for title - only on devices with fine pointer (mouse)
     const heroSection = document.getElementById('hero-section');
@@ -389,8 +438,6 @@
 
   // Cleanup
   document.addEventListener('astro:before-swap', () => {
-    ScrollTrigger.getAll().forEach(st => {
-      if (st.vars.trigger === '#hero-section') st.kill();
-    });
+    ScrollTrigger.getAll().forEach(st => st.kill());
   });
 </script>
