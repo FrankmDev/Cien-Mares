@@ -56,7 +56,16 @@ const STATS = [
   { value: "15+", label: "Años" },
 ] as const;
 
-const ITEMS_PER_PAGE = 3;
+// Responsive items per page
+const getItemsPerPage = () => {
+  if (typeof window !== 'undefined') {
+    if (window.innerWidth < 768) return 1; // Mobile
+    if (window.innerWidth < 1024) return 2; // Tablet
+  }
+  return 3; // Desktop
+};
+
+const ITEMS_PER_PAGE = 3; // Default for SSR
 const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
 ---
 
@@ -106,7 +115,7 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
     <div class="testimonials-wrapper relative">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="testimonials-grid">
         {
-          TESTIMONIALS.slice(0, ITEMS_PER_PAGE).map((testimonial, i) => (
+          TESTIMONIALS.slice(0, 3).map((testimonial, i) => (
             <TestimonialCard {...testimonial} index={i} />
           ))
         }
@@ -129,19 +138,16 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
           </svg>
         </button>
 
-        {/* Dots */}
-        <div class="flex items-center gap-3">
-          {
-            Array(TOTAL_PAGES)
-              .fill(0)
-              .map((_, i) => (
-                <button
-                  class="test-dot w-3 h-3 rounded-full border-2 border-[#0A0A0A]/10 hover:border-[#CFA35A] transition-all duration-300"
-                  data-index={i}
-                  aria-label={`Página ${i + 1}`}
-                />
-              ))
-          }
+        {/* Dots - Render max possible (6) and JS will show/hide */}
+        <div class="flex items-center gap-3" id="testimonials-dots">
+          {TESTIMONIALS.map((_, i) => (
+            <button
+              class="test-dot w-3 h-3 rounded-full border-2 border-[#0A0A0A]/10 hover:border-[#CFA35A] transition-all duration-300"
+              data-index={i}
+              aria-label={`Página ${i + 1}`}
+              style={i >= 2 ? "display: none;" : ""}
+            />
+          ))}
         </div>
 
         <button
@@ -170,10 +176,16 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
     }
   </style>
 
-  <script define:vars={{ testimonials: TESTIMONIALS, itemsPerPage: ITEMS_PER_PAGE }}>
+  <script define:vars={{ testimonials: TESTIMONIALS }}>
     // Client-side data and pagination logic
     const allTestimonials = testimonials;
-    const perPage = itemsPerPage;
+    
+    // Responsive items per page
+    function getItemsPerPage() {
+      if (window.innerWidth < 768) return 1; // Mobile
+      if (window.innerWidth < 1024) return 2; // Tablet
+      return 3; // Desktop
+    }
 
     function renderTestimonialCard(t, index) {
       const initials = t.author
@@ -263,13 +275,40 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
         const nextBtn = document.querySelector(".test-nav-next");
 
         let currentPage = 0;
-        const totalPages = Math.ceil(allTestimonials.length / perPage);
+        let itemsPerPage = getItemsPerPage();
+        let totalPages = Math.ceil(allTestimonials.length / itemsPerPage);
+
+        // Handle resize with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
+            const newItemsPerPage = getItemsPerPage();
+            if (newItemsPerPage !== itemsPerPage) {
+              itemsPerPage = newItemsPerPage;
+              totalPages = Math.ceil(allTestimonials.length / itemsPerPage);
+              if (currentPage >= totalPages) currentPage = totalPages - 1;
+              renderPage(currentPage);
+            }
+          }, 250);
+        });
+
+        function updateDots() {
+          // Recalculate total pages
+          totalPages = Math.ceil(allTestimonials.length / itemsPerPage);
+          
+          // Update dots visibility based on total pages
+          dots.forEach((dot, i) => {
+            dot.style.display = i < totalPages ? 'inline-block' : 'none';
+            dot.classList.toggle("active", i === currentPage);
+          });
+        }
 
         function renderPage(page) {
           if (!grid) return;
 
-          const start = page * perPage;
-          const pageTestimonials = allTestimonials.slice(start, start + perPage);
+          const start = page * itemsPerPage;
+          const pageTestimonials = allTestimonials.slice(start, start + itemsPerPage);
 
           gsap.to(grid, {
             opacity: 0,
@@ -283,9 +322,7 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
             },
           });
 
-          dots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === page);
-          });
+          updateDots();
         }
 
         dots.forEach((dot, i) => {
@@ -305,8 +342,7 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
           renderPage(currentPage);
         });
 
-        dots[0]?.classList.add("active");
-      });
+        updateDots();
     }
   </script>
 </section>
