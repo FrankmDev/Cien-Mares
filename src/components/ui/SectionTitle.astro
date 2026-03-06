@@ -1,0 +1,25 @@
+---
+/**
+ * Titulo de seccion estilizado con gradiente opcional
+ */
+interface Props {
+  firstLine: string;
+  secondLine?: string;
+  highlight?: string;
+  class?: string;
+}
+
+const { firstLine, secondLine, highlight, class: className = "" } = Astro.props;
+---
+
+<h2 class={`font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-[0.85] ${className}`}>
+  <span class="block">{firstLine}</span>
+  {secondLine && (
+    <span class="block text-[#CFA35A]">{secondLine}</span>
+  )}
+  {highlight && !secondLine && (
+    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] to-[#8e6f38]">
+      {highlight}
+    </span>
+  )}
+</h2>

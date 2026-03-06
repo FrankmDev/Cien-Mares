@@ -71,15 +71,6 @@ const services = [
 
   <!-- Main Content -->
   <div class="h-screen w-full flex overflow-hidden" id="services-pinned">
-    <!-- Custom Cursor - Fixed to viewport -->
-    <div id="drag-cursor" class="fixed top-0 left-0 z-[9999] pointer-events-none hidden lg:flex flex-col items-center justify-center w-24 h-24 rounded-full border border-[#CFA35A]/40 bg-[#CFA35A]/10 backdrop-blur-md opacity-0 scale-50 transition-all duration-300 will-change-transform">
-      <span class="font-mono text-[0.5rem] uppercase tracking-[0.2em] text-[#CFA35A] font-bold">Arrastrar</span>
-      <div class="flex gap-2 mt-1">
-        <svg class="w-3 h-3 text-[#CFA35A]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-        <svg class="w-3 h-3 text-[#CFA35A]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </div>
-
     <!-- Horizontal Track -->
     <div class="flex flex-nowrap h-full w-[400vw] will-change-transform" id="services-track">
       {services.map((service, i) => (
@@ -203,7 +194,7 @@ const services = [
   }
 
   @media (min-width: 1024px) {
-    .service-panel { cursor: none; }
+    .service-panel { cursor: default; }
   }
 </style>
 
@@ -265,24 +256,6 @@ const services = [
         }
       });
 
-      const cursor = document.getElementById('drag-cursor');
-      const pinnedArea = document.getElementById('services-pinned');
-      if (cursor && pinnedArea) {
-        // Use transform translate instead of x/y to avoid conflicts
-        const moveCursor = (e: MouseEvent) => {
-          const x = e.clientX - 48;
-          const y = e.clientY - 48;
-          cursor.style.transform = `translate(${x}px, ${y}px)`;
-        };
-        
-        pinnedArea.addEventListener('mousemove', moveCursor);
-        pinnedArea.addEventListener('mouseenter', () => {
-          gsap.to(cursor, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.5)' });
-        });
-        pinnedArea.addEventListener('mouseleave', () => {
-          gsap.to(cursor, { opacity: 0, scale: 0.5, duration: 0.3, ease: 'power2.in' });
-        });
-      }
     } else {
       const track = document.getElementById('services-track');
       if (track) { 

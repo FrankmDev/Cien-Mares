@@ -1,0 +1,119 @@
+---
+/**
+ * CTABanner - Banner de llamada a la acción
+ * 
+ * Props:
+ * - title: string (requerido)
+ * - highlighted?: string - Texto resaltado
+ * - description?: string
+ * - primaryButton?: { text: string; href: string; external?: boolean }
+ * - secondaryButton?: { text: string; href: string; external?: boolean }
+ * - background?: 'dark' | 'gold' | 'gradient'
+ * - size?: 'default' | 'large'
+ */
+
+interface Props {
+  title: string;
+  highlighted?: string;
+  description?: string;
+  primaryButton?: {
+    text: string;
+    href: string;
+    external?: boolean;
+  };
+  secondaryButton?: {
+    text: string;
+    href: string;
+    external?: boolean;
+  };
+  background?: 'dark' | 'gold' | 'gradient';
+  size?: 'default' | 'large';
+  class?: string;
+}
+
+const {
+  title,
+  highlighted,
+  description,
+  primaryButton,
+  secondaryButton,
+  background = 'gradient',
+  size = 'default',
+  class: className = '',
+} = Astro.props;
+
+// Background classes
+const bgClasses = {
+  dark: 'bg-cm-surface',
+  gold: 'bg-cm-accent',
+  gradient: 'bg-gradient-to-br from-cm-surface via-cm-surface to-cm-accent/10',
+};
+
+// Title size
+const titleClasses = size === 'large' 
+  ? 'text-3xl sm:text-4xl lg:text-5xl xl:text-6xl' 
+  : 'text-2xl sm:text-3xl lg:text-4xl';
+
+// Text colors based on background
+const textColorClass = background === 'gold' ? 'text-cm-bg' : 'text-white';
+const mutedColorClass = background === 'gold' ? 'text-cm-bg/70' : 'text-cm-text-muted';
+---
+
+<section 
+  class={`section-sm relative overflow-hidden ${bgClasses[background]} ${className}`}
+  data-reveal="fade"
+>
+  <!-- Decorative elements -->
+  {background === 'gradient' && (
+    <div class="absolute top-0 right-0 w-96 h-96 bg-cm-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-cm-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+  )}
+  
+  <div class="container-main relative z-10">
+    <div class="text-center max-w-4xl mx-auto">
+      <h2 class={`font-display font-black uppercase tracking-tighter leading-[0.9] ${titleClasses} ${textColorClass} mb-6`}>
+        {title}
+        {highlighted && (
+          <>
+            <br />
+            <span class={background === 'gold' ? 'text-white' : 'text-cm-accent'}>{highlighted}</span>
+          </>
+        )}
+      </h2>
+      
+      {description && (
+        <p class={`text-lg lg:text-xl ${mutedColorClass} mb-10 max-w-2xl mx-auto`}>
+          {description}
+        </p>
+      )}
+      
+      <!-- Buttons -->
+      {(primaryButton || secondaryButton) && (
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {primaryButton && (
+            <a 
+              href={primaryButton.href}
+              class={`btn btn-lg ${background === 'gold' ? 'bg-cm-bg text-white hover:bg-cm-surface' : 'btn-primary'}`}
+              {...(primaryButton.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              <span>{primaryButton.text}</span>
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          )}
+          
+          {secondaryButton && (
+            <a 
+              href={secondaryButton.href}
+              class={`btn btn-lg ${background === 'gold' ? 'border-cm-bg/30 text-cm-bg hover:bg-cm-bg/10' : 'btn-secondary'}`}
+              {...(secondaryButton.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {secondaryButton.text}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

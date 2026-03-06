@@ -1,3 +1,4 @@
+// Exportacion de secciones de la home
 export { default as HeroSection } from "./HeroSection.astro";
 export { default as StorySection } from "./StorySection.astro";
 export { default as ServicesSection } from "./ServicesSection.astro";

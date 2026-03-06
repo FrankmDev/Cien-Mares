@@ -1,0 +1,82 @@
+---
+/**
+ * ProcessSteps - Visualización de proceso paso a paso
+ * 
+ * Props:
+ * - steps: Array<{ number: number; title: string; description: string }>
+ * - direction?: 'vertical' | 'horizontal'
+ * - showConnector?: boolean
+ */
+
+interface Step {
+  number: number;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: Step[];
+  direction?: 'vertical' | 'horizontal';
+  showConnector?: boolean;
+  class?: string;
+}
+
+const {
+  steps,
+  direction = 'horizontal',
+  showConnector = true,
+  class: className = '',
+} = Astro.props;
+
+const isHorizontal = direction === 'horizontal';
+---
+
+<div 
+  class={`
+    ${isHorizontal ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6' : 'flex flex-col gap-8'}
+    ${className}
+  `}
+  data-reveal="fade"
+>
+  {steps.map((step, index) => (
+    <div class="relative group">
+      <!-- Connector line (horizontal) -->
+      {showConnector && isHorizontal && index < steps.length - 1 && (
+        <div class="hidden lg:block absolute top-8 left-[60%] right-0 h-px bg-gradient-to-r from-cm-accent/50 to-transparent"></div>
+      )}
+      
+      <!-- Connector line (vertical) -->
+      {showConnector && !isHorizontal && index < steps.length - 1 && (
+        <div class="absolute top-[60px] left-7 w-px h-12 bg-gradient-to-b from-cm-accent/50 to-transparent"></div>
+      )}
+      
+      <!-- Content -->
+      <div class={`${!isHorizontal ? 'flex items-start gap-6' : ''}`}>
+        <!-- Number badge -->
+        <div class={`
+          ${!isHorizontal ? 'flex-shrink-0' : 'mb-4'}
+          w-14 h-14 rounded-full 
+          flex items-center justify-center
+          border border-cm-accent/30
+          bg-cm-surface
+          transition-all duration-300
+          group-hover:bg-cm-accent group-hover:border-cm-accent
+        `}>
+          <span class="font-display font-bold text-xl text-cm-accent group-hover:text-cm-bg transition-colors">
+            {step.number}
+          </span>
+        </div>
+        
+        <!-- Text -->
+        <div class={!isHorizontal ? 'flex-1 pt-1' : ''}>
+          <h4 class="font-display font-bold text-lg text-white mb-2">
+            {step.title}
+          </h4>
+          <p class="text-cm-text-muted text-sm leading-relaxed">
+            {step.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

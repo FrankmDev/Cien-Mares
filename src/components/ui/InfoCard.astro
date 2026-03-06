@@ -1,0 +1,97 @@
+---
+/**
+ * InfoCard - Tarjeta de información con ícono
+ * 
+ * Props:
+ * - icon: string (requerido) - SVG path para el icono
+ * - title: string (requerido)
+ * - description?: string
+ * - value?: string - Valor destacado (ej: "24/7", "+500")
+ * - variant?: 'default' | 'large' | 'stat'
+ * - align?: 'left' | 'center' | 'horizontal'
+ */
+
+interface Props {
+  icon: string;
+  title: string;
+  description?: string;
+  value?: string;
+  variant?: 'default' | 'large' | 'stat';
+  align?: 'left' | 'center' | 'horizontal';
+  class?: string;
+}
+
+const {
+  icon,
+  title,
+  description,
+  value,
+  variant = 'default',
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+
+// Variant configurations
+const variantClasses = {
+  default: 'p-6',
+  large: 'p-8 lg:p-10',
+  stat: 'p-8 text-center',
+};
+
+const alignClasses = {
+  left: 'text-left',
+  center: 'text-center',
+  horizontal: 'flex flex-row items-start gap-6 text-left',
+};
+
+const iconContainerClasses = {
+  left: 'mb-4',
+  center: 'mx-auto mb-4',
+  horizontal: 'flex-shrink-0',
+};
+---
+
+<div 
+  class={`
+    bg-cm-surface rounded-card 
+    border border-cm-border
+    transition-all duration-500 ease-premium
+    hover:border-cm-accent/30 hover:shadow-card-hover
+    ${variantClasses[variant]}
+    ${alignClasses[align]}
+    ${className}
+  `}
+  data-reveal="fade"
+>
+  <!-- Icon -->
+  <div class={`
+    ${iconContainerClasses[align]}
+    w-12 h-12 rounded-icon
+    flex items-center justify-center
+    bg-white/5 text-cm-accent
+    transition-colors duration-300
+  `}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+    </svg>
+  </div>
+  
+  <!-- Content -->
+  <div class={align === 'horizontal' ? 'flex-1' : ''}>
+    {value && (
+      <div class="font-display font-black text-3xl lg:text-4xl text-cm-accent mb-2">
+        {value}
+      </div>
+    )}
+    
+    <h3 class={`font-display font-bold text-white ${variant === 'large' ? 'text-xl lg:text-2xl' : 'text-lg'} mb-2`}>
+      {title}
+    </h3>
+    
+    {description && (
+      <p class={`text-cm-text-muted ${variant === 'large' ? 'text-base' : 'text-sm'} leading-relaxed`}>
+        {description}
+      </p>
+    )}
+  </div>
+</div>

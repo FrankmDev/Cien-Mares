@@ -1,0 +1,107 @@
+---
+/**
+ * PageHeader - Componente reutilizable para encabezados de página
+ * 
+ * Props:
+ * - title: string (requerido) - Título principal
+ * - highlighted?: string - Texto resaltado en dorado
+ * - description?: string - Descripción/párrafo
+ * - badge?: string - Texto del badge (ej: "SERVICIO", "ACADEMIA")
+ * - background?: 'dark' | 'light' | 'image'
+ * - align?: 'left' | 'center' | 'right'
+ * - size?: 'large' | 'medium' | 'small' - Tamaño del título
+ * - class?: string - Clases adicionales
+ */
+
+interface Props {
+  title: string;
+  highlighted?: string;
+  description?: string;
+  badge?: string;
+  background?: 'dark' | 'light' | 'image';
+  align?: 'left' | 'center' | 'right';
+  size?: 'large' | 'medium' | 'small';
+  class?: string;
+}
+
+const {
+  title,
+  highlighted,
+  description,
+  badge,
+  background = 'dark',
+  align = 'center',
+  size = 'large',
+  class: className = '',
+} = Astro.props;
+
+// Background classes
+const bgClasses = {
+  dark: 'bg-cm-bg',
+  light: 'bg-cm-bg-light',
+  image: 'bg-cm-bg relative overflow-hidden',
+};
+
+// Alignment classes
+const alignClasses = {
+  left: 'text-left items-start',
+  center: 'text-center items-center',
+  right: 'text-right items-end',
+};
+
+// Title size classes
+const titleClasses = {
+  large: 'text-4xl sm:text-5xl lg:text-6xl xl:text-7xl',
+  medium: 'text-3xl sm:text-4xl lg:text-5xl',
+  small: 'text-2xl sm:text-3xl lg:text-4xl',
+};
+
+// Badge variant based on background
+const badgeVariant = background === 'light' ? 'light' : 'dark';
+---
+
+<section 
+  class={`section-sm relative ${bgClasses[background]} ${className}`} 
+  data-theme={background}
+  data-reveal="fade"
+>
+  {background === 'image' && (
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cm-bg/80 to-cm-bg"></div>
+    </div>
+  )}
+  
+  <div class="container-main relative z-10">
+    <div class={`flex flex-col ${alignClasses[align]}`}>
+      {badge && (
+        <div class={`inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 ${badgeVariant === 'dark' ? 'bg-cm-surface' : 'bg-white border border-cm-border-dark'}`}>
+          <span class="w-1.5 h-1.5 rounded-full bg-cm-accent animate-pulse"></span>
+          <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold ${badgeVariant === 'dark' ? 'text-white' : 'text-cm-text-dark'}">{badge}</span>
+        </div>
+      )}
+      
+      <h1 class={`font-display font-black uppercase tracking-tighter leading-[0.85] ${titleClasses[size]} ${background === 'light' ? 'text-cm-text-dark' : 'text-white'}`}>
+        {title}
+        {highlighted && <br />}
+        {highlighted && <span class="text-cm-accent">{highlighted}</span>}
+      </h1>
+      
+      {description && (
+        <p class={`max-w-2xl mt-6 text-lg leading-relaxed ${background === 'light' ? 'text-cm-text-muted-light' : 'text-cm-text-muted'} ${align === 'center' ? 'text-center' : ''}`}>
+          {description}
+        </p>
+      )}
+      
+      <!-- Decorative line -->
+      {align === 'center' && (
+        <div class="mt-8 w-24 h-px bg-gradient-to-r from-transparent via-cm-accent to-transparent"></div>
+      )}
+      {align === 'left' && (
+        <div class="mt-8 w-24 h-px bg-gradient-to-r from-cm-accent to-transparent"></div>
+      )}
+      {align === 'right' && (
+        <div class="mt-8 w-24 h-px bg-gradient-to-l from-cm-accent to-transparent"></div>
+      )}
+    </div>
+  </div>
+</section>

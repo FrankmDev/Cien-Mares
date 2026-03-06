@@ -1,0 +1,221 @@
+---
+/**
+ * TEMPLATE - Subpágina Estándar
+ * 
+ * Copia este archivo como base para crear nuevas subpáginas.
+ * Ejemplo: alquiler.astro, academia.astro, gestoria.astro, etc.
+ */
+
+import Layout from "@layouts/Layout.astro";
+import { 
+  PageHeader, 
+  ContentSection, 
+  FeatureCard, 
+  InfoCard,
+  CTABanner,
+  ProcessSteps,
+  QuoteBlock 
+} from "@components/ui";
+import { ICONS } from "@lib/icons";
+
+// Metadata de la página
+const title = "Nombre del Servicio | Cien Mares";
+const description = "Descripción SEO de la página";
+const theme = "dark";
+
+// Datos de ejemplo (reemplazar con datos reales)
+const features = [
+  {
+    icon: ICONS.anchor,
+    title: "Característica 1",
+    description: "Descripción de la característica",
+    features: ["Punto 1", "Punto 2", "Punto 3"],
+  },
+  {
+    icon: ICONS.ship,
+    title: "Característica 2",
+    description: "Descripción de la característica",
+    features: ["Punto 1", "Punto 2"],
+  },
+  {
+    icon: ICONS.compass,
+    title: "Característica 3",
+    description: "Descripción de la característica",
+    features: ["Punto 1", "Punto 2", "Punto 3"],
+  },
+];
+
+const processSteps = [
+  { 
+    number: 1, 
+    title: "Contacto", 
+    description: "Ponte en contacto con nosotros" 
+  },
+  { 
+    number: 2, 
+    title: "Evaluación", 
+    description: "Evaluamos tus necesidades" 
+  },
+  { 
+    number: 3, 
+    title: "Propuesta", 
+    description: "Te presentamos nuestra propuesta" 
+  },
+  { 
+    number: 4, 
+    title: "Ejecución", 
+    description: "Implementamos el servicio" 
+  },
+];
+
+const stats = [
+  { icon: ICONS.users, title: "Clientes", value: "500+", description: "Clientes satisfechos" },
+  { icon: ICONS.clock, title: "Experiencia", value: "20+", description: "Años de experiencia" },
+  { icon: ICONS.ship, title: "Embarcaciones", value: "1000+", description: "Embarcaciones atendidas" },
+];
+---
+
+<Layout title={title} description={description} theme={theme}>
+  <!-- ═══════════════════════════════════════════════════════════════
+       HEADER DE PÁGINA
+       ═══════════════════════════════════════════════════════════════ -->
+  <PageHeader
+    title="Nombre del"
+    highlighted="Servicio"
+    description="Descripción completa del servicio que se ofrece. Explica brevemente qué hace esta página y qué valor proporciona al usuario."
+    badge="SERVICIO"
+    background="dark"
+    align="center"
+    size="large"
+  />
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECCIÓN: CARACTERÍSTICAS
+       ═══════════════════════════════════════════════════════════════ -->
+  <ContentSection
+    title="¿Qué ofrecemos?"
+    subtitle="Todo lo que necesitas en un solo lugar"
+    badge="CARACTERÍSTICAS"
+    layout="3-col"
+    background="dark"
+    spacing="lg"
+  >
+    {features.map((feature) => (
+      <FeatureCard
+        icon={feature.icon}
+        title={feature.title}
+        description={feature.description}
+        features={feature.features}
+        variant="default"
+        size="md"
+      />
+    ))}
+  </ContentSection>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECCIÓN: PROCESO
+       ═══════════════════════════════════════════════════════════════ -->
+  <ContentSection
+    title="Cómo funciona"
+    subtitle="Proceso simple y transparente"
+    badge="PROCESO"
+    layout="1-col"
+    background="surface"
+    spacing="lg"
+  >
+    <ProcessSteps 
+      steps={processSteps} 
+      direction="horizontal" 
+      showConnector={true} 
+    />
+  </ContentSection>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECCIÓN: ESTADÍSTICAS / INFO
+       ═══════════════════════════════════════════════════════════════ -->
+  <ContentSection
+    title="Números que hablan"
+    subtitle="Resultados respaldados por años de experiencia"
+    layout="3-col"
+    background="dark"
+    spacing="md"
+  >
+    {stats.map((stat) => (
+      <InfoCard
+        icon={stat.icon}
+        title={stat.title}
+        value={stat.value}
+        description={stat.description}
+        variant="stat"
+        align="center"
+      />
+    ))}
+  </ContentSection>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECCIÓN: CITA / TESTIMONIO
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="section-md bg-cm-surface" data-theme="dark">
+    <div class="container-narrow">
+      <QuoteBlock
+        quote="La experiencia con Cien Mares ha sido excepcional. Su profesionalidad y atención al detalle son incomparables."
+        author="Cliente Satisfecho"
+        role="Propietario de Embarcación"
+        variant="large"
+      />
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CALL TO ACTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <CTABanner
+    title="¿Listo para comenzar?"
+    highlighted="Contáctanos hoy"
+    description="Nuestro equipo de expertos está listo para ayudarte con todas tus necesidades náuticas."
+    primaryButton={{ text: "Contactar", href: "/contacto" }}
+    secondaryButton={{ text: "Ver Servicios", href: "/servicios" }}
+    background="gradient"
+    size="large"
+  />
+</Layout>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { fadeInUp, staggerFadeIn, cleanupScrollTriggers } from "@lib/animations";
+
+  // Register GSAP plugins
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Initialize animations on page load
+  document.addEventListener("astro:page-load", () => {
+    // Animate section headers
+    gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: i * 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+  });
+
+  // Cleanup on page transition
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScrollTriggers();
+  });
+</script>

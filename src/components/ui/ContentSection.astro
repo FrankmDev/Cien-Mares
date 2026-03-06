@@ -1,0 +1,113 @@
+---
+/**
+ * ContentSection - Componente para secciones de contenido con layout flexible
+ * 
+ * Props:
+ * - title?: string - Título de la sección
+ * - subtitle?: string - Subtítulo
+ * - badge?: string - Texto del badge
+ * - layout?: '1-col' | '2-col' | '2-col-reversed' | '3-col' | '4-col'
+ * - background?: 'dark' | 'light' | 'surface' | 'gradient'
+ * - spacing?: 'sm' | 'md' | 'lg' | 'xl'
+ * - align?: 'left' | 'center' | 'right'
+ * - class?: string - Clases adicionales
+ * - containerClass?: string - Clases para el contenedor interno
+ */
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  badge?: string;
+  layout?: '1-col' | '2-col' | '2-col-reversed' | '3-col' | '4-col';
+  background?: 'dark' | 'light' | 'surface' | 'gradient';
+  spacing?: 'sm' | 'md' | 'lg' | 'xl';
+  align?: 'left' | 'center' | 'right';
+  class?: string;
+  containerClass?: string;
+}
+
+const {
+  title,
+  subtitle,
+  badge,
+  layout = '1-col',
+  background = 'dark',
+  spacing = 'lg',
+  align = 'center',
+  class: className = '',
+  containerClass = '',
+} = Astro.props;
+
+// Background classes
+const bgClasses = {
+  dark: 'bg-cm-bg',
+  light: 'bg-cm-bg-light',
+  surface: 'bg-cm-surface',
+  gradient: 'bg-gradient-to-b from-cm-bg to-cm-surface',
+};
+
+// Spacing classes
+const spacingClasses = {
+  sm: 'py-12 lg:py-16',
+  md: 'py-16 lg:py-24',
+  lg: 'py-20 lg:py-32',
+  xl: 'py-28 lg:py-40',
+};
+
+// Layout classes
+const layoutClasses = {
+  '1-col': 'flex flex-col gap-12',
+  '2-col': 'grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16',
+  '2-col-reversed': 'grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16',
+  '3-col': 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10',
+  '4-col': 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8',
+};
+
+// Alignment classes
+const alignClasses = {
+  left: 'text-left items-start',
+  center: 'text-center items-center',
+  right: 'text-right items-end',
+};
+
+// Text colors based on background
+const textColorClass = background === 'light' ? 'text-cm-text-dark' : 'text-white';
+const mutedColorClass = background === 'light' ? 'text-cm-text-muted-light' : 'text-cm-text-muted';
+---
+
+<section 
+  class={`${bgClasses[background]} ${spacingClasses[spacing]} ${className}`}
+  data-theme={background}
+  data-reveal="fade"
+>
+  <div class={`container-main ${containerClass}`}>
+    <!-- Header -->
+    {(title || badge) && (
+      <div class={`flex flex-col mb-12 lg:mb-16 ${alignClasses[align]}`}>
+        {badge && (
+          <div class={`inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 ${background === 'light' ? 'bg-white border border-cm-border-dark' : 'bg-cm-surface'}`}>
+            <span class="w-1.5 h-1.5 rounded-full bg-cm-accent animate-pulse"></span>
+            <span class={`font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold ${textColorClass}`}>{badge}</span>
+          </div>
+        )}
+        
+        {title && (
+          <h2 class={`font-display font-black uppercase tracking-tighter leading-[0.9] text-3xl lg:text-4xl xl:text-5xl ${textColorClass}`}>
+            {title}
+          </h2>
+        )}
+        
+        {subtitle && (
+          <p class={`max-w-2xl mt-4 text-lg ${mutedColorClass} ${align === 'center' ? 'text-center' : ''}`}>
+            {subtitle}
+          </p>
+        )}
+      </div>
+    )}
+    
+    <!-- Content -->
+    <div class={layoutClasses[layout]}>
+      <slot />
+    </div>
+  </div>
+</section>

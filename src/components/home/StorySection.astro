@@ -1,8 +1,44 @@
 ---
 /**
  * StorySection — Editorial Magazine Layout
- * Asymmetric composition with overlapping images
+ * Optimizado para Astro con componentes reutilizables
  */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const FEATURES = [
+  {
+    title: "Excelencia",
+    desc: "Cada detalle cuidadosamente planificado para superar expectativas.",
+    icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+    number: "01",
+  },
+  {
+    title: "Tripulación",
+    desc: "Profesionales certificados con décadas de experiencia en alta mar.",
+    icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 14v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
+    number: "02",
+  },
+  {
+    title: "Disponibilidad",
+    desc: "Atención permanente 24/7 para garantizar tu tranquilidad.",
+    icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+    number: "03",
+  },
+] as const;
+
+const IMAGES = {
+  main: {
+    src: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1400&q=85&auto=format&fit=crop",
+    alt: "Yate de lujo",
+    label: "Flota Premium",
+    title: "Embarcaciones de élite",
+  },
+  secondary: {
+    src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80&auto=format&fit=crop",
+    alt: "Equipo",
+    title: "Tripulación Experta",
+  },
+} as const;
 ---
 
 <section
@@ -12,36 +48,37 @@
 >
   <!-- Background -->
   <div class="absolute inset-0 z-0">
-    <div class="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-[#CFA35A]/[0.04] to-transparent"></div>
+    <div class="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-[#CFA35A]/[0.04] to-transparent">
+    </div>
   </div>
 
   <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
-    
     <!-- Header -->
     <div class="story-header mb-16 lg:mb-24">
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
         <div class="lg:w-[55%]">
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#0A0A0A] text-white rounded-full mb-6">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#CFA35A] animate-pulse"></span>
-            <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold">Sobre Nosotros</span>
+          <div class="mb-6">
+            <SectionLabel label="Sobre Nosotros" variant="dark" />
           </div>
-          <h2 class="font-display font-black text-4xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.85]">
-            <span class="block">15 años</span>
-            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] to-[#8e6f38]">navegando</span>
-          </h2>
+          <SectionTitle firstLine="15 años" highlight="navegando" />
         </div>
         <div class="lg:w-[40%] lg:pb-4">
           <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60 leading-relaxed mb-6">
-            Desde 2010 en Conil de la Frontera, creamos momentos únicos en el mar. Cada travesía es una historia que contar.
+            Desde 2010 en Conil de la Frontera, creamos momentos únicos en el mar.
+            Cada travesía es una historia que contar.
           </p>
           <div class="flex gap-10">
             <div>
               <span class="font-display font-black text-4xl text-[#CFA35A] block">50+</span>
-              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40">Embarcaciones</span>
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40">
+                Embarcaciones
+              </span>
             </div>
             <div>
               <span class="font-display font-black text-4xl text-[#CFA35A] block">2K+</span>
-              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40">Clientes</span>
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40">
+                Clientes
+              </span>
             </div>
           </div>
         </div>
@@ -50,41 +87,49 @@
 
     <!-- Image Grid -->
     <div class="grid grid-cols-12 gap-6 mb-20">
+      <!-- Main Image -->
       <div class="col-span-12 lg:col-span-7 story-image-main">
         <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl group">
           <img
-            src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1400&q=85&auto=format&fit=crop"
-            alt="Yate de lujo"
+            src={IMAGES.main.src}
+            alt={IMAGES.main.alt}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="eager"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 to-transparent">
+          </div>
           <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
             <div>
-              <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/60 block mb-1">Flota Premium</span>
-              <span class="font-display font-bold text-xl text-white">Embarcaciones de élite</span>
+              <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/60 block mb-1">
+                {IMAGES.main.label}
+              </span>
+              <span class="font-display font-bold text-xl text-white">{IMAGES.main.title}</span>
             </div>
             <div class="w-14 h-14 rounded-xl bg-[#CFA35A] flex items-center justify-center">
               <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Secondary Images -->
       <div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
         <div class="story-image-secondary relative aspect-video rounded-2xl overflow-hidden shadow-xl group flex-1">
           <img
-            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80&auto=format&fit=crop"
-            alt="Equipo"
+            src={IMAGES.secondary.src}
+            alt={IMAGES.secondary.alt}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent">
+          </div>
           <div class="absolute bottom-5 left-5">
-            <span class="font-display font-bold text-lg text-white">Tripulación Experta</span>
+            <span class="font-display font-bold text-lg text-white">{IMAGES.secondary.title}</span>
           </div>
         </div>
-        
+
         <div class="story-image-tertiary bg-[#0A0A0A] rounded-2xl p-6 flex items-center justify-between">
           <div>
             <span class="font-display font-black text-5xl text-white block">2010</span>
@@ -92,69 +137,79 @@
           </div>
           <div class="w-16 h-16 rounded-full border-2 border-[#CFA35A] flex items-center justify-center">
             <svg class="w-6 h-6 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
             </svg>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Features Cards - Modern Design -->
+    <!-- Features Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      {[
-        { 
-          title: 'Excelencia', 
-          desc: 'Cada detalle cuidadosamente planificado para superar expectativas.',
-          icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
-          number: '01'
-        },
-        { 
-          title: 'Tripulación', 
-          desc: 'Profesionales certificados con décadas de experiencia en alta mar.',
-          icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 14v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
-          number: '02'
-        },
-        { 
-          title: 'Disponibilidad', 
-          desc: 'Atención permanente 24/7 para garantizar tu tranquilidad.',
-          icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
-          number: '03'
-        },
-      ].map((item, i) => (
-        <div class={`story-card group relative overflow-hidden rounded-3xl bg-white border border-[#0A0A0A]/5 hover:border-[#CFA35A]/40 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(207,163,90,0.25)] ${i === 1 ? 'md:translate-y-8' : ''}`}>
-          <!-- Top accent bar -->
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] to-[#CFA35A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-          
-          <!-- Background number -->
-          <span class="absolute top-4 right-4 font-display font-black text-6xl text-[#0A0A0A]/[0.03] group-hover:text-[#CFA35A]/[0.08] transition-colors duration-500">{item.number}</span>
-          
-          <div class="relative p-8">
-            <!-- Icon with magnetic effect -->
-            <div class="relative w-14 h-14 mb-6 group/icon">
-              <div class="absolute inset-0 rounded-2xl bg-[#0A0A0A] group-hover:bg-[#CFA35A] transition-all duration-300 transform group-hover:rotate-3"></div>
-              <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#CFA35A]/50 transition-all duration-300 transform group-hover:scale-110"></div>
-              <svg class="relative w-full h-full p-3.5 text-[#CFA35A] group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d={item.icon}/>
-              </svg>
+      {
+        FEATURES.map((item, i) => (
+          <div
+            class:list={[
+              "story-card group relative overflow-hidden rounded-3xl bg-white border border-[#0A0A0A]/5 hover:border-[#CFA35A]/40 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(207,163,90,0.25)]",
+              i === 1 && "md:translate-y-8",
+            ]}
+          >
+            {/* Top accent bar */}
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] to-[#CFA35A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left">
             </div>
-            
-            <h3 class="font-display font-black text-xl uppercase tracking-tight mb-3 group-hover:text-[#CFA35A] transition-colors duration-300">{item.title}</h3>
-            <p class="font-body text-[#0A0A0A]/60 text-sm leading-relaxed mb-6">{item.desc}</p>
-            
-            <!-- Interactive link -->
-            <div class="flex items-center gap-2 text-[#0A0A0A]/30 group-hover:text-[#CFA35A] transition-all duration-300">
-              <span class="w-8 h-[1px] bg-current transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] font-bold">Descubrir</span>
-              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
+
+            {/* Background number */}
+            <span class="absolute top-4 right-4 font-display font-black text-6xl text-[#0A0A0A]/[0.03] group-hover:text-[#CFA35A]/[0.08] transition-colors duration-500">
+              {item.number}
+            </span>
+
+            <div class="relative p-8">
+              {/* Icon */}
+              <div class="relative w-14 h-14 mb-6 group/icon">
+                <div class="absolute inset-0 rounded-2xl bg-[#0A0A0A] group-hover:bg-[#CFA35A] transition-all duration-300 transform group-hover:rotate-3">
+                </div>
+                <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#CFA35A]/50 transition-all duration-300 transform group-hover:scale-110">
+                </div>
+                <svg
+                  class="relative w-full h-full p-3.5 text-[#CFA35A] group-hover:text-white transition-colors duration-300"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d={item.icon} />
+                </svg>
+              </div>
+
+              <h3 class="font-display font-black text-xl uppercase tracking-tight mb-3 group-hover:text-[#CFA35A] transition-colors duration-300">
+                {item.title}
+              </h3>
+              <p class="font-body text-[#0A0A0A]/60 text-sm leading-relaxed mb-6">{item.desc}</p>
+
+              {/* Link */}
+              <div class="flex items-center gap-2 text-[#0A0A0A]/30 group-hover:text-[#CFA35A] transition-all duration-300">
+                <span class="w-8 h-[1px] bg-current transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                </span>
+                <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] font-bold">Descubrir</span>
+                <svg
+                  class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Hover glow */}
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-[#CFA35A]/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
             </div>
           </div>
-          
-          <!-- Hover glow effect -->
-          <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-[#CFA35A]/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <!-- CTA -->
@@ -163,39 +218,93 @@
         <span class="font-display font-bold text-lg uppercase tracking-[0.1em]">Conoce nuestra historia</span>
         <div class="w-12 h-12 rounded-full bg-[#0A0A0A] flex items-center justify-center group-hover:bg-[#CFA35A] transition-colors">
           <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </div>
       </a>
     </div>
   </div>
-
-  <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("astro:page-load", () => {
-      gsap.fromTo(".story-header", 
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: "#story-section", start: "top 80%" }}
-      );
-      
-      gsap.fromTo(".story-image-main", 
-        { x: -50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: ".story-image-main", start: "top 85%" }}
-      );
-      
-      gsap.fromTo(".story-image-secondary, .story-image-tertiary", 
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".story-image-secondary", start: "top 90%" }}
-      );
-      
-      gsap.fromTo(".story-card", 
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: ".story-card", start: "top 85%" }}
-      );
-    });
-  </script>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { cleanupScrollTriggers } from "../../lib/animations";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const triggers: (string | Element | null)[] = [];
+
+  document.addEventListener("astro:page-load", () => {
+    // Header animation
+    gsap.fromTo(
+      ".story-header",
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#story-section",
+          start: "top 80%",
+        },
+      }
+    );
+
+    // Images animation
+    gsap.fromTo(
+      ".story-image-main",
+      { x: -50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".story-image-main",
+          start: "top 85%",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".story-image-secondary, .story-image-tertiary",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".story-image-secondary",
+          start: "top 90%",
+        },
+      }
+    );
+
+    // Cards animation
+    gsap.fromTo(
+      ".story-card",
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".story-card",
+          start: "top 85%",
+        },
+      }
+    );
+
+    triggers.push("#story-section", ".story-image-main", ".story-image-secondary", ".story-card");
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScrollTriggers(triggers);
+  });
+</script>

@@ -1,35 +1,33 @@
 ---
 /**
  * MethodologySection — Hexagon Process Cards
- * Modern geometric design with 3D hover effects
+ * Optimizado para Astro
  */
+import { SectionLabel, SectionTitle } from "../ui";
 
-const phases = [
+const PHASES = [
   {
-    number: '01',
-    title: 'Consulta',
-    subtitle: 'Personalizada',
-    description: 'Analizamos tus necesidades para diseñar una aventura náutica a medida.',
-    features: ['Evaluación de requerimientos', 'Selección de embarcación', 'Planificación de ruta'],
-    color: '#CFA35A'
+    number: "01",
+    title: "Consulta",
+    subtitle: "Personalizada",
+    description: "Analizamos tus necesidades para diseñar una aventura náutica a medida.",
+    features: ["Evaluación de requerimientos", "Selección de embarcación", "Planificación de ruta"],
   },
   {
-    number: '02',
-    title: 'Planificación',
-    subtitle: 'Integral',
-    description: 'Gestionamos logística, documentación y tripulación para tu tranquilidad.',
-    features: ['Gestión documental', 'Asignación de tripulación', 'Abastecimiento premium'],
-    color: '#0A0A0A'
+    number: "02",
+    title: "Planificación",
+    subtitle: "Integral",
+    description: "Gestionamos logística, documentación y tripulación para tu tranquilidad.",
+    features: ["Gestión documental", "Asignación de tripulación", "Abastecimiento premium"],
   },
   {
-    number: '03',
-    title: 'Experiencia',
-    subtitle: 'Inolvidable',
-    description: 'Disfruta del mar mientras nuestro equipo cuida cada detalle.',
-    features: ['Navegación experta', 'Servicio de lujo', 'Atención 24/7'],
-    color: '#CFA35A'
-  }
-];
+    number: "03",
+    title: "Experiencia",
+    subtitle: "Inolvidable",
+    description: "Disfruta del mar mientras nuestro equipo cuida cada detalle.",
+    features: ["Navegación experta", "Servicio de lujo", "Atención 24/7"],
+  },
+] as const;
 ---
 
 <section
@@ -39,111 +37,149 @@ const phases = [
 >
   <!-- Background -->
   <div class="absolute inset-0 z-0">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#CFA35A]/3 rounded-full blur-[150px]"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#CFA35A]/3 rounded-full blur-[150px]">
+    </div>
   </div>
 
   <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
-    
     <!-- Header -->
     <div class="meth-header text-center max-w-2xl mx-auto mb-20">
-      <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#0A0A0A] text-white rounded-full mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#CFA35A] animate-pulse"></span>
-        <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] font-bold">Proceso</span>
+      <div class="mb-6">
+        <SectionLabel label="Proceso" variant="dark" />
       </div>
-      <h2 class="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-[0.85] mb-6">
-        Cómo <span class="text-[#CFA35A]">trabajamos</span>
-      </h2>
+      <SectionTitle firstLine="Cómo" secondLine="trabajamos" class="mb-6" />
       <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60">
         Tres pasos hacia tu aventura náutica perfecta.
       </p>
     </div>
 
-    <!-- Process Cards - New Design -->
+    <!-- Process Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-      {phases.map((phase, i) => (
-        <div class="meth-card group relative" style={`--delay: ${i * 0.15}s`}>
-          <!-- Connector line (hidden on mobile) -->
-          {i < phases.length - 1 && (
-            <div class="hidden md:block absolute top-20 left-full w-12 h-[2px] z-0">
-              <div class="w-full h-full bg-gradient-to-r from-[#CFA35A]/50 to-transparent"></div>
-            </div>
-          )}
-          
-          <div class="relative p-8 rounded-3xl bg-[#FAFAFA] border-2 border-transparent hover:border-[#CFA35A]/30 transition-all duration-500 h-full group-hover:bg-white group-hover:shadow-2xl group-hover:shadow-[#CFA35A]/10">
-            
-            <!-- Top accent bar -->
-            <div class="absolute top-0 left-8 right-8 h-1 bg-[#CFA35A] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+      {
+        PHASES.map((phase, i) => (
+          <div class="meth-card group relative" style={`--delay: ${i * 0.15}s`}>
+            {/* Connector line */}
+            {i < PHASES.length - 1 && (
+              <div class="hidden md:block absolute top-20 left-full w-12 h-[2px] z-0">
+                <div class="w-full h-full bg-gradient-to-r from-[#CFA35A]/50 to-transparent" />
+              </div>
+            )}
 
-            <!-- Number with hexagon background -->
-            <div class="relative mb-8">
-              <div class="absolute -top-2 -left-2 w-20 h-20">
-                <svg class="w-full h-full text-[#CFA35A]/10 group-hover:text-[#CFA35A]/20 transition-colors" viewBox="0 0 100 100" fill="currentColor">
-                  <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"/>
+            <div class="relative p-8 rounded-3xl bg-[#FAFAFA] border-2 border-transparent hover:border-[#CFA35A]/30 transition-all duration-500 h-full group-hover:bg-white group-hover:shadow-2xl group-hover:shadow-[#CFA35A]/10 group-hover:-translate-y-1">
+              {/* Top accent bar */}
+              <div class="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] to-[#CFA35A] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+
+              {/* Number with hexagon */}
+              <div class="relative mb-8">
+                <div class="absolute -top-2 -left-2 w-20 h-20 group-hover:rotate-12 transition-transform duration-700">
+                  <svg
+                    class="w-full h-full text-[#CFA35A]/10 group-hover:text-[#CFA35A]/20 transition-colors"
+                    viewBox="0 0 100 100"
+                    fill="currentColor"
+                  >
+                    <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" />
+                  </svg>
+                </div>
+                <div class="relative w-16 h-16 rounded-2xl bg-[#0A0A0A] flex items-center justify-center group-hover:bg-[#CFA35A] transition-colors duration-300 shadow-lg group-hover:shadow-[0_10px_30px_rgba(207,163,90,0.3)] group-hover:scale-105">
+                  <span class="font-display font-black text-2xl text-white group-hover:scale-110 transition-transform">
+                    {phase.number}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div class="mb-2">
+                <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[#CFA35A] font-bold">
+                  {phase.subtitle}
+                </span>
+              </div>
+              <h3 class="font-display font-black text-2xl lg:text-3xl uppercase tracking-tight mb-4 group-hover:text-[#CFA35A] transition-colors">
+                {phase.title}
+              </h3>
+              <p class="font-body text-[#0A0A0A]/60 leading-relaxed mb-6 text-sm">{phase.description}</p>
+
+              {/* Features */}
+              <div class="flex flex-wrap gap-2">
+                {phase.features.map((feature) => (
+                  <span class="px-3 py-1.5 rounded-full bg-[#0A0A0A]/5 text-[#0A0A0A]/70 text-xs font-mono uppercase tracking-wider group-hover:bg-[#CFA35A]/10 group-hover:text-[#CFA35A] transition-colors">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              {/* Hover indicator */}
+              <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-[#0A0A0A]/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </div>
-              <div class="relative w-16 h-16 rounded-2xl bg-[#0A0A0A] flex items-center justify-center group-hover:bg-[#CFA35A] transition-colors duration-300 shadow-lg">
-                <span class="font-display font-black text-2xl text-white">{phase.number}</span>
-              </div>
-            </div>
-
-            <!-- Content -->
-            <div class="mb-2">
-              <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[#CFA35A] font-bold">{phase.subtitle}</span>
-            </div>
-            <h3 class="font-display font-black text-2xl lg:text-3xl uppercase tracking-tight mb-4 group-hover:text-[#CFA35A] transition-colors">
-              {phase.title}
-            </h3>
-            <p class="font-body text-[#0A0A0A]/60 leading-relaxed mb-6 text-sm">
-              {phase.description}
-            </p>
-
-            <!-- Features as tags -->
-            <div class="flex flex-wrap gap-2">
-              {phase.features.map((feature) => (
-                <span class="px-3 py-1.5 rounded-full bg-[#0A0A0A]/5 text-[#0A0A0A]/70 text-xs font-mono uppercase tracking-wider group-hover:bg-[#CFA35A]/10 group-hover:text-[#CFA35A] transition-colors">
-                  {feature}
-                </span>
-              ))}
-            </div>
-
-            <!-- Hover indicator -->
-            <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-[#0A0A0A]/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-              <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
-    <!-- Bottom CTA -->
+    {/* CTA */}
     <div class="meth-footer text-center mt-16">
-      <a href="/contacto" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#0A0A0A] text-white rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-[#CFA35A] transition-all duration-300 hover:shadow-lg hover:shadow-[#CFA35A]/30">
+      <a
+        href="/contacto"
+        class="group inline-flex items-center gap-3 px-8 py-4 bg-[#0A0A0A] text-white rounded-full font-display font-bold text-sm uppercase tracking-[0.15em] hover:bg-[#CFA35A] transition-all duration-300 hover:shadow-lg hover:shadow-[#CFA35A]/30 hover:scale-105 active:scale-95"
+      >
         <span>Iniciar proyecto</span>
         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+          <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </a>
     </div>
   </div>
-
-  <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("astro:page-load", () => {
-      gsap.fromTo(".meth-header", 
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: "#methodology-section", start: "top 80%" }}
-      );
-      
-      gsap.fromTo(".meth-card", 
-        { y: 80, opacity: 0, rotateY: -10 },
-        { y: 0, opacity: 1, rotateY: 0, duration: 1, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: ".meth-card", start: "top 85%" }}
-      );
-    });
-  </script>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { cleanupScrollTriggers } from "../../lib/animations";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const triggers: (string | Element | null)[] = [];
+
+  document.addEventListener("astro:page-load", () => {
+    gsap.fromTo(
+      ".meth-header",
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#methodology-section",
+          start: "top 80%",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".meth-card",
+      { y: 80, opacity: 0, rotateY: -10 },
+      {
+        y: 0,
+        opacity: 1,
+        rotateY: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".meth-card",
+          start: "top 85%",
+        },
+      }
+    );
+
+    triggers.push("#methodology-section", ".meth-card");
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScrollTriggers(triggers);
+  });
+</script>
