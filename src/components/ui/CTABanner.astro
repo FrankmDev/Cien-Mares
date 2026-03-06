@@ -60,17 +60,22 @@ const mutedColorClass = background === 'gold' ? 'text-cm-bg/70' : 'text-cm-text-
 ---
 
 <section 
-  class={`cta-banner section-sm relative overflow-hidden ${bgClasses[background]} ${className}`}
+  class={`section-sm relative overflow-hidden ${bgClasses[background]} ${className}`}
+  data-reveal="fade"
 >
   <!-- Decorative elements -->
   {background === 'gradient' && (
-    <div class="cta-deco absolute top-0 right-0 w-96 h-96 bg-cm-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-    <div class="cta-deco absolute bottom-0 left-0 w-64 h-64 bg-cm-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-cm-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-cm-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
   )}
   
   <div class="container-main relative z-10">
     <div class="text-center max-w-4xl mx-auto">
-      <h2 class={`cta-title font-display font-black uppercase tracking-tighter leading-[0.9] ${titleClasses} ${textColorClass} mb-6`}>
+      <h2 
+        class={`font-display font-black uppercase tracking-tighter leading-[0.9] ${titleClasses} ${textColorClass} mb-6`}
+        data-reveal
+        data-delay="1"
+      >
         {title}
         {highlighted && (
           <>
@@ -81,14 +86,22 @@ const mutedColorClass = background === 'gold' ? 'text-cm-bg/70' : 'text-cm-text-
       </h2>
       
       {description && (
-        <p class={`cta-desc text-lg lg:text-xl ${mutedColorClass} mb-10 max-w-2xl mx-auto`}>
+        <p 
+          class={`text-lg lg:text-xl ${mutedColorClass} mb-10 max-w-2xl mx-auto`}
+          data-reveal
+          data-delay="2"
+        >
           {description}
         </p>
       )}
       
       <!-- Buttons -->
       {(primaryButton || secondaryButton) && (
-        <div class="cta-buttons flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div 
+          class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          data-reveal
+          data-delay="3"
+        >
           {primaryButton && (
             <a 
               href={primaryButton.href}
@@ -116,46 +129,3 @@ const mutedColorClass = background === 'gold' ? 'text-cm-bg/70' : 'text-cm-text-
     </div>
   </div>
 </section>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  
-  gsap.registerPlugin(ScrollTrigger);
-  
-  // Only run animations on desktop (pointer: fine) to avoid mobile issues
-  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-  
-  if (!isTouchDevice) {
-    document.querySelectorAll('.cta-banner').forEach((banner) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: banner,
-          start: "top 85%",
-          toggleActions: "play none none none",
-          once: true
-        }
-      });
-      
-      tl.fromTo(banner.querySelector('.cta-title'), 
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-      )
-      .fromTo(banner.querySelector('.cta-desc'), 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-        "-=0.3"
-      )
-      .fromTo(banner.querySelector('.cta-buttons'), 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-        "-=0.3"
-      )
-      .fromTo(banner.querySelectorAll('.cta-deco'), 
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out", stagger: 0.1 },
-        "-=0.5"
-      );
-    });
-  }
-</script>

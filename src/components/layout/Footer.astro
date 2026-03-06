@@ -108,18 +108,18 @@ const socialIcons: Record<string, string> = {
     <div class="relative py-12 lg:py-16 border-t border-white/5">
       <div class="overflow-hidden">
         <h2 class="footer-brand font-display font-black text-[clamp(3.5rem,16vw,14rem)] leading-[0.8] text-center tracking-tighter select-none"
-            style="-webkit-text-stroke: 2px rgba(207,163,90,0.25); color: transparent;">
+            style="-webkit-text-stroke: 2px rgba(207,163,90,0.3); color: transparent;">
           CIEN MARES
         </h2>
       </div>
       
-      <!-- Animated underline -->
+      <!-- Decorative underline -->
       <div class="flex justify-center mt-8">
-        <div class="footer-line flex items-center gap-3 opacity-0">
+        <div class="flex items-center gap-3">
           <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-[#CFA35A]"></div>
-          <div class="w-2 h-2 rounded-full bg-[#CFA35A] animate-pulse"></div>
+          <div class="w-2 h-2 rounded-full bg-[#CFA35A]"></div>
           <div class="w-32 h-[2px] bg-[#CFA35A]/40"></div>
-          <div class="w-2 h-2 rounded-full bg-[#CFA35A] animate-pulse" style="animation-delay: 0.5s;"></div>
+          <div class="w-2 h-2 rounded-full bg-[#CFA35A]"></div>
           <div class="w-16 h-[2px] bg-gradient-to-l from-transparent to-[#CFA35A]"></div>
         </div>
       </div>
@@ -174,18 +174,31 @@ const socialIcons: Record<string, string> = {
     animation: pulse-slow 6s ease-in-out infinite;
   }
 
-  /* Brand text shimmer */
+  /* Brand text wave shimmer - subtle like ocean waves */
   .footer-brand {
-    background: linear-gradient(90deg, rgba(207,163,90,0) 0%, rgba(207,163,90,0.15) 50%, rgba(207,163,90,0) 100%);
+    background: linear-gradient(
+      90deg, 
+      rgba(207,163,90,0.1) 0%, 
+      rgba(207,163,90,0.4) 25%, 
+      rgba(245,230,200,0.6) 50%, 
+      rgba(207,163,90,0.4) 75%, 
+      rgba(207,163,90,0.1) 100%
+    );
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: shimmer 6s ease-in-out infinite;
+    animation: wave-shimmer 8s ease-in-out infinite;
   }
   
-  @keyframes shimmer {
-    0%, 100% { background-position: -200% center; }
-    50% { background-position: 200% center; }
+  @keyframes wave-shimmer {
+    0%, 100% { 
+      background-position: 150% center;
+      opacity: 0.8;
+    }
+    50% { 
+      background-position: -50% center;
+      opacity: 1;
+    }
   }
 
   /* Contact icon bounce on hover */
@@ -200,54 +213,4 @@ const socialIcons: Record<string, string> = {
   }
 </style>
 
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener("astro:page-load", () => {
-    // Brand reveal
-    gsap.fromTo(".footer-brand", 
-      { y: 80, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 1, 
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".footer-brand", start: "top 90%" }
-      }
-    );
-    
-    // Line reveal
-    gsap.to(".footer-line", {
-      opacity: 1,
-      scaleX: 1,
-      duration: 0.8,
-      delay: 0.3,
-      ease: "power2.out",
-      scrollTrigger: { trigger: ".footer-line", start: "top 90%" }
-    });
-
-    // Icons stagger
-    gsap.fromTo(".contact-icon, .social-icon",
-      { y: 20, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.5, 
-        stagger: 0.08,
-        ease: "back.out(1.5)",
-        scrollTrigger: { trigger: "#site-footer", start: "top 85%" }
-      }
-    );
-  });
-
-  document.addEventListener('astro:before-swap', () => {
-    ScrollTrigger.getAll().forEach(st => {
-      if (st.vars.trigger === '.footer-brand' || st.vars.trigger === '.footer-line' || st.vars.trigger === '#site-footer') {
-        st.kill();
-      }
-    });
-  });
-</script>

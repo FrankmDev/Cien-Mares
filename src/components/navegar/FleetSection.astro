@@ -1,0 +1,275 @@
+---
+/**
+ * FleetSection — La Flota
+ * Cards cinematográficas con efectos premium
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const FLEET = [
+  {
+    id: 'velero',
+    name: 'Velero',
+    tagline: 'Navegación a vela pura',
+    description: 'Navega a vela por la bahía de Cádiz o hasta las calas de Conil. Ideal para grupos de hasta 8 personas que buscan una experiencia auténtica y silenciosa.',
+    image: 'https://images.unsplash.com/photo-1500930287596-c1ecaa373bb2?w=800&q=85',
+    specs: ['Hasta 8 pax', 'Skipper incluido', 'Vela mayor + Génova'],
+    highlight: 'Experiencia auténtica',
+  },
+  {
+    id: 'lancha',
+    name: 'Lancha',
+    tagline: 'Rapidez y versatilidad',
+    description: 'Perfecta para excursiones rápidas, paseos por la costa y actividades acuáticas. Gran estabilidad y espacio para el equipo de buceo y paddlesurf.',
+    image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=85',
+    specs: ['Hasta 10 pax', 'Motor fueraborda', 'Gran plataforma'],
+    highlight: 'Máxima diversión',
+  },
+  {
+    id: 'yate',
+    name: 'Yate',
+    tagline: 'Lujo en alta mar',
+    description: 'Experiencia premium con todas las comodidades. Cabina, baño, cocina y amplio solárium. Para quienes buscan exclusividad y confort navegando.',
+    image: 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=800&q=85',
+    specs: ['Hasta 12 pax', 'Lujo & Confort', 'Todo incluido'],
+    highlight: 'Exclusividad total',
+  },
+] as const;
+---
+
+<section class="relative bg-[#02060a] py-28 lg:py-36 overflow-hidden" id="fleet-section" data-theme="dark">
+  {/* Background Effects */}
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#CFA35A]/[0.02] rounded-full blur-[150px] -translate-y-1/2"></div>
+    <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[#CFA35A]/[0.02] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-24">
+      <div class="lg:w-[55%]">
+        <div class="mb-6">
+          <SectionLabel label="La Flota" variant="light" />
+        </div>
+        <SectionTitle firstLine="Elige tu" secondLine="embarcación" />
+      </div>
+      <div class="lg:w-[40%]">
+        <p class="font-body text-base lg:text-lg text-white/60 leading-relaxed">
+          Tres tipos de embarcaciones pensadas para diferentes experiencias. Todas con
+          equipamiento premium y patrón profesional incluido.
+        </p>
+      </div>
+    </div>
+
+    {/* Fleet Cards - Cinematic Layout */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+      {FLEET.map((boat, i) => (
+        <div
+          class="fleet-card group relative"
+          data-card-index={i}
+        >
+          {/* Card Container */}
+          <div class="relative h-[480px] sm:h-[520px] md:h-[500px] lg:h-[580px] xl:h-[620px] rounded-2xl sm:rounded-3xl overflow-hidden">
+            {/* Background Image with Parallax */}
+            <div class="absolute inset-0 overflow-hidden">
+              <img
+                src={boat.image}
+                alt={boat.name}
+                class="fleet-card-image w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                style="filter: grayscale(30%) brightness(0.5);"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+              {/* Animated gradient overlay */}
+              <div class="absolute inset-0 bg-gradient-to-t from-[#02060a] via-[#02060a]/70 to-[#02060a]/30"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-[#02060a]/60 to-transparent"></div>
+              {/* Shine effect on hover */}
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            </div>
+
+            {/* Border Frame */}
+            <div class="absolute inset-0 rounded-3xl border border-white/10 group-hover:border-[#CFA35A]/40 transition-all duration-500 pointer-events-none"></div>
+            <div class="absolute inset-[1px] rounded-3xl border border-white/5 group-hover:border-[#CFA35A]/20 transition-all duration-500 pointer-events-none"></div>
+
+            {/* Corner Accents */}
+            <div class="absolute top-0 left-0 w-20 h-20 overflow-hidden pointer-events-none">
+              <div class="absolute top-6 left-6 w-[1px] h-0 bg-gradient-to-b from-[#CFA35A] to-transparent group-hover:h-12 transition-all duration-500"></div>
+              <div class="absolute top-6 left-6 h-[1px] w-0 bg-gradient-to-r from-[#CFA35A] to-transparent group-hover:w-12 transition-all duration-500 delay-100"></div>
+            </div>
+            <div class="absolute bottom-0 right-0 w-20 h-20 overflow-hidden pointer-events-none">
+              <div class="absolute bottom-6 right-6 w-[1px] h-0 bg-gradient-to-t from-[#CFA35A] to-transparent group-hover:h-12 transition-all duration-500 delay-200"></div>
+              <div class="absolute bottom-6 right-6 h-[1px] w-0 bg-gradient-to-l from-[#CFA35A] to-transparent group-hover:w-12 transition-all duration-500 delay-300"></div>
+            </div>
+
+            {/* Content */}
+            <div class="absolute inset-0 flex flex-col justify-end p-7 lg:p-9">
+              {/* Floating Badge */}
+              <div class="absolute top-7 right-7">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-[#CFA35A] rounded-full blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
+                  <div class="relative w-14 h-14 rounded-full border border-[#CFA35A]/40 flex items-center justify-center bg-[#02060a]/60 backdrop-blur-sm group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-300">
+                    <span class="font-display font-bold text-sm text-[#CFA35A] group-hover:text-[#02060a] transition-colors">
+                      0{i + 1}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Highlight Tag */}
+              <div class="mb-4">
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-[#CFA35A]/10 border border-[#CFA35A]/20 text-[0.6rem] font-mono uppercase tracking-wider text-[#CFA35A]">
+                  {boat.highlight}
+                </span>
+              </div>
+
+              {/* Tagline */}
+              <span class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-[#CFA35A]/80 mb-2">
+                {boat.tagline}
+              </span>
+
+              {/* Title with hover effect */}
+              <h3 class="font-display font-black text-3xl sm:text-4xl lg:text-4xl xl:text-5xl uppercase tracking-tight text-white mb-3 sm:mb-4 group-hover:text-[#CFA35A] transition-colors duration-500">
+                {boat.name}
+              </h3>
+
+              {/* Description */}
+              <p class="text-white/60 text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3 group-hover:text-white/80 transition-colors duration-300">
+                {boat.description}
+              </p>
+
+              {/* Specs Pills */}
+              <div class="flex flex-wrap gap-2 mb-8">
+                {boat.specs.map((spec, si) => (
+                  <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[0.65rem] font-mono uppercase tracking-wider text-white/70 group-hover:bg-[#CFA35A]/10 group-hover:border-[#CFA35A]/30 group-hover:text-[#CFA35A] transition-all duration-300"
+                        style={`transition-delay: ${si * 50}ms;`}>
+                    {spec}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <a
+                href="/contacto"
+                class="inline-flex items-center gap-4 group/btn"
+              >
+                <span class="relative font-display font-bold text-sm uppercase tracking-[0.15em] text-white group-hover/btn:text-[#CFA35A] transition-colors duration-300">
+                  Consultar disponibilidad
+                  <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#CFA35A] group-hover/btn:w-full transition-all duration-300"></span>
+                </span>
+                <div class="relative w-12 h-12 rounded-full bg-[#CFA35A] flex items-center justify-center overflow-hidden group-hover/btn:scale-110 transition-transform duration-300">
+                  <div class="absolute inset-0 bg-white translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-300"></div>
+                  <svg class="relative w-5 h-5 text-[#02060a] group-hover/btn:rotate-45 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </div>
+              </a>
+            </div>
+
+            {/* Bottom Glow */}
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-40 bg-gradient-to-t from-[#CFA35A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Bottom Trust Badge */}
+    <div class="mt-16 lg:mt-20 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+      <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="w-12 h-12 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-bold text-white block">Seguro completo</span>
+          <span class="font-mono text-[0.6rem] uppercase tracking-wider text-white/40">En todas las embarcaciones</span>
+        </div>
+      </div>
+
+      <div class="hidden lg:block w-px h-12 bg-white/10"></div>
+
+      <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="w-12 h-12 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-bold text-white block">Patrón profesional</span>
+          <span class="font-mono text-[0.6rem] uppercase tracking-wider text-white/40">Incluido en todas las salidas</span>
+        </div>
+      </div>
+
+      <div class="hidden lg:block w-px h-12 bg-white/10"></div>
+
+      <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="w-12 h-12 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-bold text-white block">Equipamiento homologado</span>
+          <span class="font-mono text-[0.6rem] uppercase tracking-wider text-white/40">Seguridad certificada</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { cleanupScrollTriggers } from "../../lib/animations";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const triggers: (string | Element | null)[] = [];
+
+  document.addEventListener("astro:page-load", () => {
+    // Cards entrance with cinematic stagger
+    const cards = gsap.utils.toArray(".fleet-card");
+    cards.forEach((card, i) => {
+      gsap.fromTo(
+        card as Element,
+        { y: 100, opacity: 0, rotateY: -5 },
+        {
+          y: 0,
+          opacity: 1,
+          rotateY: 0,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#fleet-section",
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    // Parallax on card images
+    cards.forEach((card) => {
+      const img = (card as Element).querySelector('.fleet-card-image');
+      if (img) {
+        gsap.to(img, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card as Element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
+    });
+
+    triggers.push("#fleet-section");
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScrollTriggers(triggers);
+  });
+</script>

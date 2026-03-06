@@ -76,10 +76,67 @@ const canonicalURL = new URL(
 
     <Footer />
 
+    <!-- Reset scroll on page load/reload -->
     <script>
+      // Reset scroll to top on every page load/reload
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      
+      // Force scroll to top immediately
+      window.scrollTo(0, 0);
+      
+      // Also after Astro page transitions
       document.addEventListener("astro:after-swap", () => {
         window.scrollTo(0, 0);
       });
+    </script>
+
+    <!-- Initialize scroll reveal animations -->
+    <script>
+      (function initRevealAnimations() {
+        function setupObserver() {
+          const revealElements = document.querySelectorAll('[data-reveal]:not(.revealed)');
+          if (revealElements.length === 0) return;
+          
+          // Immediately reveal elements already in viewport
+          revealElements.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              el.classList.add('revealed');
+            }
+          });
+          
+          // Observe remaining elements
+          const remainingElements = document.querySelectorAll('[data-reveal]:not(.revealed)');
+          if (remainingElements.length === 0) return;
+          
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('revealed');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            {
+              threshold: 0.05,
+              rootMargin: '0px 0px 0px 0px',
+            }
+          );
+
+          remainingElements.forEach((el) => observer.observe(el));
+        }
+
+        // Run on page load
+        document.addEventListener('astro:page-load', setupObserver);
+        
+        // Also run immediately if DOM is ready
+        if (document.readyState !== 'loading') {
+          setupObserver();
+        }
+      })();
     </script>
 
     <script>

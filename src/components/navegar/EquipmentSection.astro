@@ -1,0 +1,251 @@
+---
+/**
+ * EquipmentSection — Equipamiento a Bordo
+ * Grid interactivo premium con iconos animados
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const EQUIPMENT = [
+  {
+    name: 'Paddlesurf',
+    description: 'Tablas de 14" con capacidad para dos personas. Perfectas para explorar calas.',
+    icon: 'M12 3c-4.8 0-9 3.86-9 9 0 2.12.74 4.07 1.97 5.61L3 21l3.39-1.97A8.93 8.93 0 0 0 12 21c4.97 0 9-4.48 9-9s-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm-1-11h2v4h-2zm0 6h2v2h-2z',
+    category: 'Deportes',
+  },
+  {
+    name: 'Inflables',
+    description: 'Colchonetas gigantes y flotadores para relajarse en el agua con total comodidad.',
+    icon: 'M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7s2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z',
+    category: 'Relax',
+  },
+  {
+    name: 'Buceo',
+    description: 'Gafas, tubo y aletas de calidad profesional para descubrir fondos marinos.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-13v4H8v-4h2zm6 0v4h-2v-4h2zm-3 13c-2.76 0-5.26-1.12-7.07-2.93l1.41-1.41C8.79 16.79 10.79 17.5 13 17.5s4.21-.71 5.66-1.84l1.41 1.41C18.26 17.88 15.76 19 13 19z',
+    category: 'Aventura',
+  },
+  {
+    name: 'Insta360 X4',
+    description: 'Cámara 360° para capturar cada momento desde todos los ángulos posibles.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+    category: 'Fotografía',
+  },
+  {
+    name: 'GoPro 13',
+    description: 'La última generación para grabación de acción en 5.3K bajo el agua.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+    category: 'Fotografía',
+  },
+  {
+    name: 'Polaroid',
+    description: 'Fotografía instantánea para llevar recuerdos físicos de la experiencia.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+    category: 'Fotografía',
+  },
+  {
+    name: 'Canon R10',
+    description: 'Cámara mirrorless profesional para fotografías de alta calidad.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+    category: 'Fotografía',
+  },
+  {
+    name: 'DJI Mini 4',
+    description: 'Dron compacto con cámara 4K para tomas aéreas espectaculares.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+    category: 'Fotografía',
+  },
+  {
+    name: 'Equipo de Sonido',
+    description: 'Sistema de audio completo más altavoces bluetooth acuáticos para la fiesta.',
+    icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
+    category: 'Entretenimiento',
+  },
+] as const;
+
+const CATEGORIES = [...new Set(EQUIPMENT.map(item => item.category))];
+---
+
+<section class="relative bg-[#02060a] py-28 lg:py-36 overflow-hidden" id="equipment-section" data-theme="dark">
+  {/* Background Effects */}
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#CFA35A]/[0.02] rounded-full blur-[200px]"></div>
+    {/* Grid pattern */}
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(#CFA35A 1px, transparent 1px), linear-gradient(90deg, #CFA35A 1px, transparent 1px); background-size: 60px 60px;"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Equipamiento" variant="light" />
+      </div>
+      <SectionTitle firstLine="Todo incluido" secondLine="a bordo" />
+      <p class="font-body text-base lg:text-lg text-white/60 leading-relaxed mt-6">
+        Disfruta de todas las actividades con nuestro equipamiento premium.
+        Desde deportes acuáticos hasta la mejor tecnología para capturar recuerdos.
+      </p>
+    </div>
+
+    {/* Category Pills */}
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button class="category-pill active px-5 py-2 rounded-full bg-[#CFA35A] text-[#02060a] font-mono text-[0.7rem] uppercase tracking-wider font-bold transition-all duration-300">
+        Todo
+      </button>
+      {CATEGORIES.map((cat) => (
+        <button class="category-pill px-5 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 font-mono text-[0.7rem] uppercase tracking-wider hover:bg-white/10 hover:border-[#CFA35A]/30 hover:text-[#CFA35A] transition-all duration-300">
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    {/* Equipment Grid */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6" id="equipment-grid">
+      {EQUIPMENT.map((item, i) => (
+        <div
+          class="equipment-item group relative"
+          data-item-index={i}
+          data-category={item.category}
+        >
+          <div class="relative p-7 lg:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#CFA35A]/40 hover:bg-white/[0.05] transition-all duration-500 h-full overflow-hidden">
+            
+            {/* Background Glow on Hover */}
+            <div class="absolute inset-0 bg-gradient-to-br from-[#CFA35A]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            {/* Top Accent Line */}
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#CFA35A] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></div>
+
+            {/* Category Tag */}
+            <div class="absolute top-4 right-4">
+              <span class="font-mono text-[0.55rem] uppercase tracking-wider text-white/30 group-hover:text-[#CFA35A]/60 transition-colors">
+                {item.category}
+              </span>
+            </div>
+
+            {/* Icon Container */}
+            <div class="relative w-16 h-16 mb-6 group/icon">
+              {/* Outer Glow */}
+              <div class="absolute inset-0 bg-[#CFA35A]/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-0 group-hover:scale-100"></div>
+              
+              {/* Icon Background */}
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#CFA35A]/20 to-[#CFA35A]/5 border border-[#CFA35A]/20 group-hover:from-[#CFA35A] group-hover:to-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-300"></div>
+              
+              {/* Rotating Ring */}
+              <div class="absolute -inset-1 rounded-2xl border border-dashed border-[#CFA35A]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow"></div>
+              
+              {/* Icon */}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg 
+                  class="w-7 h-7 text-[#CFA35A] group-hover:text-[#02060a] transition-colors duration-300 transform group-hover:scale-110" 
+                  viewBox="0 0 24 24" 
+                  fill="currentColor"
+                >
+                  <path d={item.icon} />
+                </svg>
+              </div>
+            </div>
+
+            {/* Content */}
+            <h3 class="font-display font-bold text-lg uppercase tracking-tight text-white mb-2 group-hover:text-[#CFA35A] transition-colors duration-300">
+              {item.name}
+            </h3>
+            <p class="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors">
+              {item.description}
+            </p>
+
+            {/* Decorative Corner */}
+            <div class="absolute bottom-0 right-0 w-16 h-16 overflow-hidden">
+              <div class="absolute bottom-4 right-4 w-[1px] h-8 bg-gradient-to-t from-[#CFA35A]/40 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 delay-100"></div>
+              <div class="absolute bottom-4 right-4 h-[1px] w-8 bg-gradient-to-l from-[#CFA35A]/40 to-transparent transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 delay-200"></div>
+            </div>
+
+            {/* Bottom Number */}
+            <div class="absolute bottom-4 left-7 lg:left-8">
+              <span class="font-display font-black text-4xl text-white/[0.03] group-hover:text-[#CFA35A]/[0.1] transition-colors">
+                0{i + 1}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Bottom CTA */}
+    <div class="mt-16 lg:mt-20 flex flex-col lg:flex-row items-center justify-center gap-8">
+      <div class="flex items-center gap-4 px-8 py-5 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="relative">
+          <div class="absolute inset-0 bg-[#CFA35A] rounded-full blur-lg opacity-40 animate-pulse"></div>
+          <div class="relative w-14 h-14 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-bold text-white block text-lg">Todo el equipamiento incluido</span>
+          <span class="font-mono text-[0.65rem] uppercase tracking-wider text-white/40">Sin coste adicional en ninguna salida</span>
+        </div>
+      </div>
+      
+      <a href="/contacto" class="group inline-flex items-center gap-3 text-[#CFA35A] hover:text-white transition-colors duration-300">
+        <span class="font-display font-bold text-sm uppercase tracking-wider">Ver condiciones</span>
+        <div class="w-10 h-10 rounded-full border border-[#CFA35A]/30 flex items-center justify-center group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-300">
+          <svg class="w-4 h-4 group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { cleanupScrollTriggers } from "../../lib/animations";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const triggers: (string | Element | null)[] = [];
+
+  document.addEventListener("astro:page-load", () => {
+    // Staggered entrance animation for equipment items
+    const items = gsap.utils.toArray(".equipment-item");
+    items.forEach((item, i) => {
+      gsap.fromTo(
+        item as Element,
+        { y: 50, opacity: 0, scale: 0.95 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.7,
+          delay: i * 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#equipment-section",
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    triggers.push("#equipment-section");
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScrollTriggers(triggers);
+  });
+</script>
+
+<style>
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+</style>

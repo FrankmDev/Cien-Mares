@@ -1,34 +1,54 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import PageHero from "@/components/shared/PageHero.astro";
+import FleetSection from "@/components/navegar/FleetSection.astro";
+import RoutesSection from "@/components/navegar/RoutesSection.astro";
+import EquipmentSection from "@/components/navegar/EquipmentSection.astro";
+import HowItWorksSection from "@/components/navegar/HowItWorksSection.astro";
+import CTABanner from "@/components/navegar/CTABanner.astro";
+
+const HERO_CONTENT = {
+  backgroundImage: "https://images.unsplash.com/photo-1500930287596-c1ecaa373bb2?w=1920&q=85",
+  badge: { 
+    text: "Alquiler de Embarcaciones", 
+    subtext: "Cádiz — Costa de la Luz" 
+  },
+  title: {
+    line1: "Alquila un velero",
+    line2: "lancha o yate",
+  },
+  subtitle: "Excursiones personalizadas o rutas recomendadas por nuestros patrones. Vive la costa gaditana desde el mar.",
+  cta: {
+    primary: { text: "Consultar disponibilidad", href: "/contacto" },
+    secondary: { text: "Ver rutas", href: "#routes-section" },
+  },
+  stats: [
+    { value: "50+", label: "Embarcaciones" },
+    { value: "6", label: "Destinos" },
+    { value: "15+", label: "Años experiencia" },
+  ],
+};
 ---
 
 <Layout
-  title="Navegar | Cien Mares"
-  description="Alquiler de embarcaciones premium en Cádiz."
+  title="Navegar | Alquiler de Barcos en Cádiz | Cien Mares"
+  description="Alquila velero, lancha o yate en la costa de Cádiz. Excursiones personalizadas desde El Puerto de Santa María. Equipamiento premium y patrón profesional incluido."
 >
-  <section
-    class="min-h-screen flex items-center justify-center bg-[#FAFAFA] text-[#0A0A0A]"
-    data-theme="light"
-  >
-    <div class="text-center px-6">
-      <span
-        class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-6"
-        >Próximamente</span
-      >
-      <h1
-        class="font-display font-black text-[clamp(3.5rem,8vw,7rem)] leading-[0.9] tracking-tighter uppercase mb-4"
-      >
-        Navegar
-      </h1>
-      <p class="font-body text-[#0A0A0A]/60 text-lg max-w-md mx-auto">
-        Estamos preparando esta sección. Vuelve pronto.
-      </p>
-      <a
-        href="/"
-        class="inline-flex items-center gap-3 mt-8 font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] hover:text-[#0A0A0A] transition-colors"
-      >
-        <span>← Volver al inicio</span>
-      </a>
-    </div>
-  </section>
+  {/* Hero Section */}
+  <PageHero {...HERO_CONTENT} />
+
+  {/* Fleet Section - La Flota */}
+  <FleetSection />
+
+  {/* Routes Section - Rutas Disponibles */}
+  <RoutesSection />
+
+  {/* Equipment Section - Equipamiento */}
+  <EquipmentSection />
+
+  {/* How It Works Section - Proceso */}
+  <HowItWorksSection />
+
+  {/* CTA Banner - Llamada a la acción final */}
+  <CTABanner />
 </Layout>

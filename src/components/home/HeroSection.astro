@@ -370,34 +370,12 @@
       "-=0.2"
     );
 
-    // Subtle parallax on scroll - only on desktop (no mobile to avoid jump issues)
+    // Video scale on scroll - desktop only
     const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
     
     if (!isMobile) {
-      gsap.to(".hero-title-main, .hero-title-shadow", {
-        y: -40,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1
-        }
-      });
-      
-      gsap.to(".hero-tagline, .hero-cta, .hero-stats", {
-        y: -25,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1
-        }
-      });
-      
       gsap.to(".hero-video-scale", {
-        scale: 1.12,
+        scale: 1.1,
         ease: "none",
         scrollTrigger: {
           trigger: "#hero-section",

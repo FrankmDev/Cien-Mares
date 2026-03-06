@@ -1,0 +1,220 @@
+---
+/**
+ * HowItWorksSection — ¿Cómo funciona?
+ * Timeline horizontal con cards premium
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const STEPS = [
+  {
+    number: '01',
+    title: 'Elige',
+    subtitle: 'Embarcación y destino',
+    description: 'Selecciona entre velero, lancha o yate. Consulta nuestras rutas y decide cuál se adapta mejor a tu grupo.',
+    icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+  },
+  {
+    number: '02',
+    title: 'Contacta',
+    subtitle: 'Con Manuel',
+    description: 'Habla directamente con nuestro patrón para confirmar disponibilidad y resolver cualquier duda sobre la salida.',
+    icon: 'M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z',
+  },
+  {
+    number: '03',
+    title: 'Confirma',
+    subtitle: 'Tu reserva',
+    description: 'Realiza el pago de la señal y recibe toda la información necesaria: punto de encuentro, hora y qué llevar.',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    number: '04',
+    title: '¡A navegar!',
+    subtitle: 'Disfruta el mar',
+    description: 'Llega al puerto y sube a bordo. Manuel se encarga de todo. Tú solo preocúpate de disfrutar la experiencia.',
+    icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+  },
+] as const;
+---
+
+<section class="relative bg-[#FAFAFA] py-28 lg:py-36 overflow-hidden" id="how-it-works" data-theme="light">
+  {/* Background */}
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, #0A0A0A 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#0A0A0A]/10 to-transparent"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Proceso" variant="dark" />
+      </div>
+      <SectionTitle firstLine="¿Cómo" secondLine="funciona?" />
+      <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60 leading-relaxed mt-6">
+        En cuatro pasos simples estarás navegando por la costa gaditana.
+      </p>
+    </div>
+
+    {/* Timeline Steps - Horizontal on Desktop */}
+    <div class="relative">
+      {/* Connection Line */}
+      <div class="hidden lg:block absolute top-[60px] left-[100px] right-[100px] h-[2px]">
+        <div class="absolute inset-0 bg-[#0A0A0A]/10 rounded-full"></div>
+        <div class="timeline-progress absolute inset-0 bg-gradient-to-r from-[#CFA35A] to-[#e8cb8e] rounded-full origin-left scale-x-0"></div>
+      </div>
+
+      {/* Steps Grid */}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        {STEPS.map((step, i) => (
+          <div class="step-item group relative" data-step-index={i}>
+            {/* Card */}
+            <div class="relative flex flex-col items-center text-center">
+              {/* Icon Circle */}
+              <div class="relative mb-8">
+                {/* Glow effect */}
+                <div class="absolute inset-0 rounded-full bg-[#CFA35A]/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150"></div>
+                
+                {/* Main circle */}
+                <div class="relative w-[120px] h-[120px] rounded-full bg-white shadow-lg border-2 border-[#0A0A0A]/5 flex items-center justify-center group-hover:border-[#CFA35A]/50 group-hover:shadow-[0_0_40px_rgba(207,163,90,0.2)] transition-all duration-500">
+                  {/* Icon background on hover */}
+                  <div class="absolute inset-0 rounded-full bg-gradient-to-br from-[#CFA35A] to-[#e8cb8e] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Icon */}
+                  <svg 
+                    class="relative z-10 w-10 h-10 text-[#CFA35A] group-hover:text-white transition-colors duration-500" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    stroke-width="1.5"
+                  >
+                    <path d={step.icon} />
+                  </svg>
+                </div>
+                
+                {/* Step number */}
+                <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#CFA35A] flex items-center justify-center shadow-lg">
+                  <span class="font-display font-bold text-sm text-[#02060a]">{step.number}</span>
+                </div>
+
+                {/* Node on line - Desktop */}
+                <div class="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[60px]">
+                  <div class="step-node w-4 h-4 rounded-full bg-white border-2 border-[#0A0A0A]/20 shadow-sm transition-all duration-300 group-hover:border-[#CFA35A] group-hover:bg-[#CFA35A] group-hover:scale-125"></div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div class="space-y-2 px-2">
+                <h3 class="font-display font-black text-2xl uppercase tracking-tight text-[#0A0A0A] group-hover:text-[#CFA35A] transition-colors duration-300">
+                  {step.title}
+                </h3>
+                <span class="block font-mono text-[0.7rem] uppercase tracking-[0.2em] text-[#CFA35A]">
+                  {step.subtitle}
+                </span>
+                <p class="text-[#0A0A0A]/60 text-sm leading-relaxed pt-2 max-w-[280px] mx-auto">
+                  {step.description}
+                </p>
+              </div>
+
+              {/* Arrow - Mobile only */}
+              {i < STEPS.length - 1 && (
+                <div class="md:hidden mt-6">
+                  <svg class="w-5 h-5 text-[#CFA35A]/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* CTA Box */}
+    <div class="mt-20 lg:mt-24">
+      <div class="relative bg-[#0A0A0A] rounded-3xl p-8 lg:p-12 overflow-hidden">
+        {/* Background glow */}
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-[#CFA35A]/10 rounded-full blur-[100px]"></div>
+        
+        <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#CFA35A]/10 border border-[#CFA35A]/20 mb-4">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CFA35A] opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#CFA35A]"></span>
+              </span>
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#CFA35A]">Respuesta en 24h</span>
+            </div>
+            <h3 class="font-display font-black text-2xl lg:text-3xl uppercase text-white mb-2">
+              ¿Tienes alguna <span class="text-[#CFA35A]">duda?</span>
+            </h3>
+            <p class="text-white/50 text-sm lg:text-base">
+              Manuel te atiende directamente por teléfono o WhatsApp
+            </p>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="tel:+34605183785" class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-wider hover:bg-white transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+              <span>Llamar</span>
+            </a>
+            
+            <a href="https://wa.me/34605183785" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 text-white rounded-full font-display font-bold text-sm uppercase tracking-wider hover:bg-white/10 hover:border-[#CFA35A] transition-all duration-300">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { cleanupScrollTriggers } from "../../lib/animations";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const triggers = [];
+
+  document.addEventListener("astro:page-load", () => {
+    // Steps animation
+    gsap.fromTo(".step-item", 
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#how-it-works",
+          start: "top 75%",
+        },
+      }
+    );
+
+    // Progress line
+    gsap.to(".timeline-progress", {
+      scaleX: 1,
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#how-it-works",
+        start: "top 70%",
+      },
+    });
+
+    triggers.push("#how-it-works");
+  });
+
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScrollTriggers(triggers);
+  });
+</script>
