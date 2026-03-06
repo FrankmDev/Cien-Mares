@@ -60,7 +60,7 @@ const IMAGES = {
           <div class="mb-6">
             <SectionLabel label="Sobre Nosotros" variant="dark" />
           </div>
-          <SectionTitle firstLine="15 años" highlight="navegando" />
+          <SectionTitle firstLine="Una década" secondLine="navegando juntos" />
         </div>
         <div class="lg:w-[40%] lg:pb-4">
           <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60 leading-relaxed mb-6">
@@ -146,7 +146,7 @@ const IMAGES = {
     </div>
 
     <!-- Features Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="story-cards-container">
       {
         FEATURES.map((item, i) => (
           <div
@@ -154,7 +154,13 @@ const IMAGES = {
               "story-card group relative overflow-hidden rounded-3xl bg-white border border-[#0A0A0A]/5 hover:border-[#CFA35A]/40 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(207,163,90,0.25)]",
               i === 1 && "md:translate-y-8",
             ]}
+            data-card-index={i}
           >
+            {/* Animated border gradient */}
+            <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+              <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#CFA35A]/20 via-transparent to-[#CFA35A]/20"></div>
+            </div>
+
             {/* Top accent bar */}
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] to-[#CFA35A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left">
             </div>
@@ -165,14 +171,14 @@ const IMAGES = {
             </span>
 
             <div class="relative p-8">
-              {/* Icon */}
+              {/* Icon with enhanced animation */}
               <div class="relative w-14 h-14 mb-6 group/icon">
-                <div class="absolute inset-0 rounded-2xl bg-[#0A0A0A] group-hover:bg-[#CFA35A] transition-all duration-300 transform group-hover:rotate-3">
+                <div class="absolute inset-0 rounded-2xl bg-[#0A0A0A] group-hover:bg-[#CFA35A] transition-all duration-300 transform group-hover:rotate-6 group-hover:scale-105">
                 </div>
-                <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#CFA35A]/50 transition-all duration-300 transform group-hover:scale-110">
+                <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#CFA35A]/50 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
                 </div>
                 <svg
-                  class="relative w-full h-full p-3.5 text-[#CFA35A] group-hover:text-white transition-colors duration-300"
+                  class="relative w-full h-full p-3.5 text-[#CFA35A] group-hover:text-white transition-colors duration-300 transform group-hover:scale-110"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -189,7 +195,7 @@ const IMAGES = {
 
               {/* Link */}
               <div class="flex items-center gap-2 text-[#0A0A0A]/30 group-hover:text-[#CFA35A] transition-all duration-300">
-                <span class="w-8 h-[1px] bg-current transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                <span class="w-8 h-[1px] bg-current transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100">
                 </span>
                 <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] font-bold">Descubrir</span>
                 <svg
@@ -206,6 +212,11 @@ const IMAGES = {
 
             {/* Hover glow */}
             <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-[#CFA35A]/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            </div>
+
+            {/* Corner accent */}
+            <div class="absolute top-0 right-0 w-20 h-20 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div class="absolute top-0 right-0 w-[141%] h-[1px] bg-gradient-to-l from-[#CFA35A]/40 to-transparent transform rotate-45 translate-y-[40px] -translate-x-[20px]"></div>
             </div>
           </div>
         ))
@@ -255,10 +266,11 @@ const IMAGES = {
     // Images animation
     gsap.fromTo(
       ".story-image-main",
-      { x: -50, opacity: 0 },
+      { x: -50, opacity: 0, scale: 0.95 },
       {
         x: 0,
         opacity: 1,
+        scale: 1,
         duration: 1.2,
         ease: "power3.out",
         scrollTrigger: {
@@ -270,10 +282,11 @@ const IMAGES = {
 
     gsap.fromTo(
       ".story-image-secondary, .story-image-tertiary",
-      { y: 40, opacity: 0 },
+      { y: 40, opacity: 0, scale: 0.95 },
       {
         y: 0,
         opacity: 1,
+        scale: 1,
         duration: 1,
         stagger: 0.2,
         ease: "power3.out",
@@ -284,24 +297,51 @@ const IMAGES = {
       }
     );
 
-    // Cards animation
+    // Cards animation - Aparecen junto con la sección
+    const cards = gsap.utils.toArray(".story-card");
+    cards.forEach((card, i) => {
+      gsap.fromTo(
+        card as Element,
+        { 
+          y: 60, 
+          opacity: 0, 
+          rotateX: 10,
+          scale: 0.95
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          scale: 1,
+          duration: 0.8,
+          delay: 0.3 + (i * 0.1), // Secuencia rápida después del header
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#story-section",
+            start: "top 80%", // Mismo trigger que el header
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    // CTA animation
     gsap.fromTo(
-      ".story-card",
-      { y: 60, opacity: 0 },
+      ".story-cta",
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
         duration: 0.8,
-        stagger: 0.15,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: ".story-card",
-          start: "top 85%",
+          trigger: ".story-cta",
+          start: "top 90%",
         },
       }
     );
 
-    triggers.push("#story-section", ".story-image-main", ".story-image-secondary", ".story-card");
+    triggers.push("#story-section", ".story-image-main", ".story-image-secondary", "#story-cards-container", ".story-cta");
   });
 
   document.addEventListener("astro:before-swap", () => {

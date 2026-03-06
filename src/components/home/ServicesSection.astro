@@ -2,8 +2,6 @@
 /**
  * ServicesSection — Responsive Horizontal Scroll Gallery
  * Cinematic service showcase with immersive transitions
- * Desktop: Horizontal scroll with GSAP
- * Mobile/Tablet: Touch carousel with snap points
  */
 
 const services = [
@@ -55,36 +53,25 @@ const services = [
   id="services-wrapper"
   data-theme="dark"
 >
-  {/* Section Header */}
-  <div class="pt-16 pb-8 px-6 lg:px-16">
-    <div class="flex items-center justify-between max-w-[1600px] mx-auto">
+  {/* DESKTOP: Horizontal Scroll con GSAP */}
+  <div class="hidden lg:block relative" id="services-desktop">
+    {/* Section Header */}
+    <div class="absolute top-8 left-8 lg:left-16 z-40">
       <div class="flex items-center gap-3">
         <span class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-[#CFA35A] font-bold">04</span>
         <div class="w-10 h-[1px] bg-[#CFA35A]"></div>
         <span class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-white/50">Servicios</span>
       </div>
-      
-      {/* Desktop Navigation Arrows */}
-      <div class="hidden lg:flex items-center gap-3">
-        <button id="srv-prev" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors disabled:opacity-30">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button id="srv-next" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors disabled:opacity-30">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
     </div>
-  </div>
 
-  {/* DESKTOP: Horizontal Scroll con GSAP */}
-  <div class="hidden lg:block relative" id="services-desktop">
+    {/* Pinned Container */}
     <div class="h-screen w-full flex overflow-hidden" id="services-pinned">
       {/* Horizontal Track */}
       <div class="flex flex-nowrap h-full w-[400vw] will-change-transform" id="services-track">
         {services.map((service, i) => (
           <div class="w-[100vw] h-screen shrink-0 relative flex items-center overflow-hidden service-panel">
-            {/* Background Image */}
-            <div class="absolute inset-0 w-[120%] h-full -left-[10%]" data-srv-bg>
+            {/* Background Image - Full Coverage */}
+            <div class="absolute inset-0 w-full h-full" data-srv-bg>
               <img 
                 src={service.image} 
                 alt={service.title}
@@ -92,45 +79,45 @@ const services = [
                 style="filter: grayscale(40%) brightness(0.5);"
                 loading={i === 0 ? "eager" : "lazy"}
               />
-              <div class="absolute inset-0 bg-gradient-to-r from-[#02060a] via-[#02060a]/80 to-transparent" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#02060a] via-transparent to-[#02060a]/50" />
+              <div class="absolute inset-0 bg-gradient-to-r from-[#02060a] via-[#02060a]/70 to-transparent" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#02060a] via-transparent to-[#02060a]/30" />
             </div>
 
             {/* Large Background Number */}
-            <div class="absolute right-[5%] top-1/2 -translate-y-1/2 font-display font-black text-[35vh] leading-none text-white/[0.03] select-none pointer-events-none">
+            <div class="absolute right-[5%] top-1/2 -translate-y-1/2 font-display font-black text-[30vh] leading-none text-white/[0.03] select-none pointer-events-none">
               {service.number}
             </div>
 
             {/* Content */}
-            <div class="relative z-10 w-full px-16 py-16 flex flex-col justify-center h-full max-w-[1600px] mx-auto" data-srv-content>
-              <div class="grid grid-cols-2 gap-12 items-center">
+            <div class="relative z-10 w-full px-8 lg:px-16 xl:px-24 flex flex-col justify-center h-full max-w-[1600px] mx-auto">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                 
                 {/* Left Content */}
-                <div class="space-y-8">
+                <div class="space-y-6 lg:space-y-8">
                   <div class="flex items-center gap-4">
-                    <span class="font-display font-black text-6xl lg:text-8xl text-[#CFA35A]/20">{service.number}</span>
+                    <span class="font-display font-black text-5xl lg:text-7xl xl:text-8xl text-[#CFA35A]/20">{service.number}</span>
                     <div class="h-[1px] w-12 bg-[#CFA35A]/40"></div>
                   </div>
 
                   <div>
-                    <span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-[#CFA35A] block mb-3">
+                    <span class="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-[#CFA35A] block mb-2 lg:mb-3">
                       {service.subtitle}
                     </span>
-                    <h3 class="font-display font-black text-[clamp(3rem,8vw,6rem)] uppercase leading-[0.8] tracking-tighter">
+                    <h3 class="font-display font-black text-5xl md:text-6xl lg:text-7xl xl:text-[6rem] uppercase leading-[0.85] tracking-tighter">
                       {service.title}
                     </h3>
                   </div>
 
-                  <p class="font-body text-lg text-white/70 max-w-md leading-relaxed">
+                  <p class="font-body text-base lg:text-lg text-white/70 max-w-md leading-relaxed">
                     {service.description}
                   </p>
 
-                  <div class="flex items-center gap-8 pt-4">
-                    <a href={service.link} class="group inline-flex items-center gap-4">
+                  <div class="flex items-center gap-6 lg:gap-8 pt-2 lg:pt-4">
+                    <a href={service.link} class="group inline-flex items-center gap-3 lg:gap-4">
                       <span class="font-display font-bold text-sm uppercase tracking-[0.15em] text-white group-hover:text-[#CFA35A] transition-colors">
                         Ver más
                       </span>
-                      <div class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-300">
+                      <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-300">
                         <svg class="w-4 h-4 -rotate-45 group-hover:rotate-0 text-white transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                           <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -138,23 +125,23 @@ const services = [
                     </a>
 
                     <div class="flex flex-col">
-                      <span class="font-display font-black text-2xl text-[#CFA35A]">{service.stat.value}</span>
+                      <span class="font-display font-black text-xl lg:text-2xl text-[#CFA35A]">{service.stat.value}</span>
                       <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-white/40">{service.stat.label}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Right Visual */}
-                <div class="flex justify-end items-center">
-                  <div class="relative w-80 h-80 xl:w-96 xl:h-96">
+                <div class="hidden lg:flex justify-end items-center">
+                  <div class="relative w-64 h-64 xl:w-80 xl:h-80">
                     <div class="absolute inset-0 rounded-full border border-white/10 animate-spin-slow" style="animation-duration: 30s;"></div>
-                    <div class="absolute inset-8 rounded-full border border-[#CFA35A]/20"></div>
-                    <div class="absolute inset-16 rounded-full border border-white/5"></div>
+                    <div class="absolute inset-6 xl:inset-8 rounded-full border border-[#CFA35A]/20"></div>
+                    <div class="absolute inset-12 xl:inset-16 rounded-full border border-white/5"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="font-display font-black text-7xl xl:text-8xl text-white/10">{service.number}</span>
+                      <span class="font-display font-black text-6xl xl:text-7xl text-white/10">{service.number}</span>
                     </div>
                     <div class="absolute inset-0 animate-orbit" style="animation-duration: 15s;">
-                      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#CFA35A] rounded-full shadow-[0_0_20px_rgba(207,163,90,0.5)]"></div>
+                      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 xl:w-4 xl:h-4 bg-[#CFA35A] rounded-full shadow-[0_0_20px_rgba(207,163,90,0.5)]"></div>
                     </div>
                   </div>
                 </div>
@@ -165,7 +152,7 @@ const services = [
       </div>
 
       {/* Progress Dots - Desktop */}
-      <div class="absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3">
+      <div class="absolute right-6 lg:right-12 xl:right-16 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3">
         {services.map((_, i) => (
           <div class="service-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-500" data-index={i}></div>
         ))}
@@ -173,25 +160,34 @@ const services = [
     </div>
 
     {/* Bottom Progress Bar */}
-    <div class="absolute bottom-8 left-16 right-16 h-[2px] bg-white/10 z-40 rounded-full">
+    <div class="absolute bottom-6 lg:bottom-8 left-8 lg:left-16 right-8 lg:right-16 h-[2px] bg-white/10 z-40 rounded-full">
       <div class="h-full bg-[#CFA35A] w-0 rounded-full shadow-[0_0_10px_rgba(207,163,90,0.5)] transition-all duration-300" id="services-progress"></div>
     </div>
   </div>
 
   {/* MOBILE/TABLET: Touch Carousel */}
-  <div class="lg:hidden relative" id="services-mobile">
+  <div class="lg:hidden relative pt-20 pb-8" id="services-mobile">
+    {/* Section Header - Mobile */}
+    <div class="px-6 mb-6">
+      <div class="flex items-center gap-3">
+        <span class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-[#CFA35A] font-bold">04</span>
+        <div class="w-10 h-[1px] bg-[#CFA35A]"></div>
+        <span class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-white/50">Servicios</span>
+      </div>
+    </div>
+
     {/* Carousel Container */}
     <div 
-      class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8"
+      class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-6"
       id="mobile-carousel"
       style="-webkit-overflow-scrolling: touch; scroll-behavior: smooth;"
     >
       {services.map((service, i) => (
         <div 
-          class="w-[85vw] md:w-[70vw] shrink-0 snap-center snap-always px-3 first:pl-6 last:pr-6"
+          class="w-[85vw] md:w-[60vw] shrink-0 snap-center snap-always px-3 first:pl-6 last:pr-6"
           data-service-index={i}
         >
-          <div class="relative h-[70vh] md:h-[75vh] rounded-3xl overflow-hidden group">
+          <div class="relative h-[82vh] md:aspect-[4/5] rounded-2xl overflow-hidden group">
             {/* Background Image */}
             <div class="absolute inset-0">
               <img 
@@ -201,47 +197,46 @@ const services = [
                 style="filter: grayscale(30%) brightness(0.6);"
                 loading={i === 0 ? "eager" : "lazy"}
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#02060a] via-[#02060a]/60 to-transparent" />
-              <div class="absolute inset-0 bg-gradient-to-r from-[#02060a]/50 to-transparent" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#02060a] via-[#02060a]/70 to-transparent" />
             </div>
 
             {/* Content */}
-            <div class="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+            <div class="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
               {/* Number Badge */}
-              <div class="absolute top-6 right-6 w-12 h-12 rounded-full border border-[#CFA35A]/30 flex items-center justify-center bg-[#02060a]/50 backdrop-blur">
-                <span class="font-display font-bold text-[#CFA35A]">{service.number}</span>
+              <div class="absolute top-4 right-4 w-10 h-10 rounded-full border border-[#CFA35A]/30 flex items-center justify-center bg-[#02060a]/50 backdrop-blur">
+                <span class="font-display font-bold text-sm text-[#CFA35A]">{service.number}</span>
               </div>
 
               {/* Subtitle */}
-              <span class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[#CFA35A] mb-2">
+              <span class="font-mono text-[0.55rem] uppercase tracking-[0.25em] text-[#CFA35A] mb-1">
                 {service.subtitle}
               </span>
 
               {/* Title */}
-              <h3 class="font-display font-black text-4xl md:text-5xl uppercase leading-[0.85] tracking-tighter mb-4">
+              <h3 class="font-display font-black text-3xl md:text-4xl uppercase leading-[0.9] tracking-tighter mb-3">
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p class="text-white/70 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+              <p class="text-white/70 text-sm leading-relaxed mb-4 line-clamp-2">
                 {service.description}
               </p>
 
               {/* Footer */}
               <div class="flex items-center justify-between">
-                <a href={service.link} class="inline-flex items-center gap-3 group/btn">
+                <a href={service.link} class="inline-flex items-center gap-2 group/btn">
                   <span class="font-display font-bold text-xs uppercase tracking-[0.15em] text-white">
                     Ver más
                   </span>
-                  <div class="w-10 h-10 rounded-full bg-[#CFA35A] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
-                    <svg class="w-4 h-4 text-[#02060a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <div class="w-8 h-8 rounded-full bg-[#CFA35A] flex items-center justify-center group-hover/btn:scale-110 transition-transform">
+                    <svg class="w-3.5 h-3.5 text-[#02060a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </div>
                 </a>
 
                 <div class="text-right">
-                  <span class="font-display font-black text-xl text-[#CFA35A]">{service.stat.value}</span>
+                  <span class="font-display font-black text-lg text-[#CFA35A]">{service.stat.value}</span>
                   <span class="font-mono text-[0.5rem] uppercase tracking-[0.15em] text-white/40 block">{service.stat.label}</span>
                 </div>
               </div>
@@ -252,7 +247,7 @@ const services = [
     </div>
 
     {/* Mobile Indicators */}
-    <div class="flex justify-center gap-2 pb-8">
+    <div class="flex justify-center gap-2 pt-2">
       {services.map((_, i) => (
         <button 
           class="mobile-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-300"
@@ -260,11 +255,6 @@ const services = [
           aria-label={`Ir al servicio ${i + 1}`}
         ></button>
       ))}
-    </div>
-
-    {/* Mobile Progress Bar */}
-    <div class="mx-6 md:mx-12 h-[2px] bg-white/10 rounded-full mb-8">
-      <div class="h-full bg-[#CFA35A] rounded-full shadow-[0_0_10px_rgba(207,163,90,0.5)] transition-all duration-300" id="mobile-progress" style="width: 25%;"></div>
     </div>
   </div>
 </section>
@@ -300,7 +290,6 @@ const services = [
     box-shadow: 0 0 10px rgba(207, 163, 90, 0.5);
   }
 
-  /* Hide scrollbar for mobile carousel */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -309,7 +298,6 @@ const services = [
     display: none;
   }
 
-  /* Snap points for smooth scrolling */
   #mobile-carousel {
     scroll-snap-type: x mandatory;
   }
@@ -325,85 +313,32 @@ const services = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Check if desktop
-  const isDesktop = window.innerWidth >= 1024;
-
-  document.addEventListener('astro:page-load', () => {
-    if (window.innerWidth >= 1024) {
-      // DESKTOP: GSAP Horizontal Scroll
-      initDesktopCarousel();
-    } else {
-      // MOBILE: Touch Carousel
-      initMobileCarousel();
-    }
-  });
-
-  function initDesktopCarousel() {
+  function initDesktop() {
     const track = document.getElementById('services-track');
     const wrapper = document.getElementById('services-wrapper');
     const dots = document.querySelectorAll('.service-dot');
     const progressBar = document.getElementById('services-progress');
-    const prevBtn = document.getElementById('srv-prev');
-    const nextBtn = document.getElementById('srv-next');
     
     if (!track || !wrapper) return;
-
-    let currentIndex = 0;
-    const totalServices = 4;
-
-    // Navigation buttons
-    prevBtn?.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
-      }
-    });
-
-    nextBtn?.addEventListener('click', () => {
-      if (currentIndex < totalServices - 1) {
-        currentIndex++;
-        updateCarousel();
-      }
-    });
-
-    function updateCarousel() {
-      const progress = currentIndex / (totalServices - 1);
-      gsap.to(track, {
-        x: () => -(currentIndex * window.innerWidth) + 'px',
-        duration: 1,
-        ease: 'power3.out'
-      });
-      
-      if (progressBar) {
-        progressBar.style.width = `${(progress * 100)}%`;
-      }
-      
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
-
-      // Update buttons state
-      if (prevBtn) prevBtn.disabled = currentIndex === 0;
-      if (nextBtn) nextBtn.disabled = currentIndex === totalServices - 1;
-    }
 
     // Initialize first dot
     dots[0]?.classList.add('active');
 
-    // GSAP ScrollTrigger horizontal scroll
+    // Create GSAP timeline with ScrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: { 
         trigger: wrapper, 
         start: 'top top', 
         end: '+=400%', 
         pin: '#services-pinned', 
-        scrub: 1.5,
+        scrub: 1,
+        anticipatePin: 1,
         onUpdate: (self) => {
           const progress = self.progress;
-          currentIndex = Math.min(Math.floor(progress * totalServices), totalServices - 1);
+          const activeIndex = Math.min(Math.floor(progress * 4), 3);
           
           dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
+            dot.classList.toggle('active', i === activeIndex);
           });
           
           if (progressBar) {
@@ -414,19 +349,19 @@ const services = [
     });
     
     tl.to(track, { 
-      x: () => -(track.scrollWidth - window.innerWidth) + 'px', 
+      x: () => -(track.scrollWidth - window.innerWidth), 
       ease: 'none' 
     });
 
     // Parallax on background images
     const panels = gsap.utils.toArray('.service-panel');
     panels.forEach((panel) => {
-      const bg = panel.querySelector('[data-srv-bg]');
+      const bg = panel.querySelector('[data-srv-bg');
       if (bg) {
         gsap.fromTo(bg, 
-          { xPercent: -5 }, 
+          { xPercent: -3 }, 
           { 
-            xPercent: 5, 
+            xPercent: 3, 
             ease: 'none', 
             scrollTrigger: { 
               trigger: wrapper, 
@@ -440,17 +375,14 @@ const services = [
     });
   }
 
-  function initMobileCarousel() {
+  function initMobile() {
     const carousel = document.getElementById('mobile-carousel');
     const dots = document.querySelectorAll('.mobile-dot');
-    const progressBar = document.getElementById('mobile-progress');
     
     if (!carousel) return;
 
-    // Initialize first dot
     dots[0]?.classList.add('active');
 
-    // Intersection Observer for tracking active slide
     const observerOptions = {
       root: carousel,
       threshold: 0.5
@@ -460,27 +392,17 @@ const services = [
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const index = parseInt(entry.target.getAttribute('data-service-index') || '0');
-          
-          // Update dots
           dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
           });
-          
-          // Update progress bar
-          if (progressBar) {
-            const progress = ((index + 1) / 4) * 100;
-            progressBar.style.width = `${progress}%`;
-          }
         }
       });
     }, observerOptions);
 
-    // Observe each slide
     carousel.querySelectorAll('[data-service-index]').forEach(slide => {
       observer.observe(slide);
     });
 
-    // Click on dots to navigate
     dots.forEach((dot, i) => {
       dot.addEventListener('click', () => {
         const slide = carousel.querySelector(`[data-service-index="${i}"]`);
@@ -489,29 +411,16 @@ const services = [
         }
       });
     });
-
-    // Touch swipe support
-    let startX = 0;
-    let scrollLeft = 0;
-    let isDown = false;
-
-    carousel.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - carousel.offsetLeft;
-      scrollLeft = carousel.scrollLeft;
-    });
-
-    carousel.addEventListener('mouseleave', () => isDown = false);
-    carousel.addEventListener('mouseup', () => isDown = false);
-
-    carousel.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 2;
-      carousel.scrollLeft = scrollLeft - walk;
-    });
   }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', () => {
+    if (window.innerWidth >= 1024) {
+      initDesktop();
+    } else {
+      initMobile();
+    }
+  });
 
   // Cleanup on page transition
   document.addEventListener('astro:before-swap', () => {

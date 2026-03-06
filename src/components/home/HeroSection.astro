@@ -82,23 +82,17 @@
       <!-- Main Title with 3D layered effect -->
       <div class="hero-title-container relative mb-8 lg:mb-10">
         <!-- Shadow layer for depth -->
-        <div class="hero-title-shadow absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-0">
-          <span class="font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text" 
+        <div class="hero-title-shadow absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
+          <span class="font-display font-black text-[clamp(3.5rem,16vw,14rem)] leading-[0.85] tracking-tighter uppercase text-transparent bg-clip-text whitespace-nowrap" 
                 style="-webkit-text-stroke: 2px rgba(207,163,90,0.15); transform: translateY(8px);">
-            CIEN
-          </span>
-          <span class="font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text"
-                style="-webkit-text-stroke: 2px rgba(207,163,90,0.15); transform: translateY(8px);">
-            MARES
+            CIEN MARES
           </span>
         </div>
         
         <!-- Main title -->
         <h1 class="hero-title-main opacity-0 relative">
-          <span class="block font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase text-white drop-shadow-2xl">
-            CIEN
-          </span>
-          <span class="block font-display font-black text-[clamp(3.5rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase">
+          <span class="font-display font-black text-[clamp(3.5rem,16vw,14rem)] leading-[0.85] tracking-tighter uppercase whitespace-nowrap">
+            <span class="text-white drop-shadow-2xl">CIEN</span>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CFA35A] via-[#e8cb8e] via-[#f5e6c8] via-[#e8cb8e] to-[#CFA35A] animate-gradient-shift">
               MARES
             </span>
@@ -365,9 +359,11 @@
       }
     });
 
-    // Mouse parallax for title
+    // Mouse parallax for title - only on devices with fine pointer (mouse)
     const heroSection = document.getElementById('hero-section');
-    if (heroSection && window.innerWidth > 1024) {
+    const hasMouse = window.matchMedia('(pointer: fine)').matches;
+    
+    if (heroSection && hasMouse && window.innerWidth > 1024) {
       heroSection.addEventListener('mousemove', (e) => {
         const { clientX, clientY } = e;
         const { innerWidth, innerHeight } = window;

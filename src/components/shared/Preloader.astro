@@ -1,19 +1,20 @@
 ---
 /**
  * Preloader — Modern Oceanic Experience
- * Clean cinematic loading with wave video and refined animations
+ * Solo aparece una vez por sesión
  */
 ---
 
 <div
   id="global-preloader-v2"
-  class="fixed inset-0 z-[99999] bg-[#02060a] flex flex-col items-center justify-center overflow-hidden"
+  class="fixed inset-0 z-[99999] bg-[#02060a]"
+  style="display: none; opacity: 0; pointer-events: none;"
 >
   <!-- Video Background -->
   <div class="absolute inset-0 z-0 overflow-hidden">
     <video
       id="wave-video"
-      class="absolute inset-0 w-full h-full object-cover scale-110"
+      class="absolute inset-0 w-full h-full object-cover"
       autoplay
       muted
       loop
@@ -26,208 +27,299 @@
       />
     </video>
     
-    <!-- Ocean Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-[#02060a]/60 via-[#0a1628]/40 to-[#02060a]/80 z-[1]"></div>
-    
-    <!-- Vignette -->
-    <div class="absolute inset-0 z-[2]" style="background: radial-gradient(ellipse at center, transparent 0%, #02060a 90%);"></div>
+    <!-- Gradient Overlays -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#02060a]/80 via-[#0a1628]/40 to-[#02060a]/95 z-[1]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#02060a_80%)] z-[2]"></div>
   </div>
 
-  <!-- Animated Waves SVG -->
-  <div class="absolute bottom-0 left-0 right-0 z-[3] pointer-events-none">
-    <svg class="absolute bottom-0 w-full h-[150px] lg:h-[250px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+  <!-- Animated Waves Bottom -->
+  <div class="absolute bottom-0 left-0 right-0 z-[3] pointer-events-none h-[180px] overflow-hidden">
+    <svg class="absolute bottom-0 w-[200%] h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
       <defs>
-        <path id="wave-shape" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"/>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgba(207,163,90,0);stop-opacity:0" />
+          <stop offset="50%" style="stop-color:rgba(207,163,90,0.2);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgba(207,163,90,0);stop-opacity:0" />
+        </linearGradient>
       </defs>
-      <g class="wave-parallax">
-        <use href="#wave-shape" x="48" y="0" fill="rgba(207, 163, 90, 0.05)" />
-        <use href="#wave-shape" x="48" y="3" fill="rgba(207, 163, 90, 0.08)" />
-        <use href="#wave-shape" x="48" y="5" fill="rgba(207, 163, 90, 0.1)" />
-      </g>
+      <path class="wave-path-1" d="M0,60 C150,90 350,30 600,60 C850,90 1050,30 1200,60 L1200,120 L0,120 Z" fill="url(#waveGradient)" opacity="0.7"/>
+      <path class="wave-path-2" d="M0,80 C200,50 400,100 600,80 C800,60 1000,100 1200,80 L1200,120 L0,120 Z" fill="url(#waveGradient)" opacity="0.5"/>
+      <path class="wave-path-3" d="M0,100 C180,70 420,110 600,100 C780,90 1020,110 1200,100 L1200,120 L0,120 Z" fill="rgba(207,163,90,0.15)" opacity="0.4"/>
     </svg>
   </div>
 
   <!-- Floating Particles -->
-  <div class="absolute inset-0 z-[4] pointer-events-none overflow-hidden">
-    <div class="particle p-1"></div>
-    <div class="particle p-2"></div>
-    <div class="particle p-3"></div>
-    <div class="particle p-4"></div>
-    <div class="particle p-5"></div>
-  </div>
+  <div class="absolute inset-0 z-[4] pointer-events-none overflow-hidden" id="particles-container"></div>
 
-  <!-- Noise Texture -->
+  <!-- Noise Texture Overlay -->
   <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none z-[5]"
-    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E');"
+    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 400 400%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E');"
   ></div>
 
-  <!-- Main Content -->
-  <div class="relative z-20 flex flex-col items-center w-full max-w-7xl px-4">
+  <!-- Main Content Container -->
+  <div class="relative z-20 flex flex-col items-center justify-center min-h-screen px-6">
     
-    <!-- Logo Mark -->
-    <div class="mb-10 opacity-0 preloader-mark">
-      <svg width="56" height="56" viewBox="0 0 48 48" fill="none" class="text-[#CFA35A]">
-        <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" class="animate-pulse-slow"/>
-        <path d="M24 8v32M8 24h32" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="24" cy="24" r="8" fill="currentColor" opacity="0.8"/>
-      </svg>
-    </div>
-
-    <!-- Title -->
-    <div class="overflow-hidden mb-4">
-      <h1 class="preloader-title font-display font-black text-[clamp(3rem,15vw,12rem)] leading-[0.8] tracking-tighter uppercase text-white flex items-center justify-center whitespace-nowrap">
-        <span class="inline-block translate-y-[120%] preloader-char">C</span>
-        <span class="inline-block translate-y-[120%] preloader-char">I</span>
-        <span class="inline-block translate-y-[120%] preloader-char">E</span>
-        <span class="inline-block translate-y-[120%] preloader-char">N</span>
-        <span class="w-[3vw] md:w-[4vw]"></span>
-        <span class="inline-block translate-y-[120%] preloader-char">M</span>
-        <span class="inline-block translate-y-[120%] preloader-char">A</span>
-        <span class="inline-block translate-y-[120%] preloader-char">R</span>
-        <span class="inline-block translate-y-[120%] preloader-char">E</span>
-        <span class="inline-block translate-y-[120%] preloader-char">S</span>
-      </h1>
-    </div>
-
-    <!-- Tagline -->
-    <div class="overflow-hidden mb-12">
-      <p class="preloader-subtitle font-mono text-[0.65rem] md:text-xs uppercase tracking-[0.5em] text-[#CFA35A]/80 translate-y-[100%]">
-        Experiencias Náuticas Premium
-      </p>
-    </div>
-
-    <!-- Decorative Line -->
-    <div class="w-0 h-[1px] bg-gradient-to-r from-transparent via-[#CFA35A]/60 to-transparent rounded-full preloader-line mb-10"></div>
-    
-    <!-- Progress -->
-    <div class="flex items-center gap-4 opacity-0 preloader-progress">
-      <span class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-white/40">Cargando</span>
-      <div class="w-20 h-[2px] bg-white/10 rounded-full overflow-hidden">
-        <div class="progress-bar h-full bg-[#CFA35A] w-0 rounded-full shadow-[0_0_10px_rgba(207,163,90,0.5)]"></div>
+    <!-- Central Content Card -->
+    <div class="relative flex flex-col items-center">
+      
+      <!-- Ambient Glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cm-accent/10 rounded-full blur-[120px] opacity-0 preloader-ambient"></div>
+      
+      <!-- Logo Container -->
+      <div class="relative mb-6 opacity-0 preloader-logo-container">
+        <!-- Outer glow rings -->
+        <div class="absolute inset-0 w-24 h-24 -m-4 rounded-full border border-cm-accent/20 animate-ping-slow"></div>
+        <div class="absolute inset-0 w-24 h-24 -m-4 rounded-full bg-cm-accent/5 blur-xl"></div>
+        
+        <div class="relative w-16 h-16">
+          <!-- Rotating outer ring -->
+          <svg class="absolute -inset-2 w-20 h-20 animate-spin-slow" viewBox="0 0 72 72" fill="none">
+            <circle cx="36" cy="36" r="34" stroke="#CFA35A" stroke-width="0.5" stroke-dasharray="8 4" opacity="0.4"/>
+          </svg>
+          
+          <!-- Counter-rotating middle ring -->
+          <svg class="absolute -inset-1 w-18 h-18 animate-spin-reverse" viewBox="0 0 72 72" fill="none">
+            <circle cx="36" cy="36" r="30" stroke="#CFA35A" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.3"/>
+          </svg>
+          
+          <!-- Main logo -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-14 h-14 drop-shadow-[0_0_15px_rgba(207,163,90,0.5)]" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="#CFA35A" stroke-width="1.5"/>
+              <path d="M24 8v32M8 24h32" stroke="#CFA35A" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="8" fill="#CFA35A"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <span class="progress-percent font-mono text-[0.6rem] text-[#CFA35A] w-8 text-right" id="progress-text">0%</span>
+
+      <!-- Brand Name with enhanced styling -->
+      <div class="overflow-hidden mb-2">
+        <h1 class="font-display font-black text-[clamp(2.5rem,11vw,7rem)] leading-[0.9] tracking-tighter uppercase text-white text-center drop-shadow-[0_0_30px_rgba(207,163,90,0.3)]">
+          <span class="inline-block translate-y-full preloader-char">C</span>
+          <span class="inline-block translate-y-full preloader-char">I</span>
+          <span class="inline-block translate-y-full preloader-char">E</span>
+          <span class="inline-block translate-y-full preloader-char">N</span>
+          <span class="inline-block w-[0.1em]"></span>
+          <span class="inline-block translate-y-full preloader-char">M</span>
+          <span class="inline-block translate-y-full preloader-char">A</span>
+          <span class="inline-block translate-y-full preloader-char">R</span>
+          <span class="inline-block translate-y-full preloader-char">E</span>
+          <span class="inline-block translate-y-full preloader-char">S</span>
+        </h1>
+      </div>
+
+      <!-- Decorative Diamond -->
+      <div class="w-2 h-2 rotate-45 bg-cm-accent/60 my-4 opacity-0 preloader-diamond shadow-[0_0_10px_rgba(207,163,90,0.8)]"></div>
+
+      <!-- Tagline -->
+      <div class="overflow-hidden mb-8">
+        <p class="font-mono text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.5em] text-cm-accent/80 translate-y-full preloader-subtitle">
+          Experiencias Náuticas Premium
+        </p>
+      </div>
+
+      <!-- Progress Section -->
+      <div class="flex flex-col items-center gap-4 opacity-0 preloader-progress">
+        <!-- Elegant Progress Bar -->
+        <div class="relative w-56 h-1 bg-white/5 rounded-full overflow-hidden">
+          <!-- Glow line behind -->
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-cm-accent/20 to-transparent animate-shimmer"></div>
+          <!-- Actual progress -->
+          <div class="progress-bar h-full bg-gradient-to-r from-cm-accent via-cm-accent-light to-cm-accent w-0 rounded-full shadow-[0_0_20px_rgba(207,163,90,0.8)]"></div>
+        </div>
+        
+        <!-- Progress Info -->
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-white/30">Cargando</span>
+          <div class="flex gap-1">
+            <span class="w-1 h-1 rounded-full bg-cm-accent animate-bounce-dot" style="animation-delay: 0s;"></span>
+            <span class="w-1 h-1 rounded-full bg-cm-accent animate-bounce-dot" style="animation-delay: 0.15s;"></span>
+            <span class="w-1 h-1 rounded-full bg-cm-accent animate-bounce-dot" style="animation-delay: 0.3s;"></span>
+          </div>
+          <span class="progress-percent font-mono text-[0.65rem] text-cm-accent font-bold min-w-[2rem] text-right" id="progress-text">0%</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Corner Accents -->
-  <div class="absolute top-8 left-8 w-16 h-16 border-l border-t border-white/10 z-20"></div>
-  <div class="absolute top-8 right-8 w-16 h-16 border-r border-t border-white/10 z-20"></div>
-  <div class="absolute bottom-8 left-8 w-16 h-16 border-l border-b border-white/10 z-20"></div>
-  <div class="absolute bottom-8 right-8 w-16 h-16 border-r border-b border-white/10 z-20"></div>
+  <!-- Corner Frame Decorations -->
+  <div class="absolute top-8 left-8 w-24 h-24 preloader-corner">
+    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cm-accent/40 to-transparent"></div>
+    <div class="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-cm-accent/40 to-transparent"></div>
+    <div class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-cm-accent"></div>
+  </div>
+  <div class="absolute top-8 right-8 w-24 h-24 preloader-corner">
+    <div class="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-cm-accent/40 to-transparent"></div>
+    <div class="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-b from-cm-accent/40 to-transparent"></div>
+    <div class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-cm-accent"></div>
+  </div>
+  <div class="absolute bottom-8 left-8 w-24 h-24 preloader-corner">
+    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-cm-accent/40 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-[2px] h-full bg-gradient-to-t from-cm-accent/40 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-cm-accent"></div>
+  </div>
+  <div class="absolute bottom-8 right-8 w-24 h-24 preloader-corner">
+    <div class="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-cm-accent/40 to-transparent"></div>
+    <div class="absolute bottom-0 right-0 w-[2px] h-full bg-gradient-to-t from-cm-accent/40 to-transparent"></div>
+    <div class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-cm-accent"></div>
+  </div>
 
-  <!-- Wave Transition Overlay -->
-  <div class="wave-transition absolute inset-0 z-[15] pointer-events-none" id="wave-transition">
-    <div class="wave-layer wave-layer-1"></div>
-    <div class="wave-layer wave-layer-2"></div>
-    <div class="wave-layer wave-layer-3"></div>
+  <!-- Year Badge -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[0.5rem] uppercase tracking-[0.4em] text-white/20 z-20 opacity-0 preloader-year">
+    Est. 2010 — Cádiz
+  </div>
+
+  <!-- Exit Curtain Transition -->
+  <div class="exit-curtain absolute inset-0 z-[15] pointer-events-none overflow-hidden">
+    <div class="exit-layer exit-top absolute top-0 left-0 right-0 h-0 bg-[#02060a]"></div>
+    <div class="exit-layer exit-bottom absolute bottom-0 left-0 right-0 h-0 bg-[#02060a]"></div>
   </div>
 </div>
 
 <style>
-  /* Wave Animation */
-  .wave-parallax use {
-    animation: wave-move 20s cubic-bezier(.55,.5,.45,.5) infinite;
+  /* Wave Animations */
+  @keyframes wave-flow-1 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes wave-flow-2 {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes wave-flow-3 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-30%); }
   }
   
-  .wave-parallax use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
-  .wave-parallax use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
-  .wave-parallax use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
-  
-  @keyframes wave-move {
-    0% { transform: translate3d(-90px, 0, 0); }
-    100% { transform: translate3d(85px, 0, 0); }
+  .wave-path-1 { animation: wave-flow-1 6s linear infinite; }
+  .wave-path-2 { animation: wave-flow-2 9s linear infinite; }
+  .wave-path-3 { animation: wave-flow-3 12s linear infinite; }
+
+  /* Spin Animations */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 15s linear infinite;
+  }
+  .animate-spin-reverse {
+    animation: spin-reverse 20s linear infinite;
   }
 
-  /* Particles */
-  .particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(207, 163, 90, 0.3);
-    border-radius: 50%;
-    animation: float 15s ease-in-out infinite;
+  /* Ping Animation */
+  @keyframes ping-slow {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { opacity: 0.2; }
+    100% { transform: scale(1.5); opacity: 0; }
   }
-  
-  .p-1 { left: 15%; top: 80%; animation-delay: 0s; }
-  .p-2 { left: 30%; top: 60%; animation-delay: -3s; }
-  .p-3 { left: 60%; top: 75%; animation-delay: -7s; }
-  .p-4 { left: 75%; top: 55%; animation-delay: -5s; }
-  .p-5 { left: 90%; top: 70%; animation-delay: -10s; }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.1; }
-    25% { transform: translateY(-30px) translateX(10px); opacity: 0.4; }
-    50% { transform: translateY(-60px) translateX(-5px); opacity: 0.2; }
-    75% { transform: translateY(-30px) translateX(15px); opacity: 0.3; }
+  .animate-ping-slow {
+    animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 
-  /* Pulse Animation */
-  .animate-pulse-slow {
-    animation: pulse-slow 3s ease-in-out infinite;
+  /* Shimmer Animation */
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
   }
-  
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
   }
 
-  /* Wave Transition Layers */
-  .wave-transition {
-    opacity: 0;
-    pointer-events: none;
+  /* Bounce Dots */
+  @keyframes bounce-dot {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-6px); opacity: 1; }
   }
-  
-  .wave-layer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 0;
-    background: #02060a;
-    transform-origin: bottom;
-  }
-  
-  .wave-layer-1 {
-    opacity: 0.9;
-    border-radius: 100% 100% 0 0 / 20px 20px 0 0;
-  }
-  
-  .wave-layer-2 {
-    opacity: 0.7;
-    border-radius: 100% 100% 0 0 / 40px 40px 0 0;
-  }
-  
-  .wave-layer-3 {
-    opacity: 1;
+  .animate-bounce-dot {
+    animation: bounce-dot 1s ease-in-out infinite;
   }
 
   /* Video zoom */
   #wave-video {
-    animation: subtle-zoom 25s ease-in-out infinite alternate;
+    animation: video-zoom 25s ease-in-out infinite alternate;
   }
-  
-  @keyframes subtle-zoom {
-    from { transform: scale(1.1); }
-    to { transform: scale(1.15); }
+  @keyframes video-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
   }
 </style>
 
 <script>
   import { gsap } from "gsap";
 
-  document.addEventListener("astro:page-load", () => {
+  // Generate floating particles
+  function createParticles() {
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    for (let i = 0; i < 15; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'absolute rounded-full';
+      const size = Math.random() * 2 + 1;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.background = Math.random() > 0.5 ? '#CFA35A' : '#ffffff';
+      particle.style.opacity = `${Math.random() * 0.3 + 0.1}`;
+      particle.style.animation = `float-${i} ${10 + Math.random() * 15}s ease-in-out infinite`;
+      particle.style.animationDelay = `${Math.random() * 3}s`;
+      container.appendChild(particle);
+      
+      // Add float keyframes
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes float-${i} {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * -50 - 30}px) scale(${0.8 + Math.random() * 0.4}); }
+          66% { transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * -80 - 50}px) scale(${0.8 + Math.random() * 0.4}); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+
+  function hidePreloader() {
+    const preloader = document.getElementById("global-preloader-v2");
+    if (preloader) {
+      preloader.style.display = "none";
+      preloader.style.opacity = "0";
+      preloader.style.pointerEvents = "none";
+    }
+    document.body.style.overflow = "";
+    document.dispatchEvent(new CustomEvent("preloader:complete"));
+  }
+
+  function runPreloader() {
     const preloader = document.getElementById("global-preloader-v2");
     const video = document.getElementById("wave-video") as HTMLVideoElement;
+    
     if (!preloader) return;
 
+    // Create particles
+    createParticles();
+
+    // Show preloader
+    preloader.style.display = "block";
+    preloader.style.opacity = "1";
+    preloader.style.pointerEvents = "auto";
     document.body.style.overflow = "hidden";
 
     const progressText = document.getElementById("progress-text");
     const progressBar = document.querySelector(".progress-bar");
     let progress = 0;
     
+    // Faster progress
     const progressInterval = setInterval(() => {
-      progress += Math.random() * 18;
+      progress += Math.random() * 15 + 8;
       if (progress >= 100) {
         progress = 100;
         clearInterval(progressInterval);
@@ -236,7 +328,7 @@
       if (progressBar) {
         (progressBar as HTMLElement).style.width = progress + "%";
       }
-    }, 80);
+    }, 40);
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -245,23 +337,66 @@
       },
     });
 
-    // 33% shorter - all durations and delays multiplied by 0.67
-    tl.to(".preloader-mark", { opacity: 1, scale: 1, duration: 0.54, ease: "power2.out" }, 0.13)
-      .to(".preloader-char", { y: "0%", duration: 0.8, stagger: { each: 0.033, from: "center" }, ease: "power4.out" }, 0.2)
-      .to(".preloader-subtitle", { y: "0%", duration: 0.54, ease: "power3.out" }, 0.4)
-      .to(".preloader-line", { width: "50vw", duration: 0.67, ease: "power3.inOut" }, 0.54)
-      .to(".preloader-progress", { opacity: 1, duration: 0.33, ease: "power2.out" }, 0.67)
-      .to({}, { duration: 0.54 })
-      .to(".progress-bar", { width: "100%", duration: 0.2, ease: "power2.out", onStart: () => { if (progressText) progressText.textContent = "100%"; }})
-      .to(".preloader-char", { y: "-30%", opacity: 0, filter: "blur(8px)", duration: 0.4, stagger: { each: 0.013, from: "edges" }, ease: "power2.in" }, "+=0.13")
-      .to([".preloader-subtitle", ".preloader-line", ".preloader-progress", ".preloader-mark"], { opacity: 0, y: -15, duration: 0.27, ease: "power2.in" }, "<+=0.07")
-      .to(".wave-layer-1", { height: "120vh", duration: 0.6, ease: "power3.inOut" }, "-=0.13")
-      .to(".wave-layer-2", { height: "120vh", duration: 0.54, ease: "power3.inOut" }, "-=0.5")
-      .to(".wave-layer-3", { height: "120vh", duration: 0.47, ease: "power3.inOut" }, "-=0.43")
-      .to("#wave-video", { scale: 1.25, opacity: 0, duration: 0.54, ease: "power2.inOut" }, "-=0.54")
-      .to(preloader, { opacity: 0, duration: 0.27, ease: "power2.inOut" }, "-=0.2")
+    // Entry Animation - Shortened
+    tl.to(".preloader-ambient", { opacity: 1, duration: 0.6, ease: "power2.out" }, 0)
+      .to(".preloader-corner", { opacity: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" }, 0.1)
+      .to(".preloader-logo-container", { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 0.15)
+      .to(".preloader-char", { y: "0%", duration: 0.6, stagger: { each: 0.03, from: "center" }, ease: "power3.out" }, 0.25)
+      .to(".preloader-diamond", { opacity: 1, scale: 1, rotation: 45, duration: 0.4, ease: "back.out(2)" }, 0.5)
+      .to(".preloader-subtitle", { y: "0%", duration: 0.5, ease: "power3.out" }, 0.55)
+      .to(".preloader-progress", { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.6)
+      .to(".preloader-year", { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.7)
+      
+      // Short hold
+      .to({}, { duration: 0.4 })
+      
+      // Quick progress fill
+      .to(".progress-bar", { width: "100%", duration: 0.2, ease: "power2.out", 
+        onStart: () => { 
+          if (progressText) progressText.textContent = "100%"; 
+          if (progressBar) (progressBar as HTMLElement).style.width = "100%";
+        } 
+      })
+      
+      // Short pause at 100%
+      .to({}, { duration: 0.15 })
+      
+      // Exit Animation - Fast
+      .to(".preloader-char", { y: "-100%", opacity: 0, duration: 0.35, stagger: { each: 0.015, from: "edges" }, ease: "power2.in" }, "+=0.05")
+      .to([".preloader-subtitle", ".preloader-diamond", ".preloader-progress", ".preloader-logo-container", ".preloader-ambient", ".preloader-year"], { 
+        opacity: 0, 
+        y: -15, 
+        duration: 0.3, 
+        stagger: 0.02, 
+        ease: "power2.in" 
+      }, "<+=0.05")
+      .to(".preloader-corner", { opacity: 0, duration: 0.2 }, "<")
+      
+      // Curtain exit effect
+      .to(".exit-top", { height: "51vh", duration: 0.5, ease: "power3.inOut" }, "-=0.15")
+      .to(".exit-bottom", { height: "51vh", duration: 0.5, ease: "power3.inOut" }, "<")
+      .to("#wave-video", { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "<+=0.1")
+      .to(preloader, { opacity: 0, duration: 0.2, ease: "power2.inOut" }, "-=0.1")
       .set(preloader, { display: "none" });
 
-    setTimeout(() => { if (video) video.pause(); }, 3350);
+    // Pause video after animation (shorter now ~2.2s)
+    setTimeout(() => { if (video) video.pause(); }, 2300);
+  }
+
+  // Extend Window interface for TypeScript
+  declare global {
+    interface Window {
+      __PRELOADER_SHOWN__?: boolean;
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener("astro:page-load", () => {
+    if (window.__PRELOADER_SHOWN__) {
+      hidePreloader();
+    } else {
+      window.__PRELOADER_SHOWN__ = true;
+      runPreloader();
+    }
   });
 </script>
