@@ -1,34 +1,61 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+/**
+ * Cien Mares — Academia Náutica
+ * 
+ * Página de formación náutica con:
+ * - Hero cinematográfico
+ * - Tabla expandible de títulos
+ * - Cards de perfeccionamiento
+ * - Sección de metodología (teoría/práctica)
+ * - Testimonios de alumnos
+ * - Preguntas frecuentes
+ * - CTA Banner final
+ */
+
+import Layout from '@/layouts/Layout.astro';
+import {
+  HeroSection,
+  TitlesSection,
+  PerfectionSection,
+  HowClassesWorkSection,
+  TestimonialsSection,
+  FAQSection,
+  CTABanner,
+} from '@/components/aprender';
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PAGE METADATA
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const pageMeta = {
+  title: "Academia Náutica | Cien Mares | Títulos de Recreo en Cádiz",
+  description:
+    "Academia náutica homologada EEND-CA-67 en Cádiz. Cursos de Licencia, PNB, PER, Patrón y Capitán de Yate. 15 años formando navegantes con clases prácticas y teóricas.",
+};
 ---
 
 <Layout
-  title="Aprender | Cien Mares"
-  description="Academia náutica homologada en Cádiz."
+  title={pageMeta.title}
+  description={pageMeta.description}
 >
-  <section
-    class="min-h-screen flex items-center justify-center bg-[#FAFAFA] text-[#0A0A0A]"
-    data-theme="light"
-  >
-    <div class="text-center px-6">
-      <span
-        class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-6"
-        >Próximamente</span
-      >
-      <h1
-        class="font-display font-black text-[clamp(3.5rem,8vw,7rem)] leading-[0.9] tracking-tighter uppercase mb-4"
-      >
-        Academia
-      </h1>
-      <p class="font-body text-[#0A0A0A]/60 text-lg max-w-md mx-auto">
-        Estamos preparando esta sección. Vuelve pronto.
-      </p>
-      <a
-        href="/"
-        class="inline-flex items-center gap-3 mt-8 font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] hover:text-[#0A0A0A] transition-colors"
-      >
-        <span>← Volver al inicio</span>
-      </a>
-    </div>
-  </section>
+  {/* Hero Section — Pantalla completa con imagen de prácticas */}
+  <HeroSection />
+
+  {/* Títulos Disponibles — Tabla expandible con 7 títulos */}
+  <TitlesSection />
+
+  {/* Clases de Perfeccionamiento — 2 cards: vela y motor */}
+  <PerfectionSection />
+
+  {/* Cómo son las clases — 2 columnas: teoría y práctica */}
+  <HowClassesWorkSection />
+
+  {/* Testimonios de alumnos — Grid de 3 cards con reseñas */}
+  <TestimonialsSection />
+
+  {/* Preguntas frecuentes — Accordion de 6 preguntas */}
+  <FAQSection />
+
+  {/* CTA Banner — Orientación sin compromiso */}
+  <CTABanner />
 </Layout>

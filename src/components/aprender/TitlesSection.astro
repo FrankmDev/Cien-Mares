@@ -1,0 +1,355 @@
+---
+/**
+ * TitlesSection — Tabla expandible de títulos náuticos
+ * 7 filas expandibles con información detallada de cada título
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const TITLES = [
+  {
+    id: "licencia",
+    name: "Licencia de Navegación",
+    shortName: "Licencia",
+    length: "6 m",
+    distance: "2 millas",
+    price: "Desde 90€",
+    description: "El primer paso en el mundo náutico. No requiere examen, solo formación práctica de 4 horas con un instructor homologado. Ideal para quienes quieren iniciarse sin complicaciones.",
+    forWhom: "Para principiantes absolutos que quieren navegar embarcaciones de poca potencia cerca de la costa.",
+    allows: "Navegar embarcaciones de hasta 6 metros y 55 CV de potencia, hasta 2 millas de la costa.",
+    duration: "4 horas de prácticas",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+  },
+  {
+    id: "pnb",
+    name: "Patrón de Navegación Básica",
+    shortName: "PNB",
+    length: "8 m",
+    distance: "5 millas",
+    price: "Desde 200€",
+    description: "El título más popular para navegar por la costa. Te permite salir con embarcaciones de mayor tamaño y distancia. Requiere examen teórico y 8 horas de prácticas obligatorias.",
+    forWhom: "Para quienes quieren navegar con más libertad por la costa gaditana sin necesidad de ir lejos.",
+    allows: "Navegar embarcaciones de hasta 8 metros de eslora, hasta 5 millas de la costa, día y noche.",
+    duration: "Examen + 8h prácticas",
+    icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+  },
+  {
+    id: "per",
+    name: "Patrón de Embarcaciones de Recreo",
+    shortName: "PER",
+    length: "15 m",
+    distance: "12 millas",
+    price: "Desde 300€",
+    description: "El título más completo antes de dar el salto a grandes distancias. Te permite navegar embarcaciones de hasta 15 metros y realizar travesías costeras. Requiere 16 horas de prácticas de navegación.",
+    forWhom: "Para navegantes que quieren hacer travesías por la costa andaluza o ir a embarcaciones de mayor tamaño.",
+    allows: "Navegar embarcaciones de hasta 15 metros, hasta 12 millas de la costa. Posible ampliación a Baleares.",
+    duration: "Examen + 16h prácticas",
+    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+  },
+  {
+    id: "per-ampliado",
+    name: "PER Ampliado",
+    shortName: "PER Ampliado",
+    length: "24 m",
+    distance: "12 millas + Baleares",
+    price: "Desde 250€",
+    description: "Ampliación del PER que te permite manebar embarcaciones de mayor eslora y navegar entre la península y Baleares. Requiere realizar una travesía de 24 horas con un instructor.",
+    forWhom: "Para titulados PER que quieren dar el salto a embarcaciones más grandes o navegar a Baleares.",
+    allows: "Navegar embarcaciones de hasta 24 metros y cruzar a Baleares desde la península (menor de 150 millas).",
+    duration: "24h de travesía obligatoria",
+    icon: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8",
+  },
+  {
+    id: "patron-yate",
+    name: "Patrón de Yate",
+    shortName: "Patrón Yate",
+    length: "24 m",
+    distance: "150 millas",
+    price: "Desde 400€",
+    description: "El título para quienes sueñan con travesías de altura. Te permite navegar hasta 150 millas de la costa, ideal para cruces al norte de África o travesías por el Mediterráneo.",
+    forWhom: "Para navegantes experimentados que quieren hacer travesías de altura y salir de la costa.",
+    allows: "Navegar embarcaciones de hasta 24 metros, hasta 150 millas de la costa, sin límite de distancia entre puertos.",
+    duration: "Examen + prácticas de travesía",
+    icon: "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.806-.984A3 3 0 0018 10a3 3 0 00-5.68-1.33",
+  },
+  {
+    id: "capitan-yate",
+    name: "Capitán de Yate",
+    shortName: "Capitán Yate",
+    length: "24 m",
+    distance: "Ilimitada",
+    price: "Desde 400€",
+    description: "El máximo título de recreo. Sin límite de distancia a la costa, puedes cruzar océanos y navegar el mundo. Requiere experiencia previa como Patrón de Yate.",
+    forWhom: "Para navegantes que buscan la máxima titulación de recreo sin límites geográficos.",
+    allows: "Navegar embarcaciones de hasta 24 metros sin límite de distancia a la costa. Navegación oceánica.",
+    duration: "Examen + travesía de altura",
+    icon: "M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z",
+  },
+  {
+    id: "vela",
+    name: "Habilitación a Vela",
+    shortName: "Vela",
+    length: "Todas",
+    distance: "—",
+    price: "Desde 180€",
+    description: "Habilitación adicional que se añade a cualquier otro título para poder navegar a vela. Requiere 16 horas de prácticas específicas en embarcación velera.",
+    forWhom: "Para titulados que quieren completar su formación y poder navegar a vela con su título actual.",
+    allows: "Navegar embarcaciones de vela con el alcance de tu título principal (PER, Patrón o Capitán).",
+    duration: "16h de prácticas en velero",
+    icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+  },
+];
+---
+
+<section class="relative bg-[#02060a] py-28 lg:py-36 overflow-hidden" id="titles-section" data-theme="dark">
+  {/* Background Effects */}
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#CFA35A]/[0.02] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-[#CFA35A]/[0.015] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-20">
+      <div class="lg:w-[55%]">
+        <div class="mb-6">
+          <SectionLabel label="Títulos Disponibles" variant="light" />
+        </div>
+        <SectionTitle firstLine="Elige tu" secondLine="titulación" />
+      </div>
+      <div class="lg:w-[40%]">
+        <p class="font-body text-base lg:text-lg text-white/60 leading-relaxed">
+          Siete títulos náuticos homologados por la Dirección General de la Marina Mercante. Desde la iniciación hasta la navegación oceánica.
+        </p>
+      </div>
+    </div>
+
+    {/* Titles Table / Accordion */}
+    <div class="space-y-4" id="titles-accordion">
+      {TITLES.map((title, i) => (
+        <div 
+          class="title-row group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] hover:border-[#CFA35A]/30 transition-all duration-500"
+          data-title-id={title.id}
+          data-reveal="fade"
+          data-delay={i + 1}
+        >
+          {/* Main Row */}
+          <button 
+            class="title-trigger w-full p-6 lg:p-8 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-8 text-left transition-all duration-300"
+            aria-expanded="false"
+            aria-controls={`title-content-${title.id}`}
+          >
+            {/* Number */}
+            <div class="hidden lg:flex w-12 h-12 rounded-full bg-[#CFA35A]/10 border border-[#CFA35A]/20 items-center justify-center shrink-0 group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-300">
+              <span class="font-display font-bold text-[#CFA35A] group-hover:text-[#02060a] transition-colors">
+                0{i + 1}
+              </span>
+            </div>
+
+            {/* Title & Icon */}
+            <div class="flex items-center gap-4 lg:w-[280px] shrink-0">
+              <div class="lg:hidden w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+                <span class="font-display font-bold text-sm text-[#CFA35A]">0{i + 1}</span>
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-lg lg:text-xl text-white group-hover:text-[#CFA35A] transition-colors">
+                  {title.name}
+                </h3>
+                <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-white/40 lg:hidden">
+                  {title.length} · {title.distance}
+                </span>
+              </div>
+            </div>
+
+            {/* Specs - Desktop */}
+            <div class="hidden lg:flex flex-1 items-center justify-center gap-8">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-[#CFA35A]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                </svg>
+                <span class="font-mono text-sm text-white/70">Hasta {title.length}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-[#CFA35A]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                  <path d="M2 12h20"/>
+                </svg>
+                <span class="font-mono text-sm text-white/70">{title.distance}</span>
+              </div>
+            </div>
+
+            {/* Price */}
+            <div class="lg:w-[150px] text-left lg:text-right shrink-0">
+              <span class="font-display font-bold text-xl text-[#CFA35A]">{title.price}</span>
+            </div>
+
+            {/* Expand Icon */}
+            <div class="absolute right-6 top-6 lg:static lg:w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#CFA35A]/50 group-hover:bg-[#CFA35A]/10 transition-all duration-300">
+              <svg 
+                class="expand-icon w-5 h-5 text-white/50 group-hover:text-[#CFA35A] transition-all duration-300" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2"
+              >
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </div>
+          </button>
+
+          {/* Expandable Content */}
+          <div 
+            id={`title-content-${title.id}`}
+            class="title-content hidden px-6 lg:px-8 pb-8 lg:pb-8 lg:pl-[104px]"
+          >
+            <div class="pt-4 border-t border-white/10">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Description */}
+                <div class="space-y-6">
+                  <p class="text-white/70 leading-relaxed">
+                    {title.description}
+                  </p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+                      <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d={title.icon}/>
+                      </svg>
+                    </div>
+                    <span class="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-[#CFA35A]">
+                      {title.duration}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div class="space-y-4">
+                  <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+                    <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#CFA35A] block mb-2">¿Para quién es?</span>
+                    <p class="text-sm text-white/60">{title.forWhom}</p>
+                  </div>
+                  <div class="p-4 rounded-xl bg-white/5 border border-white/5">
+                    <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#CFA35A] block mb-2">¿Qué permite?</span>
+                    <p class="text-sm text-white/60">{title.allows}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://wa.me/34605183785?text=Hola,%20me%20interesa%20el%20título%20de%20{encodeURIComponent(title.shortName)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group inline-flex items-center justify-center gap-3 px-6 py-3 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-wider hover:bg-white transition-all duration-300"
+                >
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  <span>Consultar por WhatsApp</span>
+                </a>
+                <a
+                  href="/contacto"
+                  class="group inline-flex items-center justify-center gap-3 px-6 py-3 border border-white/20 text-white rounded-full font-display font-bold text-sm uppercase tracking-wider hover:bg-white/5 hover:border-[#CFA35A]/50 transition-all duration-300"
+                >
+                  <span>Más información</span>
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Bottom Note */}
+    <div class="mt-12 lg:mt-16 flex flex-col lg:flex-row items-center justify-center gap-6 text-center">
+      <div class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-white/60">Academia homologada EEND-CA-67</span>
+      </div>
+      
+      <div class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-white/60">Horarios flexibles</span>
+      </div>
+      
+      <div class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <span class="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-white/60">Clases en grupo o individuales</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Active state for expanded rows */
+  .title-row.active {
+    border-color: rgba(207, 163, 90, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  
+  .title-row.active .expand-icon {
+    transform: rotate(45deg);
+    color: #CFA35A;
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const triggers = document.querySelectorAll(".title-trigger");
+    
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const row = trigger.closest(".title-row");
+        const content = row?.querySelector(".title-content");
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+        
+        // Close all other rows
+        document.querySelectorAll(".title-row").forEach((otherRow) => {
+          if (otherRow !== row) {
+            otherRow.classList.remove("active");
+            const otherTrigger = otherRow.querySelector(".title-trigger");
+            const otherContent = otherRow.querySelector(".title-content");
+            otherTrigger?.setAttribute("aria-expanded", "false");
+            otherContent?.classList.add("hidden");
+          }
+        });
+        
+        // Toggle current row
+        if (isExpanded) {
+          row?.classList.remove("active");
+          trigger.setAttribute("aria-expanded", "false");
+          content?.classList.add("hidden");
+        } else {
+          row?.classList.add("active");
+          trigger.setAttribute("aria-expanded", "true");
+          content?.classList.remove("hidden");
+          
+          // Animate content in
+          if (content) {
+            gsap.fromTo(content, 
+              { opacity: 0, y: -10 },
+              { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+            );
+          }
+        }
+      });
+    });
+  });
+</script>

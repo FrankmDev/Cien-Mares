@@ -1,0 +1,116 @@
+---
+/**
+ * IncluyeSection — Qué incluye la gestión
+ * 3 bloques con icono, título y párrafo corto
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const FEATURES = [
+  {
+    title: "Tramitación rápida y eficiente",
+    description: "Nos encargamos de todo el papeleo ante las autoridades marítimas para que tú solo tengas que firmar. Gestionamos directamente con Capitanías y registros.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+  },
+  {
+    title: "Asesoramiento personalizado",
+    description: "Te explicamos cada trámite, sus plazos y sus costes antes de empezar. Sin sorpresas ni letra pequeña. Cada caso es diferente y lo tratamos como tal.",
+    icon: "M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z",
+  },
+  {
+    title: "Gestión de seguros e impuestos",
+    description: "Tramitamos seguros y calculamos los impuestos aplicables a tu embarcación o moto de agua. Te asesoramos sobre la cobertura más adecuada para tu caso.",
+    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+  },
+] as const;
+---
+
+<section class="relative bg-[#FAFAFA] py-28 lg:py-36 overflow-hidden" id="incluye-section" data-theme="light">
+  {/* Background */}
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, #0A0A0A 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#0A0A0A]/10 to-transparent"></div>
+    <div class="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#CFA35A]/[0.03] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-[#CFA35A]/[0.02] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Qué incluye" variant="dark" />
+      </div>
+      <SectionTitle firstLine="Todo lo que" secondLine="necesitas" />
+      <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60 leading-relaxed mt-6">
+        Un servicio completo que cubre todos los aspectos de la gestión náutica. 
+        Desde el primer contacto hasta la entrega final de documentación.
+      </p>
+    </div>
+
+    {/* Features Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+      {FEATURES.map((feature, i) => (
+        <div 
+          class="feature-card group relative"
+          data-reveal="fade"
+          data-delay={i + 1}
+        >
+          <div class="relative h-full p-8 lg:p-10 rounded-3xl bg-white border border-[#0A0A0A]/5 hover:border-[#CFA35A]/20 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(207,163,90,0.15)] hover:-translate-y-1">
+            {/* Number */}
+            <div class="absolute top-8 right-8">
+              <span class="font-display font-black text-5xl text-[#CFA35A]/10 group-hover:text-[#CFA35A]/20 transition-colors">
+                0{i + 1}
+              </span>
+            </div>
+
+            {/* Icon */}
+            <div class="relative mb-8">
+              <div class="w-16 h-16 rounded-2xl bg-[#CFA35A]/10 flex items-center justify-center group-hover:bg-[#CFA35A] group-hover:scale-110 transition-all duration-500">
+                <svg class="w-8 h-8 text-[#CFA35A] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d={feature.icon}/>
+                </svg>
+              </div>
+              {/* Glow effect on hover */}
+              <div class="absolute inset-0 w-16 h-16 rounded-2xl bg-[#CFA35A]/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+
+            {/* Content */}
+            <h3 class="font-display font-bold text-xl lg:text-2xl text-[#0A0A0A] mb-4 group-hover:text-[#CFA35A] transition-colors">
+              {feature.title}
+            </h3>
+            <p class="text-[#0A0A0A]/60 leading-relaxed text-sm lg:text-base">
+              {feature.description}
+            </p>
+
+            {/* Bottom line accent */}
+            <div class="absolute bottom-0 left-10 right-10 h-[2px] bg-gradient-to-r from-transparent via-[#CFA35A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    // Cards entrance animation
+    gsap.fromTo(".feature-card", 
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#incluye-section",
+          start: "top 70%",
+        },
+      }
+    );
+  });
+</script>

@@ -1,47 +1,51 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+/**
+ * Cien Mares — Contacto
+ * 
+ * Página de contacto con:
+ * - Hero cinematográfico
+ * - Información de contacto (teléfono, email, ubicación, horarios)
+ * - Formulario de contacto funcional
+ * - Mapa y ubicación
+ * - CTA WhatsApp
+ */
+
+import Layout from '@/layouts/Layout.astro';
+import {
+  HeroSection,
+  InfoSection,
+  FormSection,
+  MapSection,
+  CTABanner,
+} from '@/components/contacto';
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PAGE METADATA
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const pageMeta = {
+  title: "Contacto | Cien Mares | Servicios Náuticos en Cádiz",
+  description:
+    "Contacta con Cien Mares. Teléfono: +34 605 18 37 85. Email: info@cienmares.es. WhatsApp disponible. Estamos en El Puerto de Santa María, Cádiz.",
+};
 ---
 
 <Layout
-  title="Contacto | Cien Mares"
-  description="Contacta con Cien Mares para servicios náuticos premium en Cádiz."
+  title={pageMeta.title}
+  description={pageMeta.description}
 >
-  <section
-    class="min-h-screen flex items-center justify-center bg-[#FAFAFA] text-[#0A0A0A]"
-    data-theme="light"
-  >
-    <div class="text-center px-6">
-      <span
-        class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-6"
-        >Próximamente</span
-      >
-      <h1
-        class="font-display font-black text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tighter uppercase mb-4"
-      >
-        Contacto
-      </h1>
-      <p class="font-body text-[#0A0A0A]/60 text-lg max-w-md mx-auto mb-8">
-        Estamos preparando esta sección. Mientras tanto, puedes contactarnos
-        directamente.
-      </p>
-      <div class="flex flex-col items-center gap-4">
-        <a
-          href="tel:+34605183785"
-          class="font-display font-black text-2xl text-[#0A0A0A] hover:text-[#CFA35A] transition-colors"
-          >+34 605 18 37 85</a
-        >
-        <a
-          href="mailto:info@cienmares.es"
-          class="font-mono text-[0.75rem] uppercase tracking-widest text-[#0A0A0A]/60 hover:text-[#CFA35A] transition-colors"
-          >info@cienmares.es</a
-        >
-      </div>
-      <a
-        href="/"
-        class="inline-flex items-center gap-3 mt-8 font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] hover:text-[#0A0A0A] transition-colors"
-      >
-        <span>← Volver al inicio</span>
-      </a>
-    </div>
-  </section>
+  {/* Hero Section — Pantalla completa con imagen cinematográfica */}
+  <HeroSection />
+
+  {/* Info Section — Grid de información de contacto */}
+  <InfoSection />
+
+  {/* Form Section — Formulario de contacto funcional */}
+  <FormSection />
+
+  {/* Map Section — Ubicación y mapa */}
+  <MapSection />
+
+  {/* CTA Banner — WhatsApp directo */}
+  <CTABanner />
 </Layout>

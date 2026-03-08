@@ -1,0 +1,162 @@
+---
+/**
+ * MapSection — Sección de ubicación
+ * Información de ubicación con mapa/embed
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+---
+
+<section class="relative bg-[#02060a] py-28 lg:py-36 overflow-hidden" id="mapa" data-theme="dark">
+  {/* Background Effects */}
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#CFA35A]/[0.015] rounded-full blur-[150px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Ubicación" variant="light" />
+      </div>
+      <SectionTitle firstLine="Dónde" secondLine="encontrarnos" />
+      <p class="font-body text-base lg:text-lg text-white/60 leading-relaxed mt-6">
+        Estamos en El Puerto de Santa María, Cádiz. Punto estratégico para servicios náuticos en la bahía.
+      </p>
+    </div>
+
+    {/* Content Grid */}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      {/* Map Placeholder/Image */}
+      <div class="map-container relative rounded-3xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full min-h-[400px]" data-reveal="fade" data-delay="1">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3196.856738538884!2d-6.2297!3d36.5934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0dd1d0e5b6e4b1%3A0x2d0a5e0b5b5b5b5b!2sEl%20Puerto%20de%20Santa%20Mar%C3%ADa%2C%20C%C3%A1diz!5e0!3m2!1ses!2ses!4v1234567890"
+          width="100%"
+          height="100%"
+          style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="absolute inset-0"
+        ></iframe>
+        <div class="absolute inset-0 border border-white/10 rounded-3xl pointer-events-none"></div>
+      </div>
+
+      {/* Info Card */}
+      <div class="info-container" data-reveal="fade" data-delay="2">
+        <div class="h-full p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10">
+          {/* Address */}
+          <div class="mb-10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <span class="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-[#CFA35A]">Dirección</span>
+            </div>
+            <p class="font-display font-bold text-xl text-white mb-2">
+              El Puerto de Santa María
+            </p>
+            <p class="text-white/60">
+              Cádiz, España · 11500
+            </p>
+          </div>
+
+          {/* Operating Hours */}
+          <div class="mb-10">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <span class="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-[#CFA35A]">Horario de atención</span>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center py-2 border-b border-white/5">
+                <span class="text-white/60">Lunes - Viernes</span>
+                <span class="font-display font-bold text-white">9:00 - 19:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-white/5">
+                <span class="text-white/60">Sábados</span>
+                <span class="font-display font-bold text-white">10:00 - 14:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-white/60">Domingos</span>
+                <span class="font-display font-bold text-white/40">Cerrado</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Contact */}
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <span class="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-[#CFA35A]">Contacto rápido</span>
+            </div>
+            <a 
+              href="tel:+34605183785" 
+              class="group flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#CFA35A]/30 hover:bg-white/[0.05] transition-all duration-300"
+            >
+              <div>
+                <span class="font-display font-bold text-xl text-white group-hover:text-[#CFA35A] transition-colors block">+34 605 18 37 85</span>
+                <span class="font-mono text-[0.6rem] uppercase tracking-wider text-white/40">Llamar ahora</span>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-[#CFA35A]/10 flex items-center justify-center group-hover:bg-[#CFA35A] transition-colors">
+                <svg class="w-5 h-5 text-[#CFA35A] group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    gsap.fromTo(".map-container", 
+      { x: -50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#mapa",
+          start: "top 70%",
+        },
+      }
+    );
+
+    gsap.fromTo(".info-container", 
+      { x: 50, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#mapa",
+          start: "top 70%",
+        },
+      }
+    );
+  });
+</script>

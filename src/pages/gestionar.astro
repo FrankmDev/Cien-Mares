@@ -1,34 +1,56 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+/**
+ * Cien Mares — Gestión Náutica
+ * 
+ * Página de gestoría y traslados con:
+ * - Hero cinematográfico
+ * - Grid de servicios de gestoría con precios
+ * - 3 bloques de qué incluye la gestión
+ * - Sección de traslados (nacional e internacional)
+ * - Proceso de contratación en 3 pasos
+ * - CTA Banner final
+ */
+
+import Layout from '@/layouts/Layout.astro';
+import {
+  HeroSection,
+  GestoriaSection,
+  IncluyeSection,
+  TrasladosSection,
+  ProcesoSection,
+  CTABanner,
+} from '@/components/gestionar';
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PAGE METADATA
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const pageMeta = {
+  title: "Gestión Náutica | Gestoría y Traslados | Cien Mares",
+  description:
+    "Gestoría náutica completa: inscripciones, certificados, cambios de titularidad. Traslados de embarcaciones nacionales e internacionales. Precios transparentes y servicio profesional.",
+};
 ---
 
 <Layout
-  title="Gestoría | Cien Mares"
-  description="Gestoría náutica profesional en Cádiz."
+  title={pageMeta.title}
+  description={pageMeta.description}
 >
-  <section
-    class="min-h-screen flex items-center justify-center bg-[#FAFAFA] text-[#0A0A0A]"
-    data-theme="light"
-  >
-    <div class="text-center px-6">
-      <span
-        class="font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] block mb-6"
-        >Próximamente</span
-      >
-      <h1
-        class="font-display font-black text-[clamp(3.5rem,8vw,7rem)] leading-[0.9] tracking-tighter uppercase mb-4"
-      >
-        Gestoría
-      </h1>
-      <p class="font-body text-[#0A0A0A]/60 text-lg max-w-md mx-auto">
-        Estamos preparando esta sección. Vuelve pronto.
-      </p>
-      <a
-        href="/"
-        class="inline-flex items-center gap-3 mt-8 font-mono text-[0.65rem] uppercase tracking-[0.3em] font-bold text-[#CFA35A] hover:text-[#0A0A0A] transition-colors"
-      >
-        <span>← Volver al inicio</span>
-      </a>
-    </div>
-  </section>
+  {/* Hero Section — Pantalla completa con imagen de yate */}
+  <HeroSection />
+
+  {/* Gestoría Section — Grid de servicios con precios */}
+  <GestoriaSection />
+
+  {/* Incluye Section — 3 bloques de características */}
+  <IncluyeSection />
+
+  {/* Traslados Section — Nacional e internacional */}
+  <TrasladosSection />
+
+  {/* Proceso Section — 3 pasos de contratación */}
+  <ProcesoSection />
+
+  {/* CTA Banner — Respuesta en 24h */}
+  <CTABanner />
 </Layout>

@@ -1,0 +1,202 @@
+---
+/**
+ * TrasladosSection — Traslados de Embarcaciones
+ * 2 columnas: texto a un lado, imagen al otro
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+---
+
+<section class="relative bg-[#02060a] py-28 lg:py-36 overflow-hidden" id="traslados-section" data-theme="dark">
+  {/* Background Effects */}
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute top-1/2 right-0 w-[600px] h-[600px] bg-[#CFA35A]/[0.02] rounded-full blur-[150px] -translate-y-1/2"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Traslados" variant="light" />
+      </div>
+      <SectionTitle firstLine="Transportamos tu" secondLine="embarcación" />
+    </div>
+
+    {/* Main Content - Two Columns */}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 lg:mb-24">
+      {/* Text Column */}
+      <div class="order-2 lg:order-1" data-reveal="fade" data-delay="1">
+        <p class="font-body text-lg lg:text-xl text-white/70 leading-relaxed mb-8">
+          Transportamos tu barco a destinos nacionales e internacionales, con o sin el propietario a bordo, con todas las garantías. Equipo experimentado y seguro completo.
+        </p>
+
+        {/* Trust Badges */}
+        <div class="flex flex-wrap gap-4 mb-10">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+            <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="font-mono text-[0.65rem] uppercase tracking-wider text-white/70">Tripulación profesional</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+            <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            <span class="font-mono text-[0.65rem] uppercase tracking-wider text-white/70">Seguro completo</span>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <a
+          href="https://wa.me/34605183785?text=Hola,%20me%20interesa%20un%20traslado%20de%20embarcación"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center gap-3 px-8 py-4 bg-[#CFA35A] text-[#02060a] rounded-full font-display font-bold text-sm uppercase tracking-wider hover:bg-white transition-all duration-300"
+        >
+          <span>Solicitar presupuesto</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      {/* Image Column */}
+      <div class="order-1 lg:order-2 relative" data-reveal="fade" data-delay="2">
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/3]">
+          <img
+            src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&q=85"
+            alt="Embarcación en traslado"
+            class="w-full h-full object-cover"
+            style="filter: grayscale(30%) brightness(0.7);"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#02060a]/60 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 border border-white/10 rounded-3xl"></div>
+        </div>
+
+        {/* Floating Badge */}
+        <div class="absolute -bottom-6 -left-6 lg:-left-12 bg-[#CFA35A] rounded-2xl p-6 shadow-2xl shadow-[#CFA35A]/20">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-[#02060a]/20 flex items-center justify-center">
+              <svg class="w-6 h-6 text-[#02060a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="font-display font-black text-2xl text-[#02060a]">100%</span>
+              <span class="font-mono text-[0.6rem] uppercase tracking-wider text-[#02060a]/70 block">Garantizado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Sub-blocks - Nacional e Internacional */}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+      {/* Nacional */}
+      <div class="traslado-card group relative p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#CFA35A]/30 transition-all duration-500" data-reveal="fade" data-delay="1">
+        <div class="flex items-start gap-6">
+          <div class="w-14 h-14 rounded-2xl bg-[#CFA35A]/10 border border-[#CFA35A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-500">
+            <svg class="w-7 h-7 text-[#CFA35A] group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl lg:text-2xl text-white mb-3 group-hover:text-[#CFA35A] transition-colors">
+              Traslados nacionales
+            </h3>
+            <p class="text-white/60 leading-relaxed mb-4">
+              Costas españolas, entre puertos de la Península, Baleares y Canarias. Rutas planificadas según meteorología y condiciones óptimas.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-sm text-white/50">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>Entre península y Baleares</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm text-white/50">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>Rutas a Canarias</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm text-white/50">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>Travesías entre puertos peninsulares</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Internacional */}
+      <div class="traslado-card group relative p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#CFA35A]/30 transition-all duration-500" data-reveal="fade" data-delay="2">
+        <div class="flex items-start gap-6">
+          <div class="w-14 h-14 rounded-2xl bg-[#CFA35A]/10 border border-[#CFA35A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-500">
+            <svg class="w-7 h-7 text-[#CFA35A] group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl lg:text-2xl text-white mb-3 group-hover:text-[#CFA35A] transition-colors">
+              Traslados internacionales
+            </h3>
+            <p class="text-white/60 leading-relaxed mb-4">
+              Rutas hacia Portugal, Marruecos, Francia, Italia u otros destinos a consultar. Experiencia en travesías de larga distancia con todas las garantías.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-sm text-white/50">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>Portugal y Marruecos</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm text-white/50">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>Francia e Italia</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm text-white/50">
+                <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+                <span>Otros destinos a consultar</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    // Cards entrance animation
+    gsap.fromTo(".traslado-card", 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#traslados-section",
+          start: "top 60%",
+        },
+      }
+    );
+  });
+</script>

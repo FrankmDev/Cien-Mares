@@ -1,0 +1,122 @@
+---
+/**
+ * InfoSection — Información de contacto
+ * Grid con tarjetas de teléfono, email, ubicación y horarios
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const INFO_CARDS = [
+  {
+    title: "Teléfono",
+    value: "+34 605 18 37 85",
+    description: "Llamadas y WhatsApp",
+    href: "tel:+34605183785",
+    icon: "M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z",
+  },
+  {
+    title: "Email",
+    value: "info@cienmares.es",
+    description: "Respuesta en 24h",
+    href: "mailto:info@cienmares.es",
+    icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  {
+    title: "Ubicación",
+    value: "El Puerto de Santa María",
+    description: "Cádiz, España",
+    href: "#mapa",
+    icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z",
+  },
+  {
+    title: "Horario",
+    value: "Lun - Vie: 9:00 - 19:00",
+    description: "Sáb: 10:00 - 14:00",
+    href: null,
+    icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+] as const;
+---
+
+<section class="relative bg-[#02060a] py-28 lg:py-36 overflow-hidden" id="info-section" data-theme="dark">
+  {/* Background Effects */}
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CFA35A]/30 to-transparent"></div>
+    <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#CFA35A]/[0.02] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-[#CFA35A]/[0.015] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Información" variant="light" />
+      </div>
+      <SectionTitle firstLine="Cómo" secondLine="contactarnos" />
+      <p class="font-body text-base lg:text-lg text-white/60 leading-relaxed mt-6">
+        Múltiples formas de llegar a nosotros. Elige la que prefieras.
+      </p>
+    </div>
+
+    {/* Info Cards Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {INFO_CARDS.map((card, i) => {
+        const CardWrapper = card.href ? 'a' : 'div';
+        const wrapperProps = card.href ? { href: card.href, class: "block h-full" } : { class: "h-full" };
+        return (
+          <div 
+            class="info-card group relative"
+            data-reveal="fade"
+            data-delay={i + 1}
+          >
+            <CardWrapper {...wrapperProps}>
+              <div class="h-full p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#CFA35A]/30 hover:bg-white/[0.04] transition-all duration-500">
+                {/* Icon */}
+                <div class="w-14 h-14 rounded-2xl bg-[#CFA35A]/10 border border-[#CFA35A]/20 flex items-center justify-center mb-6 group-hover:bg-[#CFA35A] group-hover:border-[#CFA35A] transition-all duration-500">
+                  <svg class="w-7 h-7 text-[#CFA35A] group-hover:text-[#02060a] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d={card.icon}/>
+                  </svg>
+                </div>
+
+                {/* Content */}
+                <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/40 block mb-2">
+                  {card.title}
+                </span>
+                <span class="font-display font-bold text-xl text-white group-hover:text-[#CFA35A] transition-colors block mb-2">
+                  {card.value}
+                </span>
+                <span class="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-white/50">
+                  {card.description}
+                </span>
+              </div>
+            </CardWrapper>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    gsap.fromTo(".info-card", 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#info-section",
+          start: "top 70%",
+        },
+      }
+    );
+  });
+</script>

@@ -1,0 +1,192 @@
+---
+/**
+ * PerfectionSection — Clases de Perfeccionamiento
+ * 2 cards lado a lado: vela y motor
+ */
+import { SectionLabel, SectionTitle } from "../ui";
+
+const CLASSES = [
+  {
+    id: "vela",
+    title: "Perfeccionamiento a Vela",
+    subtitle: "Domina el arte de la navegación a vela",
+    description: "Clases individuales o en grupo para mejorar tu destreza en una área determinada o en general. Aprende a leer el viento, ajustar velas, ceñida y empopada con técnicas avanzadas.",
+    duration: "4-8 horas",
+    modality: "Presencial en Cádiz",
+    private: "Disponible clase privada",
+    image: "https://images.unsplash.com/photo-1500930287596-c1ecaa373bb2?w=800&q=85",
+    features: ["Timón y trimado de velas", "Maniobras de virada y arribada", "Navegación con diferentes intensidades de viento", "Meteorología práctica"],
+    icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+  },
+  {
+    id: "motor",
+    title: "Perfeccionamiento a Motor",
+    subtitle: "Control total de la embarcación",
+    description: "Mejora tus habilidades de gobierno, atraque y maniobras en espacios reducidos. Ideal para titulados que quieren ganar confianza antes de alquilar o comprar su primera embarcación.",
+    duration: "4-8 horas",
+    modality: "Presencial en Cádiz",
+    private: "Disponible clase privada",
+    image: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=85",
+    features: ["Atraque en diferentes condiciones", "Fondeo y anclaje seguro", "Navegación en canales estrechos", "Maniobras con viento y corriente"],
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+  },
+] as const;
+---
+
+<section class="relative bg-[#FAFAFA] py-28 lg:py-36 overflow-hidden" id="perfection-section" data-theme="light">
+  {/* Background */}
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, #0A0A0A 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#0A0A0A]/10 to-transparent"></div>
+    <div class="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#CFA35A]/[0.03] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-[#CFA35A]/[0.02] rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1400px]">
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <div class="mb-6 flex justify-center">
+        <SectionLabel label="Perfeccionamiento" variant="dark" />
+      </div>
+      <SectionTitle firstLine="Mejora tus" secondLine="habilidades" />
+      <p class="font-body text-base lg:text-lg text-[#0A0A0A]/60 leading-relaxed mt-6">
+        Clases individuales o en grupo para mejorar tu destreza en una área determinada o en general. 
+        Perfecto para titulados que quieren ganar confianza antes de navegar solos.
+      </p>
+    </div>
+
+    {/* Cards Grid */}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+      {CLASSES.map((cls, i) => (
+        <div 
+          class="perfection-card group relative"
+          data-card-index={i}
+          data-reveal="fade"
+          data-delay={i + 1}
+        >
+          <div class="relative h-full rounded-3xl overflow-hidden bg-white border border-[#0A0A0A]/5 hover:border-[#CFA35A]/30 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(207,163,90,0.2)]">
+            {/* Image */}
+            <div class="relative h-[240px] lg:h-[280px] overflow-hidden">
+              <img
+                src={cls.image}
+                alt={cls.title}
+                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                style="filter: grayscale(20%) brightness(0.9);"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent"></div>
+              
+              {/* Icon Badge */}
+              <div class="absolute top-6 right-6">
+                <div class="w-14 h-14 rounded-full bg-[#CFA35A] flex items-center justify-center shadow-lg shadow-[#CFA35A]/30 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                  <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d={cls.icon}/>
+                  </svg>
+                </div>
+              </div>
+
+              {/* Title Overlay */}
+              <div class="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+                <span class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[#CFA35A] block mb-2">
+                  {cls.subtitle}
+                </span>
+                <h3 class="font-display font-black text-2xl lg:text-3xl uppercase tracking-tight text-white">
+                  {cls.title}
+                </h3>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div class="p-6 lg:p-8">
+              <p class="text-[#0A0A0A]/70 leading-relaxed mb-6">
+                {cls.description}
+              </p>
+
+              {/* Features */}
+              <ul class="space-y-3 mb-8">
+                {cls.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-[#CFA35A]/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg class="w-3 h-3 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M5 12l5 5L20 7"/>
+                      </svg>
+                    </div>
+                    <span class="text-sm text-[#0A0A0A]/70">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Meta Info */}
+              <div class="flex flex-wrap gap-4 mb-8">
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#CFA35A]/10">
+                  <svg class="w-4 h-4 text-[#CFA35A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                  <span class="font-mono text-[0.65rem] uppercase tracking-wider text-[#CFA35A]">{cls.duration}</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A0A0A]/5">
+                  <svg class="w-4 h-4 text-[#0A0A0A]/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span class="font-mono text-[0.65rem] uppercase tracking-wider text-[#0A0A0A]/60">{cls.modality}</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A0A0A]/5">
+                  <svg class="w-4 h-4 text-[#0A0A0A]/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                  </svg>
+                  <span class="font-mono text-[0.65rem] uppercase tracking-wider text-[#0A0A0A]/60">{cls.private}</span>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <a
+                href="https://wa.me/34605183785"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group/btn inline-flex items-center justify-center gap-3 w-full px-8 py-4 bg-[#0A0A0A] text-white rounded-full font-display font-bold text-sm uppercase tracking-wider hover:bg-[#CFA35A] transition-all duration-300"
+              >
+                <span>Reservar clase</span>
+                <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Bottom Info */}
+    <div class="mt-16 text-center">
+      <p class="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-[#0A0A0A]/50">
+        Todas las clases incluyen embarcación, combustible y material didáctico · Seguro incluido
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    // Cards entrance animation
+    gsap.fromTo(".perfection-card", 
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#perfection-section",
+          start: "top 70%",
+        },
+      }
+    );
+  });
+</script>
