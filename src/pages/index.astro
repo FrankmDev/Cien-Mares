@@ -19,21 +19,19 @@ import {
 	TestimonialsSection,
 	CTASection,
 } from '@/components/home';
+import { pageMetadata } from '@/data/site';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// PAGE METADATA
+// PAGE METADATA - Centralized in src/data/site.ts
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const pageMeta = {
-	title: "Cien Mares | Experiencias Náuticas Premium en Cádiz",
-	description:
-		"Servicios náuticos de excelencia en Conil de la Frontera. Alquiler de embarcaciones, academia homologada, gestoría y traslados internacionales desde 2010.",
-};
+const meta = pageMetadata.home;
 ---
 
 <Layout
-	title={pageMeta.title}
-	description={pageMeta.description}
+	title={meta.title}
+	description={meta.description}
+	image={meta.image}
 	transparentHeader={true}
 >
 	<main class="home">

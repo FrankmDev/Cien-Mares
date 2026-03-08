@@ -1,0 +1,224 @@
+---
+/**
+ * SEO Component - Complete SEO optimization with Schema.org
+ * Handles meta tags, Open Graph, Twitter Cards, and JSON-LD structured data
+ */
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  type?: "website" | "article" | "product" | "service";
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+  locale?: string;
+}
+
+const {
+  title,
+  description,
+  image = "/images/og-default.jpg",
+  canonical,
+  noindex = false,
+  nofollow = false,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+  tags,
+  locale = "es_ES",
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || "https://cienmares.es";
+const canonicalURL = canonical 
+  ? new URL(canonical, siteUrl).toString()
+  : new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageURL = new URL(image, siteUrl).toString();
+const robotsContent = `${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow" : "follow"}`;
+
+// Organization Schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Cien Mares",
+  url: siteUrl,
+  logo: `${siteUrl}/logo.svg`,
+  description: "Servicios náuticos premium en Cádiz. Alquiler de embarcaciones, academia náutica homologada, gestoría y traslados.",
+  sameAs: [
+    "https://instagram.com/cienmares",
+    "https://facebook.com/cienmares",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+34-605-18-37-85",
+    contactType: "customer service",
+    areaServed: "ES",
+    availableLanguage: ["Spanish"],
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "El Puerto de Santa María",
+    addressRegion: "Cádiz",
+    addressCountry: "ES",
+  },
+};
+
+// LocalBusiness Schema
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Cien Mares",
+  image: ogImageURL,
+  url: siteUrl,
+  telephone: "+34-605-18-37-85",
+  priceRange: "€€",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "El Puerto de Santa María",
+    addressRegion: "Cádiz",
+    addressCountry: "ES",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "36.5934",
+    longitude: "-6.2297",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "19:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "10:00",
+      closes: "14:00",
+    },
+  ],
+};
+
+// WebPage Schema
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": type === "article" ? "Article" : "WebPage",
+  url: canonicalURL,
+  name: title,
+  description: description,
+  image: ogImageURL,
+  ...(type === "article" && {
+    datePublished: publishedTime,
+    dateModified: modifiedTime || publishedTime,
+    author: {
+      "@type": "Organization",
+      name: author || "Cien Mares",
+    },
+    articleSection: section,
+    keywords: tags?.join(", "),
+  }),
+  inLanguage: locale,
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Cien Mares",
+    url: siteUrl,
+  },
+};
+
+// Breadcrumb Schema
+const getBreadcrumbSchema = () => {
+  const pathParts = Astro.url.pathname.split("/").filter(Boolean);
+  const breadcrumbList = pathParts.map((part, index) => ({
+    "@type": "ListItem",
+    position: index + 2,
+    name: part.charAt(0).toUpperCase() + part.slice(1),
+    item: new URL(pathParts.slice(0, index + 1).join("/"), siteUrl).toString(),
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: siteUrl,
+      },
+      ...breadcrumbList,
+    ],
+  };
+};
+---
+
+{/* Primary Meta Tags */}
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robotsContent} />
+<link rel="canonical" href={canonicalURL} />
+
+{/* Language and Locale */}
+<meta property="og:locale" content={locale} />
+<meta http-equiv="content-language" content={locale.split("_")[0]} />
+
+{/* Open Graph / Facebook */}
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content="Cien Mares" />
+
+{/* Twitter */}
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImageURL} />
+<meta property="twitter:image:alt" content={title} />
+<meta name="twitter:site" content="@cienmares" />
+
+{/* Article specific meta tags */}
+{type === "article" && publishedTime && (
+  <>
+    <meta property="article:published_time" content={publishedTime} />
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    {author && <meta property="article:author" content={author} />}
+    {section && <meta property="article:section" content={section} />}
+    {tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+  </>
+)}
+
+{/* Prefetch and Preconnect - Optimized for LCP */}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://images.unsplash.com" />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+{/* Favicons */}
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#CFA35A" />
+<meta name="msapplication-TileColor" content="#02060a" />
+
+{/* Theme Color */}
+<meta name="theme-color" content="#02060a" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)" />
+
+{/* Structured Data - JSON-LD */}
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+{Astro.url.pathname !== "/" && (
+  <script type="application/ld+json" set:html={JSON.stringify(getBreadcrumbSchema())} />
+)}

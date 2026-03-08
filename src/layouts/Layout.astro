@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
+import SEO from "../components/seo/SEO.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import Preloader from "../components/shared/Preloader.astro";
@@ -8,57 +9,67 @@ import Preloader from "../components/shared/Preloader.astro";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
   transparentHeader?: boolean;
+  noindex?: boolean;
 }
 
 const {
-  title = "Cien Mares | Experiencias Nauticas Premium en Cadiz",
-  description = "Servicios nauticos de excelencia en Conil de la Frontera. Alquiler de embarcaciones, academia homologada, gestoria y traslados internacionales.",
+  title = "Cien Mares | Experiencias Náuticas Premium en Cádiz",
+  description = "Servicios náuticos de excelencia en Cádiz. Alquiler de embarcaciones, academia náutica homologada, gestoría y traslados internacionales.",
+  image = "/images/og-default.jpg",
   transparentHeader = false,
+  noindex = false,
 } = Astro.props;
-
-const canonicalURL = new URL(
-  Astro.url.pathname,
-  Astro.site || "https://cienmares.es",
-);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050505" />
-
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;300;400;500&display=swap"
+    
+    {/* SEO Component - All meta tags and structured data */}
+    <SEO 
+      title={title} 
+      description={description} 
+      image={image}
+      noindex={noindex}
+      type="website"
     />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:locale" content="es_ES" />
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {/* Critical Image Preload for LCP - Homepage Hero Poster */}
+    {Astro.url.pathname === "/" && (
+      <link rel="preload" as="image" href="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80" type="image/jpeg" fetchpriority="high" />
+    )}
+    
+    {/* Google Fonts - Optimized Loading */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;300;400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;300;400;500&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;300;400;500&display=swap" />
+    </noscript>
 
     <ClientRouter />
   </head>
 
-  <body class="bg-[#030406] text-[#F9F9F9] cursor-none lg:cursor-none">
+  <body class="bg-cm-bg text-cm-text font-body antialiased">
+    {/* Skip to content link - Accessibility */}
+    <a
+      href="#main-content"
+      class="skip-link"
+    >
+      Saltar al contenido principal
+    </a>
+
     <Preloader />
-    <!-- Grain Overlay -->
+    
+    {/* Grain Overlay */}
     <div class="grain-overlay" aria-hidden="true"></div>
 
-    <!-- Custom Cursor -->
+    {/* Custom Cursor - Desktop only */}
     <div
       id="custom-cursor"
       class="custom-cursor hidden lg:block"
@@ -70,44 +81,40 @@ const canonicalURL = new URL(
 
     <Header transparent={transparentHeader} />
 
-    <main id="main-content">
+    <main id="main-content" role="main" tabindex="-1">
       <slot />
     </main>
 
     <Footer />
 
-    <!-- Reset scroll on page load/reload -->
+    {/* Reset scroll on page load/reload */}
     <script>
-      // Reset scroll to top on every page load/reload
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      
-      // Force scroll to top immediately
       window.scrollTo(0, 0);
-      
-      // Also after Astro page transitions
       document.addEventListener("astro:after-swap", () => {
         window.scrollTo(0, 0);
       });
     </script>
 
-    <!-- Initialize scroll reveal animations -->
+    {/* Initialize scroll reveal animations - Optimized */}
     <script>
       (function initRevealAnimations() {
         function setupObserver() {
           const revealElements = document.querySelectorAll('[data-reveal]:not(.revealed)');
           if (revealElements.length === 0) return;
           
-          // Immediately reveal elements already in viewport
-          revealElements.forEach((el) => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              el.classList.add('revealed');
-            }
+          // Use requestAnimationFrame for better performance
+          requestAnimationFrame(() => {
+            revealElements.forEach((el) => {
+              const rect = el.getBoundingClientRect();
+              if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('revealed');
+              }
+            });
           });
           
-          // Observe remaining elements
           const remainingElements = document.querySelectorAll('[data-reveal]:not(.revealed)');
           if (remainingElements.length === 0) return;
           
@@ -122,36 +129,36 @@ const canonicalURL = new URL(
             },
             {
               threshold: 0.05,
-              rootMargin: '0px 0px 0px 0px',
+              rootMargin: '0px 0px 50px 0px',
             }
           );
 
           remainingElements.forEach((el) => observer.observe(el));
         }
 
-        // Run on page load
         document.addEventListener('astro:page-load', setupObserver);
         
-        // Also run immediately if DOM is ready
         if (document.readyState !== 'loading') {
           setupObserver();
         }
       })();
     </script>
 
+    {/* Custom cursor - Desktop only with reduced motion support */}
     <script>
       document.addEventListener("astro:page-load", () => {
-        if (window.innerWidth < 1024) return;
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion || window.innerWidth < 1024) return;
 
         const cursor = document.getElementById("custom-cursor");
         if (!cursor) return;
 
-        let mouseX = 0,
-          mouseY = 0;
-        let cursorX = 0,
-          cursorY = 0;
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
         let isActive = true;
-        let inactivityTimeout: ReturnType<typeof setTimeout> | undefined;
+        let rafId;
+        let inactivityTimeout;
 
         function updateCursor() {
           if (!isActive) return;
@@ -160,23 +167,22 @@ const canonicalURL = new URL(
           cursorY += (mouseY - cursorY) * 0.15;
 
           if (cursor) {
-            cursor.style.transform = `translate(${cursorX - 20}px, ${cursorY - 20}px)`;
+            cursor.style.transform = `translate3d(${cursorX - 20}px, ${cursorY - 20}px, 0)`;
           }
 
-          requestAnimationFrame(updateCursor);
+          rafId = requestAnimationFrame(updateCursor);
         }
 
         document.addEventListener("mousemove", (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
-
           cursor.style.opacity = "1";
 
           clearTimeout(inactivityTimeout);
           inactivityTimeout = setTimeout(() => {
             cursor.style.opacity = "0";
           }, 3000);
-        });
+        }, { passive: true });
 
         document.addEventListener("mouseenter", () => {
           cursor.style.opacity = "1";
@@ -188,18 +194,26 @@ const canonicalURL = new URL(
           cursor.style.opacity = "0";
         });
 
-        // Interactive elements
-        const interactives = document.querySelectorAll(
-          "a, button, [role='button'], input, textarea, select, .service-panel",
-        );
-
-        interactives.forEach((el) => {
-          el.addEventListener("mouseenter", () => {
+        // Optimized event delegation for interactive elements
+        document.addEventListener("mouseover", (e) => {
+          const target = e.target.closest("a, button, [role='button'], input, textarea, select, .service-panel");
+          if (target) {
             cursor.classList.add("cursor-hover");
-          });
-          el.addEventListener("mouseleave", () => {
+          }
+        }, { passive: true });
+
+        document.addEventListener("mouseout", (e) => {
+          const target = e.target.closest("a, button, [role='button'], input, textarea, select, .service-panel");
+          if (target) {
             cursor.classList.remove("cursor-hover");
-          });
+          }
+        }, { passive: true });
+
+        // Cleanup on page navigation
+        document.addEventListener("astro:before-swap", () => {
+          isActive = false;
+          cancelAnimationFrame(rafId);
+          clearTimeout(inactivityTimeout);
         });
 
         updateCursor();
@@ -209,10 +223,39 @@ const canonicalURL = new URL(
 </html>
 
 <style is:global>
+  /* Skip to content link - Accessibility */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999999;
+    padding: 1rem 2rem;
+    background: #CFA35A;
+    color: #02060a;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 0 0 1rem 1rem;
+    transition: top 0.3s ease;
+  }
+  
+  .skip-link:focus {
+    top: 0;
+  }
+
   /* Hide default cursor on desktop */
   @media (min-width: 1024px) {
     * {
       cursor: none !important;
+    }
+    
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        cursor: auto !important;
+      }
     }
   }
 
@@ -278,6 +321,7 @@ const canonicalURL = new URL(
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
+  /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -285,6 +329,27 @@ const canonicalURL = new URL(
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+    
+    .custom-cursor {
+      display: none !important;
+    }
+  }
+
+  /* Focus visible styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid #CFA35A;
+    outline-offset: 4px;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
     }
   }
 </style>

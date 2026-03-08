@@ -22,21 +22,19 @@ import {
   FAQSection,
   CTABanner,
 } from '@/components/aprender';
+import { pageMetadata } from '@/data/site';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// PAGE METADATA
+// PAGE METADATA - Centralized in src/data/site.ts
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const pageMeta = {
-  title: "Academia Náutica | Cien Mares | Títulos de Recreo en Cádiz",
-  description:
-    "Academia náutica homologada EEND-CA-67 en Cádiz. Cursos de Licencia, PNB, PER, Patrón y Capitán de Yate. 15 años formando navegantes con clases prácticas y teóricas.",
-};
+const meta = pageMetadata.aprender;
 ---
 
 <Layout
-  title={pageMeta.title}
-  description={pageMeta.description}
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   {/* Hero Section — Pantalla completa con imagen de prácticas */}
   <HeroSection />

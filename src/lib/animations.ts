@@ -9,6 +9,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Ensure GSAP plugins are registered
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  
+  // Optimize GSAP for performance
+  gsap.config({
+    nullTargetWarn: false,
+  });
+  
+  // Reduce forced reflows with will-change batching
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -87,6 +98,8 @@ export function fadeInUp(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -123,6 +136,8 @@ export function fadeInDown(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -159,6 +174,8 @@ export function fadeInLeft(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -195,6 +212,8 @@ export function fadeInRight(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -230,6 +249,8 @@ export function scaleIn(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -347,6 +368,8 @@ export function revealImage(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -385,6 +408,8 @@ export function revealTextLines(
         trigger,
         start,
         toggleActions: "play none none none",
+        fastScrollEnd: true,
+        preventOverlaps: true,
       },
     }
   );
@@ -418,7 +443,8 @@ export function parallaxY(
     start: "top bottom",
     end: "bottom top",
     scrub,
-    animation: gsap.to(target, { yPercent }),
+    fastScrollEnd: true,
+    animation: gsap.to(target, { yPercent, force3D: true }),
   });
 }
 
@@ -439,7 +465,8 @@ export function parallaxScale(
     start: "top bottom",
     end: "bottom top",
     scrub,
-    animation: gsap.to(target, { scale }),
+    fastScrollEnd: true,
+    animation: gsap.to(target, { scale, force3D: true }),
   });
 }
 
@@ -473,6 +500,8 @@ export function pinSection(
     end,
     pin: true,
     scrub,
+    fastScrollEnd: true,
+    anticipatePin: 1,
     animation,
   });
 }

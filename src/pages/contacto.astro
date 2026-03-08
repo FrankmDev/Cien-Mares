@@ -18,21 +18,19 @@ import {
   MapSection,
   CTABanner,
 } from '@/components/contacto';
+import { pageMetadata } from '@/data/site';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// PAGE METADATA
+// PAGE METADATA - Centralized in src/data/site.ts
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const pageMeta = {
-  title: "Contacto | Cien Mares | Servicios Náuticos en Cádiz",
-  description:
-    "Contacta con Cien Mares. Teléfono: +34 605 18 37 85. Email: info@cienmares.es. WhatsApp disponible. Estamos en El Puerto de Santa María, Cádiz.",
-};
+const meta = pageMetadata.contacto;
 ---
 
 <Layout
-  title={pageMeta.title}
-  description={pageMeta.description}
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   {/* Hero Section — Pantalla completa con imagen cinematográfica */}
   <HeroSection />

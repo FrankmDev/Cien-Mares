@@ -20,21 +20,19 @@ import {
   ProcesoSection,
   CTABanner,
 } from '@/components/gestionar';
+import { pageMetadata } from '@/data/site';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// PAGE METADATA
+// PAGE METADATA - Centralized in src/data/site.ts
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const pageMeta = {
-  title: "Gestión Náutica | Gestoría y Traslados | Cien Mares",
-  description:
-    "Gestoría náutica completa: inscripciones, certificados, cambios de titularidad. Traslados de embarcaciones nacionales e internacionales. Precios transparentes y servicio profesional.",
-};
+const meta = pageMetadata.gestionar;
 ---
 
 <Layout
-  title={pageMeta.title}
-  description={pageMeta.description}
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   {/* Hero Section — Pantalla completa con imagen de yate */}
   <HeroSection />

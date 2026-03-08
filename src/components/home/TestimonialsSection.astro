@@ -96,14 +96,14 @@ const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
           STATS.map((stat) => (
             <div class="text-center group/stat cursor-default">
               <div class="flex items-baseline justify-center gap-1">
-                <span class="font-display font-black text-3xl lg:text-4xl group-hover/stat:text-[#CFA35A] transition-colors duration-300">
+                <span class="font-display font-black text-3xl lg:text-4xl text-[#0A0A0A] group-hover/stat:text-[#B08A4A] transition-colors duration-300">
                   {stat.value}
                 </span>
-                <span class="font-display text-lg text-[#CFA35A]">{stat.suffix}</span>
+                <span class="font-display text-lg text-[#B08A4A]">{stat.suffix}</span>
               </div>
-              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/40 group-hover/stat:text-[#0A0A0A]/70 transition-colors relative">
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-[#0A0A0A]/70 group-hover/stat:text-[#0A0A0A] transition-colors relative">
                 {stat.label}
-                <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-[#CFA35A] group-hover/stat:w-full transition-all duration-300" />
+                <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-[#B08A4A] group-hover/stat:w-full transition-all duration-300" />
               </span>
             </div>
           ))

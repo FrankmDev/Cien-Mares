@@ -6,6 +6,9 @@ import RoutesSection from "@/components/navegar/RoutesSection.astro";
 import EquipmentSection from "@/components/navegar/EquipmentSection.astro";
 import HowItWorksSection from "@/components/navegar/HowItWorksSection.astro";
 import CTABanner from "@/components/navegar/CTABanner.astro";
+import { pageMetadata } from "@/data/site";
+
+const meta = pageMetadata.navegar;
 
 const HERO_CONTENT = {
   backgroundImage: "https://images.unsplash.com/photo-1500930287596-c1ecaa373bb2?w=1920&q=85",
@@ -31,8 +34,9 @@ const HERO_CONTENT = {
 ---
 
 <Layout
-  title="Navegar | Alquiler de Barcos en Cádiz | Cien Mares"
-  description="Alquila velero, lancha o yate en la costa de Cádiz. Excursiones personalizadas desde El Puerto de Santa María. Equipamiento premium y patrón profesional incluido."
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   {/* Hero Section */}
   <PageHero {...HERO_CONTENT} />
